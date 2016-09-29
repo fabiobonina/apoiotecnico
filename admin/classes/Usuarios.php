@@ -2,67 +2,66 @@
 
 require_once 'Crud.php';
 
-class OrdensServicos extends Crud{
+class Usuarios extends Crud{
 	
-	protected $table = 'tb_ordemsservicos';
-	private $codUser;
-	private $filial;
-	private $os;
-	private $codCliente;
-	private $codLocal;
-	private $codSistema;
-	private $codServico;
-	private $dataSol;
-	private $codUser;
-	private $status;
-	private $ativo;
+	protected $table = 'usuarios';
+	private $nome;
+	private $email;
+	private $nickuser;
+	private $senha;
+	private $sexo;
+	private $raca;
+	private $nascimento;
+	private $datacadastro;
+	private $datalogin;
+	private $nivel_usuario;
+	private $ativado;
 
 
-	public function setCodUser($codUser){
-		$this->codUser = $codUser;
+
+	public function setNome($nome){
+		$this->nome = $nome;
 	}
 
-	public function getCodUser(){
-		return $this->codUser;
+	public function getNome(){
+		return $this->nome;
 	}
 
-	public function setFilial($filial){
-		$this->filial = $filial;
+	public function setEmail($email){
+		$this->email = $email;
 	}
 
-	public function setOS($os){
-		$this->os = $os;
+	public function setNickuser($nickuser){
+		$this->nickuser = $nickuser;
 	}
 
-	public function setCodCliente($codCliente){
-		$this->codCliente = $codCliente;
+	public function setSenha($senha){
+		$this->senha = $senha;
 	}
 
-	public function setCodLocal($codLocal){
-		$this->codLocal = $codLocal;
+	public function setSexo($sexo){
+		$this->sexo = $sexo;
 	}
 
-	public function setCodSistema($codSistema){
-		$this->codSistema = $codSistema;
+	public function setRaca($raca){
+		$this->raca = $raca;
 	}
 
-	public function setDataSol($dataSol){
-		$this->dataSol = $dataSol;
+	public function setNascimento($nascimento){
+		$this->nascimento = $nascimento;
 	}
 
-	public function setDataOs($dataOs){
-		$this->dataOs = $dataOs;
+	public function setDataCadastro($datacadastro){
+		$this->datacadastro = $datacadastro;
 	}
 
-	public function setDataFech($dataFech){
-		$this->dataTerm = $dataTerm;
+	public function setDatalogin($datalogin){
+		$this->datalogin = $datalogin;
 	}
 
-	public function setDataTerm($dataTerm){
-		$this->dataTerm = $dataTerm;
+	public function setNivel($nivel_usuario){
+		$this->nivel_usuario = $nivel_usuario;
 	}
-
-
 
 	public function setAtivodo($ativado){
 		$this->ativado = $ativado;
