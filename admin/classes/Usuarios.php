@@ -76,4 +76,57 @@ class Usuarios extends Crud{
 		
 	}
 
+	public function logar(){
+
+		// SELECIONAR BANCO DE DADOS
+		
+		$sql = "SELECT * from $this->table WHERE BINARY nickuser=:nickuser AND BINARY senha=:senha ";
+
+			$stmt = DB::prepare($sql);
+			$stmt->bindParam(':nickuser', $this->nickuser);
+			$stmt->bindParam(':senha', $this->senha);
+			$stmt->execute();
+			$contar = $stmt->rowCount();
+			if($contar=1){
+				//$usuario = $this->nickuser;
+				//$senha	 = $this->senha;
+				//$_SESSION['usuarioUser'] = $usuario;
+				//$_SESSION['senhaUser'] = $senha;
+				
+				$loop = $stmt->fetchAll();
+				foreach ($loop as $show){
+					$loginId = $show->id;
+					$loginNome = $show->nome;
+					$loginEmail = $show->email;
+					$loginUser = $show->nickuser;
+					$loginSenha = $show->senha;
+					$loginNivel = $show->nivel;
+				}
+				$_SESSION['loginNome'] = $loginId;
+				$_SESSION['loginId'] = $loginNome;
+				$_SESSION['loginEmail'] = $loginEmail;
+				$_SESSION['loginUser'] = $loginUser;
+				$_SESSION['loginSenha'] = $loginSenha;
+				$_SESSION['loginNivel'] = $loginNivel;
+				
+
+
+
+
+				echo '<div class="alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
+                </div>';
+				
+				header("Refresh: 3, ../index.php?acao=welcome");
+			}else{
+				echo '<div class="alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Erro ao logar!</strong> Os dados estão incorretos.
+                </div>';
+			}
+		
+	}
+
+
 }

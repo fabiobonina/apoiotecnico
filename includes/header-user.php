@@ -2,42 +2,20 @@
 ob_start();
 session_start();
 // login
-if(!isset($_SESSION['usuarioTeste']) && (!isset($_SESSION['senhaTeste']))){
+if(!isset($_SESSION['usuarioUser']) && (!isset($_SESSION['senhaUser']))){
 	header("Location: login.php");exit;
 }
 
-	include("admin/conexao/conecta.php");
+	//include("admin/conexao/conecta.php");
 	include("admin/includes/logout.php");
-	
-	$usuarioLogado = $_SESSION['usuarioTeste'];
-	$senhaLogado = $_SESSION['senhaTeste'];
-	
-// seleciona a usuario logado
-		$selecionaLogado = "SELECT * from login WHERE usuario=:usuarioLogado AND senha=:senhaLogado";
-		try{
-			$result = $conexao->prepare($selecionaLogado);	
-			$result->bindParam('usuarioLogado',$usuarioLogado, PDO::PARAM_STR);		
-			$result->bindParam('senhaLogado',$senhaLogado, PDO::PARAM_STR);		
-			$result->execute();
-			$contar = $result->rowCount();	
-			
-			if($contar =1){
-				$loop = $result->fetchAll();
-				foreach ($loop as $show){
-					$nomeLogado = $show['nome'];
-					$userLogado = $show['usuario'];
-					$emailLogado = $show['email'];
-					$senhaLogado = $show['senha'];
-					$nivelLogado = $show['nivel'];
-				}
 
-				$_SESSION['nivelUse'] = $nivelLogado;
-				
-			}
-			
-			}catch (PDOWException $erro){ echo $erro;}
-	
+	$userUsuario = $_SESSION['loginUser'];
+	$userSenha = $_SESSION['liginSenha'];
+	$userNivel = $_SESSION['loginNivel'];
+	$userNome = $_SESSION['loginNome'];
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt">

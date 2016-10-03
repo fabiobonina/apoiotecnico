@@ -12,8 +12,7 @@
               <li><a href="admin/home.php">Admintrarção do Site</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> <?php echo $nomeLogado;?> <b class="caret"></b></a>
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <?php echo $userNome;?> <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Perfil</a></li>
               <li><a href="?sair" onClick="return confirm('Deseja realmente sair do Sistema?')">Sair</a></li>
@@ -39,14 +38,15 @@
       <ul class="mainnav">
         <li <?php if($acao =="welcome" || ($acao =="index")){echo 'class="active"';}?>><a href="index.php"><i class="icon-home"></i><span>Home</span> </a> </li>
         
-        <?php if($nivelLogado ==1){?>
-        <li class="<?php if($acao =="os-solicitar" || ($acao =="os-ordemservico") || ($acao =="os-finalizar") || ($acao =="os-baixar") || ($acao =="os-concluidas")){echo "active";}?> dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-wrench"></i><span>Ordens de Serviços</span> <b class="caret"></b></a>
+        <?php if($userNivel >= 0){?>
+        <li class="<?php if($acao =="oat-solicitar" || ($acao =="oat-ordemservico") || ($acao =="oat-finalizar") || ($acao =="oat-baixar") || ($acao =="oat-concluidas")){echo "active";}?> dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-wrench"></i><span>Ordens de Serviços</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="index.php?acao=os-solicitar">Solicição de Serviço</a></li>
-            <li><a href="index.php?acao=os-ordemservico">Ordem de Serviço</a></li>
-            <li><a href="index.php?acao=os-finalizar">OS-Finalizar</a></li>
-            <li><a href="index.php?acao=os-baixar">OS-Baixar</a></li>
-            <li><a href="index.php?acao=os-concluidas">OS-Concluidas</a></li>
+            <li><a href="index.php?acao=oat-solicitar">Solicição de Serviço</a></li>
+            <li><a href="index.php?acao=oat-ordemservico">Ordem de Serviço</a></li>
+            <li><a href="index.php?acao=oat-finalizar">OS-Finalizar</a></li>
+            <li><a href="index.php?acao=oat-baixar">OS-Baixar</a></li>
+            <li><a href="index.php?acao=oat-concluidas">OS-Concluidas</a></li>
           </ul>
         </li>
         <?php }?>

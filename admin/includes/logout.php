@@ -1,8 +1,10 @@
 <?php
 if(isset($_REQUEST['sair'])){	
 	session_destroy();
-	session_unset($_SESSION['usuarioTeste']);
-	session_unset($_SESSION['senhaTeste']);	
-	header("Location: index.php");	
+	session_unset($_SESSION['loginUser']);
+	session_unset($_SESSION['loginSenha']);
+	session_unset($_SESSION['loginNivel']);
+	session_unset($_SESSION['loginNome']);
+	header("Location: ../index.php");	
 }
 ?>

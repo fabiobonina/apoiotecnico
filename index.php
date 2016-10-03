@@ -23,29 +23,29 @@
 	if(isset($_GET['acao'])){
 		$acao = $_GET['acao'];	
 		
-		if($acao=='welcome'){include("pages/inicio.php");}	
+		if($acao=='welcome'){include("pages/oat/oat-inicio.php");}	
 		
-		// OS solicitar
-		if($acao=='os-solicitar'){include("pages/os-solicitar.php");}	
+		// OAT solicitar
+		if($acao=='oat-solicitar'){include("pages/oat/oat-solicitar.php");}	
 		
-		// OS Abrir
-		if($acao=='os-ordemservico'){include("pages/os-ordemservico.php");}
+		// OAT Abrir
+		if($acao=='oat-ordemservico'){include("pages/oat/oat-ordemservico.php");}
 		
-		// OS Fechar
-		if($acao=='os-finalizar'){include("pages/os-finalizar.php");}
+		// OAT Fechar
+		if($acao=='oat-finalizar'){include("pages/oat/oat-finalizar.php");}
 		
-		// OS baixar
-		if($acao=='os-baixar'){include("pages/os-baixar.php");}
+		// OAT baixar
+		if($acao=='oat-baixar'){include("pages/oat/oat-baixar.php");}
 		
-		// OS Concluidas
-		if($acao=='os-concluidas'){include("pages/os-concluidas.php");}
+		// OAT Concluidas
+		if($acao=='oat-concluidas'){include("pages/oat/oat-concluidas.php");}
 		
 	}else{
-		include("pages/inicio.php");
+		include("pages/oat/oat-inicio.php");
 	}
 ?>
 
 
-<?php include("includes/footer2.php");?>
+<?php include("includes/footer-user.php");?>
 </body>
 </html>

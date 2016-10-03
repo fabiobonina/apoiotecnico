@@ -4,8 +4,9 @@ session_start();
 if(isset($_SESSION['usuarioTeste']) && (isset($_SESSION['senhaTeste']))){
 	header("Location: index.php");exit;
 }
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="br">
   
