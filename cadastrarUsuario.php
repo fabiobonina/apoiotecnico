@@ -1,3 +1,10 @@
+
+<?php
+	function __autoload($class_name){
+		require_once 'admin/classes/' . $class_name . '.php';
+	}
+?>
+
 <?php 
 	include("includes/header_cadastro.php");
 	include("conexao/conexao.php");

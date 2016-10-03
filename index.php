@@ -1,8 +1,8 @@
 
-<?php include("includes/header2.php");?>
+<?php include("includes/header-user.php");?>
 </head>
 <body>
-<?php include("includes/topo2.php");?>
+<?php include("includes/topo-user.php");?>
 
 
 <?php
@@ -43,7 +43,6 @@
 	}else{
 		include("pages/inicio.php");
 	}
-
 ?>
 
 

@@ -3,7 +3,7 @@ ob_start();
 session_start();
 // login
 if(!isset($_SESSION['usuarioTeste']) && (!isset($_SESSION['senhaTeste']))){
-	header("Location: admin/index.php");exit;
+	header("Location: login.php");exit;
 }
 
 	include("admin/conexao/conecta.php");

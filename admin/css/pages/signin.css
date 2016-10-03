@@ -10,9 +10,9 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 
 
 .account-container {
-	width: 380px; 
+	width: 450px; 
 	display: block;
-	margin: 60px auto 0 auto;
+	margin: 50px auto 0 auto;
 	
 	background: #f9f9f9;
 	
@@ -57,6 +57,7 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 
 .password-field { background: url(../../img/signin/password.png) no-repeat; }
 
+.email-field { background: url(../../img/signin/email.png) no-repeat; }
 
 
 
