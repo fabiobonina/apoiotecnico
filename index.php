@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Sistema de Postagem com PHP PDO</title>
+<title>SysHub - System</title>
 <link rel="stylesheet" type="text/css" href="css/reset.css" media="all">
 <link rel="stylesheet" type="text/css" href="css/estilo.css" media="all">
 </head>

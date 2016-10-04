@@ -2,11 +2,11 @@
 ob_start();
 session_start();
 // login
-if(!isset($_SESSION['usuarioTeste']) && (!isset($_SESSION['senhaTeste']))){
-	header("Location: index.php?acao=negado");exit;
+if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginSenha']))){
+	header("Location: ../login.php?acao=negado");exit;
 }
 
-if($_SESSION['nivelUse'] < 2){
+if($_SESSION['loginNivel'] < 2){
 	echo '<div class="alert alert-danger">
          <button type="button" class="close" data-dismiss="alert">×</button>
          <strong>Acesso não pernitido!</strong> Seu nivel não tem permição.
@@ -14,38 +14,13 @@ if($_SESSION['nivelUse'] < 2){
 	header("Location: ../index.php?acao=negado");exit;
 }
 
-	include("conexao/conecta.php");
 	include("includes/logout.php");
 
-	
-	$usuarioLogado = $_SESSION['usuarioTeste'];
-	$senhaLogado = $_SESSION['senhaTeste'];
-	
-// seleciona a usuario logado
-		$selecionaLogado = "SELECT * from login WHERE usuario=:usuarioLogado AND senha=:senhaLogado";
-		try{
-			$result = $conexao->prepare($selecionaLogado);	
-			$result->bindParam('usuarioLogado',$usuarioLogado, PDO::PARAM_STR);		
-			$result->bindParam('senhaLogado',$senhaLogado, PDO::PARAM_STR);		
-			$result->execute();
-			$contar = $result->rowCount();	
-			
-			if($contar =1){
-				$loop = $result->fetchAll();
-				foreach ($loop as $show){
-					$nomeLogado = $show['nome'];
-					$userLogado = $show['usuario'];
-					$emailLogado = $show['email'];
-					$senhaLogado = $show['senha'];
-					$nivelLogado = $show['nivel'];
-				}
-				
-				$_SESSION['nivelUse'] = $nivelLogado;
+	$usuarioLogado = $_SESSION['loginUser'];
+	$senhaLogado = $_SESSION['loginSenha'];
+	$nomeLogado = $_SESSION['loginNome'];
+	$nivelLogado = $_SESSION['loginNivel'];
 
-			}
-			
-			}catch (PDOWException $erro){ echo $erro;}
-	
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,4 @@
 <?php
-
 require_once 'Crud.php';
 
 class Usuarios extends Crud{
@@ -87,7 +86,7 @@ class Usuarios extends Crud{
 			$stmt->bindParam(':senha', $this->senha);
 			$stmt->execute();
 			$contar = $stmt->rowCount();
-			if($contar=1){
+			if($contar>0){
 				//$usuario = $this->nickuser;
 				//$senha	 = $this->senha;
 				//$_SESSION['usuarioUser'] = $usuario;
@@ -102,23 +101,19 @@ class Usuarios extends Crud{
 					$loginSenha = $show->senha;
 					$loginNivel = $show->nivel;
 				}
-				$_SESSION['loginNome'] = $loginId;
-				$_SESSION['loginId'] = $loginNome;
+				$_SESSION['loginId'] = $loginId;
+				$_SESSION['loginNome'] = $loginNome;
 				$_SESSION['loginEmail'] = $loginEmail;
 				$_SESSION['loginUser'] = $loginUser;
 				$_SESSION['loginSenha'] = $loginSenha;
 				$_SESSION['loginNivel'] = $loginNivel;
-				
 
-
-
-
-				echo '<div class="alert alert-success">
-                      <button type="button" class="close" data-dismiss="alert">×</button>
+				echo $loginNome, $loginUser, '<div class="alert alert-success">
+					  <button type="button" class="close" data-dismiss="alert">×</button>
                       <strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
                 </div>';
 				
-				header("Refresh: 3, ../index.php?acao=welcome");
+				header("Refresh: 6, index.php?acao=welcome");
 			}else{
 				echo '<div class="alert alert-danger">
                       <button type="button" class="close" data-dismiss="alert">×</button>

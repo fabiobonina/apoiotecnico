@@ -6,8 +6,8 @@
 ?>
 
 <?php 
-	include("includes/header_cadastro.php");
-	include("conexao/conexao.php");
+	include("includes/header-user.php");
+	include("admin/conexao/conexao.php");
 
 	$mysqli = new mysqli("localhost","root","","riskzone");
 

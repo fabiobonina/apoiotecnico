@@ -1,8 +1,9 @@
 <?php
 ob_start();
 session_start();
+
 // login
-if(!isset($_SESSION['usuarioUser']) && (!isset($_SESSION['senhaUser']))){
+if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginSenha']))){
 	header("Location: login.php");exit;
 }
 
@@ -10,7 +11,7 @@ if(!isset($_SESSION['usuarioUser']) && (!isset($_SESSION['senhaUser']))){
 	include("admin/includes/logout.php");
 
 	$userUsuario = $_SESSION['loginUser'];
-	$userSenha = $_SESSION['liginSenha'];
+	$userSenha = $_SESSION['loginSenha'];
 	$userNivel = $_SESSION['loginNivel'];
 	$userNome = $_SESSION['loginNome'];
 
@@ -21,7 +22,7 @@ if(!isset($_SESSION['usuarioUser']) && (!isset($_SESSION['senhaUser']))){
 <html lang="pt">
 <head>
 <meta charset="utf-8">
-<title>SKYHUB System - Apoio Técnico</title>
+<title>SkyHub - System | Apoio Técnico</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="admin/css/bootstrap.min.css" rel="stylesheet">
