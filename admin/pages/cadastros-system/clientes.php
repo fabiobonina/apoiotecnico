@@ -1,12 +1,27 @@
 <?php
 	function __autoload($class_name){
-		require_once '../../admin/classes/' . $class_name . '.php';
+		require_once '../../classes/' . $class_name . '.php';
 	}
 
-    include("includes/header_cadastro.php");
+    //include("../includes/header_cadastro.php");
 ?>
 
-
+<--DOCTYPE HTML>
+<html land="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <title>PHP OO</title>
+  <meta name="description" content="PHP OO" />
+  <meta name="robots" content="index, follow" />
+   <meta name="author" content="Andrew Esteves"/>
+   <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" />
+-->
+  <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+   <![endif]-->
+</head>
 
 <body>
 
