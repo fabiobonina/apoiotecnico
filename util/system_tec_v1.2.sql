@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Out-2016 às 12:07
+-- Generation Time: 10-Out-2016 às 12:48
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -67,8 +67,16 @@ CREATE TABLE `tb_ativo` (
 CREATE TABLE `tb_clientes` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `nick` varchar(50) NOT NULL
+  `nick` varchar(30) NOT NULL,
+  `ativo` enum('0','1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_clientes`
+--
+
+INSERT INTO `tb_clientes` (`id`, `nome`, `nick`, `ativo`) VALUES
+(1, 'Fabio Bonina', 'fabio', '0');
 
 -- --------------------------------------------------------
 
@@ -93,9 +101,9 @@ CREATE TABLE `tb_insumos` (
 
 CREATE TABLE `tb_localidades` (
   `id` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
+  `cliente` varchar(30) NOT NULL,
   `regional` varchar(100) DEFAULT NULL,
-  `nome` varchar(100) NOT NULL,
+  `nome` varchar(50) NOT NULL,
   `municipio` varchar(100) NOT NULL,
   `uf` varchar(2) NOT NULL,
   `latitude` float(10,6) DEFAULT NULL,
@@ -126,7 +134,7 @@ CREATE TABLE `tb_mod` (
 CREATE TABLE `tb_oat` (
   `id` int(11) NOT NULL,
   `nickuser` varchar(30) NOT NULL,
-  `tb_clientes_id` int(11) NOT NULL,
+  `clientes_nick` varchar(30) NOT NULL,
   `tb_localidades_id` int(11) NOT NULL,
   `tb_servicos_id` varchar(6) NOT NULL,
   `tb_sistema_id` varchar(10) NOT NULL,
@@ -178,7 +186,7 @@ CREATE TABLE `tb_postagens` (
 
 CREATE TABLE `tb_servicos` (
   `id` varchar(6) NOT NULL,
-  `nome` varchar(45) NOT NULL,
+  `nome` varchar(30) NOT NULL,
   `ativo` enum('0','1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -190,7 +198,7 @@ CREATE TABLE `tb_servicos` (
 
 CREATE TABLE `tb_sistema` (
   `id` varchar(10) NOT NULL,
-  `descrico` varchar(45) NOT NULL,
+  `descricao` varchar(45) NOT NULL,
   `ativo` enum('0','1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -241,7 +249,8 @@ ALTER TABLE `tb_ativo`
 -- Indexes for table `tb_clientes`
 --
 ALTER TABLE `tb_clientes`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nick` (`nick`);
 
 --
 -- Indexes for table `tb_insumos`
@@ -255,7 +264,7 @@ ALTER TABLE `tb_insumos`
 --
 ALTER TABLE `tb_localidades`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tb_localidades_tb_clientes1_idx` (`id_cliente`);
+  ADD KEY `fk_tb_localidades_tb_clientes1_idx` (`cliente`);
 
 --
 -- Indexes for table `tb_mod`
@@ -270,7 +279,6 @@ ALTER TABLE `tb_mod`
 --
 ALTER TABLE `tb_oat`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tb_oat_tb_clientes1_idx` (`tb_clientes_id`),
   ADD KEY `fk_tb_oat_tb_localidades1_idx` (`tb_localidades_id`),
   ADD KEY `fk_tb_oat_tb_servicos1_idx` (`tb_servicos_id`),
   ADD KEY `fk_tb_oat_tb_sistema1_idx` (`tb_sistema_id`),
@@ -314,6 +322,11 @@ ALTER TABLE `tipo_despesa`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_clientes`
+--
+ALTER TABLE `tb_clientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `tb_insumos`
 --
 ALTER TABLE `tb_insumos`
@@ -355,12 +368,6 @@ ALTER TABLE `tb_insumos`
   ADD CONSTRAINT `fk_tb_osdespesa_tb_oat10` FOREIGN KEY (`tb_oat_id`) REFERENCES `tb_oat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `tb_localidades`
---
-ALTER TABLE `tb_localidades`
-  ADD CONSTRAINT `fk_tb_localidades_tb_clientes1` FOREIGN KEY (`id_cliente`) REFERENCES `tb_clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Limitadores para a tabela `tb_mod`
 --
 ALTER TABLE `tb_mod`
@@ -371,7 +378,6 @@ ALTER TABLE `tb_mod`
 -- Limitadores para a tabela `tb_oat`
 --
 ALTER TABLE `tb_oat`
-  ADD CONSTRAINT `fk_tb_oat_tb_clientes1` FOREIGN KEY (`tb_clientes_id`) REFERENCES `tb_clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_oat_tb_localidades1` FOREIGN KEY (`tb_localidades_id`) REFERENCES `tb_localidades` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
