@@ -8,9 +8,6 @@ class Clientes extends Crud{
 	private $nick;
 	private $ativo;
 
-
-
-
 	public function setNome($nome){
 		$this->nome = $nome;
 	}
@@ -27,16 +24,11 @@ class Clientes extends Crud{
 	public function insert(){
 
 		$sql  = "INSERT INTO $this->table (nome, nick, ativo) ";
-		$sql .= "VALUES (:nome, :email, :nickuser, :senha, :nivel, :ativo, :data_cadastro, :data_ultimo_login)";
+		$sql .= "VALUES (:nome, :nick, :ativo)";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':nome',$this->nome);
-		$stmt->bindParam(':email',$this->email);
-		$stmt->bindParam(':nickuser',$this->nickuser);
-		$stmt->bindParam(':senha',$this->senha);
-		$stmt->bindParam(':nivel',$this->nivel_usuario);
+		$stmt->bindParam(':nick',$this->nick);
 		$stmt->bindParam(':ativo',$this->ativo);
-		$stmt->bindParam(':data_cadastro',$this->datacadastro);
-		$stmt->bindParam(':data_ultimo_login',$this->datalogin);
 
 		return $stmt->execute(); 
 
@@ -44,10 +36,11 @@ class Clientes extends Crud{
 
 	public function update($id){
 
-		$sql  = "UPDATE $this->table SET nome = :nome, nickuser = :nickuser, senha = :senha, WHERE id = :id";
+		$sql  = "UPDATE $this->table SET nome = :nome, nick = :nick, ativo = :ativo WHERE id = :id ";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':nome', $this->nome);
 		$stmt->bindParam(':nick',$this->nick);
+		$stmt->bindParam(':ativo',$this->ativo);
 		$stmt->bindParam(':id', $id);
 		return $stmt->execute();
 		
@@ -65,11 +58,6 @@ class Clientes extends Crud{
 			$stmt->execute();
 			$contar = $stmt->rowCount();
 			if($contar>0){
-				//$usuario = $this->nickuser;
-				//$senha	 = $this->senha;
-				//$_SESSION['usuarioUser'] = $usuario;
-				//$_SESSION['senhaUser'] = $senha;
-				
 				$loop = $stmt->fetchAll();
 				foreach ($loop as $show){
 					$loginId = $show->id;
@@ -86,7 +74,7 @@ class Clientes extends Crud{
 				$_SESSION['loginSenha'] = $loginSenha;
 				$_SESSION['loginNivel'] = $loginNivel;
 
-				echo $loginNome, $loginUser, '<div class="alert alert-success">
+				echo '<div class="alert alert-success">
 					  <button type="button" class="close" data-dismiss="alert">×</button>
                       <strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
                 </div>';

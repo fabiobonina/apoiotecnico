@@ -1,51 +1,20 @@
+  <!-- Header -->
+  <?php include("admin/includes/header.php");?>
+  <!-- /Header -->
 
-<?php include("includes/header-user.php");?>
-</head>
-<body>
-<?php include("includes/topo-user.php");?>
+            <!-- menu profile quick info -->
+            <?php include("admin/includes/menu.php");?>
+            <!-- /menu footer buttons -->
 
+        <!-- top navigation -->
+        <?php include("admin/includes/topo.php");?>
+        <!-- /top navigation -->
 
-<?php
-	require_once("admin/conexao/conecta.php");
-	require("admin/functions/limita-texto.php");
-?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>SysHub - System</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css" media="all">
-<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all">
-</head>
+        <!-- page content -->
+        <?php include("admin/includes/conteudo.php");?>
+        <!-- /page content -->
+        
+        <!-- footer content -->
+        <?php include("admin/includes/footer.php");?>
+        <!-- /footer content -->
 
-<body>
-<?php
-	if(isset($_GET['acao'])){
-		$acao = $_GET['acao'];	
-		
-		if($acao=='welcome'){include("pages/oat/oat-inicio.php");}	
-		
-		// OAT solicitar
-		if($acao=='oat-solicitar'){include("pages/oat/oat-solicitar.php");}	
-		
-		// OAT Abrir
-		if($acao=='oat-ordemservico'){include("pages/oat/oat-ordemservico.php");}
-		
-		// OAT Fechar
-		if($acao=='oat-finalizar'){include("pages/oat/oat-finalizar.php");}
-		
-		// OAT baixar
-		if($acao=='oat-baixar'){include("pages/oat/oat-baixar.php");}
-		
-		// OAT Concluidas
-		if($acao=='oat-concluidas'){include("pages/oat/oat-concluidas.php");}
-		
-	}else{
-		include("pages/oat/oat-inicio.php");
-	}
-?>
-
-
-<?php include("includes/footer-user.php");?>
-</body>
-</html>

@@ -5,6 +5,6 @@ if(isset($_REQUEST['sair'])){
 	session_unset($_SESSION['loginSenha']);
 	session_unset($_SESSION['loginNivel']);
 	session_unset($_SESSION['loginNome']);
-	header("Location: ../index.php");	
+	header("Location: login.php");
 }
 ?>

@@ -87,11 +87,6 @@ class Usuarios extends Crud{
 			$stmt->execute();
 			$contar = $stmt->rowCount();
 			if($contar>0){
-				//$usuario = $this->nickuser;
-				//$senha	 = $this->senha;
-				//$_SESSION['usuarioUser'] = $usuario;
-				//$_SESSION['senhaUser'] = $senha;
-				
 				$loop = $stmt->fetchAll();
 				foreach ($loop as $show){
 					$loginId = $show->id;
@@ -108,7 +103,7 @@ class Usuarios extends Crud{
 				$_SESSION['loginSenha'] = $loginSenha;
 				$_SESSION['loginNivel'] = $loginNivel;
 
-				echo $loginNome, $loginUser, '<div class="alert alert-success">
+				echo '<div class="alert alert-success">
 					  <button type="button" class="close" data-dismiss="alert">×</button>
                       <strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
                 </div>';
