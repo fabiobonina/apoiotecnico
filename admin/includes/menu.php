@@ -85,7 +85,7 @@
                   <li><a><i class="fa fa-cog"></i> OAT Config <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="oat-system.php?acao=oat-clientes">Clientes</a></li>
-                      <li><a href="oat-system.php?acao=oat-locadades">Locadades</a></li>
+                      <li><a href="oat-system.php?acao=oat-localidades">Localidades</a></li>
                       <li><a href="oat-system.php?acao=oat-tecnicos">Tecnicos</a></li>
                       <li><a href="oat-system.php?acao=oat-sistemas">Sistemas</a></li>
                       <li><a href="oat-system.php?acao=oat-serviços">Serviços</a></li>

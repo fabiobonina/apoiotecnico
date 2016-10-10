@@ -3,12 +3,22 @@
 					$localidade = new Localidades();
 						#CADASTRAR
 						if(isset($_POST['cadastrar'])):
-							$nome = $_POST['nome'];
-							$nick =$_POST["nick"];
+              $cliente = $_POST['cliente'];
+              $regiao = $_POST['regiao'];
+              $nome = $_POST['nome'];
+              $municipio = $_POST['municipio'];
+              $uf = $_POST['uf'];
+							$lat = $_POST['lat'];
+							$long =$_POST["long"];
 							$ativo =$_POST["ativo"];
 
-							$localidade->setNome($nome);
-							$localidade->setNick($nick);
+							$localidade->setCliente($cliente);
+							$localidade->setRegiao($regiao);
+              $localidade->setNome($nome);
+							$localidade->setMunicipio($municipio);
+							$localidade->setUf($uf);
+              $localidade->setLat($lat);
+							$localidade->setLong($long);
 							$localidade->setAtivo($ativo);
 							# Insert
 							if($localidade->insert()){
@@ -19,12 +29,22 @@
 						if(isset($_POST['atualizar'])):
 
 							$id = $_POST['id'];
-							$nome = $_POST['nome'];
-							$nick =$_POST["nick"];
+              $cliente = $_POST['cliente'];
+              $regiao = $_POST['regiao'];
+              $nome = $_POST['nome'];
+              $municipio = $_POST['municipio'];
+              $uf = $_POST['uf'];
+							$lat = $_POST['lat'];
+							$long =$_POST["long"];
 							$ativo =$_POST["ativo"];
 
-							$localidade->setNome($nome);
-							$localidade->setNick($nick);
+							$localidade->setCliente($cliente);
+							$localidade->setRegiao($regiao);
+              $localidade->setNome($nome);
+							$localidade->setMunicipio($municipio);
+							$localidade->setUf($uf);
+              $localidade->setLat($lat);
+							$localidade->setLong($long);
 							$localidade->setAtivo($ativo);
 
 							if($localidade->update($id)){
@@ -38,6 +58,8 @@
 								echo "Deletado com sucesso!";
 							}
 						endif;
+
+            $cliente = new Clientes();
 				?>
         <!-- page content -->
         <div class="right_col" role="main">
@@ -119,8 +141,7 @@
                           <button type="submit" name="atualizar" class="btn btn-success">Salvar</button>
                         </div>
                       </div>
-
-		                    </form>
+		                </form>
                   </div>
                 </div>
               </div>
@@ -155,38 +176,65 @@
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nome <span class="required">*</span>
-                        </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cliente <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php foreach($localidade->findAll() as $key => $value): ?>
+                          <?php echo $value->nick; ?>                 
+                          <input type="text" id="first-name" name="cliente" required="required" class="form-control col-md-7 col-xs-12">
+                        <?php endforeach; ?>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Regional <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="regiao" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nome <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="first-name" name="nome" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Razão Social <span class="required">*</span>
-                        </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Municipio <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="nick" name="nick" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="municipio" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">UF <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="uf" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Latidude <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="lat" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Longitude <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="nick" name="long" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Ativo <span class="required">*</span></label>
                       <p>
-                        S:
-                        <input type="radio" class="flat" name="ativo" id="ativo0" value="0" checked="" required /> N:
-                        <input type="radio" class="flat" name="ativo" id="ativo1" value="1" />
+                        S:<input type="radio" class="flat" name="ativo" id="ativo0" value="0" checked="" required />
+                        N:<input type="radio" class="flat" name="ativo" id="ativo1" value="1" />
                       </p>
-                      
                       </div>
-
-		                      <div class="ln_solid"></div>
+		                  <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button type="submit" class="btn btn-primary">Cancelar</button>
                           <button type="submit" name="cadastrar" class="btn btn-success">Cadastrar</button>
                         </div>
                       </div>
-
-		                    </form>
+		                </form>
                   </div>
                 </div>
               </div>
@@ -231,7 +279,6 @@
                           <th>Ação</th>
                         </tr>
                       </thead>
-
                 			<?php foreach($localidade->findAll() as $key => $value): ?>
                       <tbody>
                         <tr>
@@ -246,7 +293,6 @@
                         </tr>
                       </tbody>
                       <?php endforeach; ?>
-
                     </table>
                   </div>
                 </div>

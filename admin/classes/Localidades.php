@@ -1,7 +1,7 @@
 <?php
 require_once 'Crud.php';
 
-class Clientes extends Crud{
+class Localidades extends Crud{
 	
 	protected $table = 'tb_localidades';
 	private $cliente;
@@ -24,6 +24,9 @@ class Clientes extends Crud{
 	}
 	public function setRegional($regional){
 		$this->regional = $regional;
+	}
+	public function setMunicipio($municipio){
+		$this->municipio = $municipio;
 	}
 	public function setUf($uf){
 		$this->uf = $uf;
@@ -58,12 +61,16 @@ class Clientes extends Crud{
 
 	public function update($id){
 
-		$sql  = "UPDATE $this->table SET nome = :nome, nick = :nick, ativo = :ativo WHERE id = :id ";
+		$sql  = "UPDATE $this->table SET cliente = :cliente, regional = :regional, nome = :nome, municipio = :municipio, uf = :uf, 	latidude = :latidude, ativo = :ativo WHERE id = :id ";
 		$stmt = DB::prepare($sql);
-		$stmt->bindParam(':nome', $this->nome);
-		$stmt->bindParam(':nick',$this->nick);
+		$stmt->bindParam(':cliente',$this->cliente);
+		$stmt->bindParam(':regional',$this->regional);
+		$stmt->bindParam(':nome',$this->nome);
+		$stmt->bindParam(':municipio',$this->municipio);
+		$stmt->bindParam(':uf',$this->uf);
+		$stmt->bindParam(':latitude',$this->latitude);
+		$stmt->bindParam(':longitude',$this->longitude);
 		$stmt->bindParam(':ativo',$this->ativo);
-		$stmt->bindParam(':id', $id);
 		return $stmt->execute();
 		
 	}

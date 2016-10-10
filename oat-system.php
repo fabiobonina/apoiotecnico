@@ -17,7 +17,7 @@
             
             if($acao=='oat-clientes'){include("admin/pages/oat-system/clientes.php");}	
             // cadastro
-            if($acao=='oat-locadades'){include("admin/pages/oat-system/locadades.php");}	
+            if($acao=='oat-localidades'){include("admin/pages/oat-system/localidades.php");}	
             // exibicao
             if($acao=='oat-tecnicos'){include("admin/pages/oat-system/tecnicos.php");}
             // edicao
