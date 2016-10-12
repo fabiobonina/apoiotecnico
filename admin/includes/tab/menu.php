@@ -4,13 +4,13 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<index class="php"></index>" class="site_title"><i class="fa fa-paw"></i> <span>SkyHub | Web Mobi</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>SkyHub | Web Mobi</span></a>
             </div>
             <div class="clearfix"></div>
             <!-- menu profile quick info -->
             <div class="profile">
               <div class="profile_pic">
-                <img src="images/user.png" alt="..." class="img-circle profile_img">
+                <img src="../images/user.png" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -28,7 +28,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php">Dashboard</a></li>
+                      <li><a href="../index.php">Dashboard</a></li>
                       <li><a href="index2.php">Dashboard2</a></li>
                       <li><a href="index3.php">Dashboard3</a></li>
                     </ul>
@@ -84,12 +84,12 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-cog"></i> OAT Config <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="oat-system.php?acao=oat-clientes">Clientes</a></li>
-                      <li><a href="oat-system.php?acao=oat-localidades">Localidades</a></li>
-                      <li><a href="oat-system.php?acao=oat-tecnicos">Tecnicos</a></li>
-                      <li><a href="oat-system.php?acao=oat-sistemas">Sistemas</a></li>
-                      <li><a href="oat-system.php?acao=oat-servicos">Serviços</a></li>
-                      <li><a href="oat-system.php?acao=oat-despesas">Tipo Despesa</a></li>
+                      <li><a href="oat-clientes.php">Clientes</a></li>
+                      <li><a href="oat-localidades.php">Localidades</a></li>
+                      <li><a href="oat-tecnicos.php">Tecnicos</a></li>
+                      <li><a href="oat-sistemas.php">Sistemas</a></li>
+                      <li><a href="oat-serviços.php">Serviços</a></li>
+                      <li><a href="oat-despesas.php">Tipo Despesa</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>

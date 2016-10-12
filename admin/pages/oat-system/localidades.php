@@ -4,7 +4,7 @@
 						#CADASTRAR
 						if(isset($_POST['cadastrar'])):
               $cliente = $_POST['cliente'];
-              $regiao = $_POST['regiao'];
+              $regional = $_POST['regional'];
               $nome = $_POST['nome'];
               $municipio = $_POST['municipio'];
               $uf = $_POST['uf'];
@@ -13,7 +13,7 @@
 							$ativo =$_POST["ativo"];
 
 							$localidade->setCliente($cliente);
-							$localidade->setRegiao($regiao);
+							$localidade->setRegional($regional);
               $localidade->setNome($nome);
 							$localidade->setMunicipio($municipio);
 							$localidade->setUf($uf);
@@ -30,7 +30,7 @@
 
 							$id = $_POST['id'];
               $cliente = $_POST['cliente'];
-              $regiao = $_POST['regiao'];
+              $regional = $_POST['regional'];
               $nome = $_POST['nome'];
               $municipio = $_POST['municipio'];
               $uf = $_POST['uf'];
@@ -39,7 +39,7 @@
 							$ativo =$_POST["ativo"];
 
 							$localidade->setCliente($cliente);
-							$localidade->setRegiao($regiao);
+							$localidade->setRegional($regional);
               $localidade->setNome($nome);
 							$localidade->setMunicipio($municipio);
 							$localidade->setUf($uf);
@@ -52,7 +52,7 @@
 							}
 						endif;
 						#DELETAR
-						if(isset($_GET['acao']) && $_GET['acao'] == 'deletar'):
+						if(isset($_GET['acao1']) && $_GET['acao1'] == 'deletar'):
 							$id = (int)$_GET['id'];
 							if($localidade->delete($id)){
 								echo "Deletado com sucesso!";
@@ -83,7 +83,7 @@
 
             <div class="clearfix"></div>
               <?php
-              if(isset($_GET['acao']) && $_GET['acao'] == 'editar'){
+              if(isset($_GET['acao1']) && $_GET['acao1'] == 'editar'){
 
                 $id = (int)$_GET['id'];
                 $resultado = $localidade->find($id);
@@ -178,16 +178,17 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cliente <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?php foreach($localidade->findAll() as $key => $value): ?>
-                          <?php echo $value->nick; ?>                 
-                          <input type="text" id="first-name" name="cliente" required="required" class="form-control col-md-7 col-xs-12">
-                        <?php endforeach; ?>
+                          <select name="cliente" class="form-control col-md-7 col-xs-12">
+                            <?php foreach($cliente->findAll() as $key => $value): ?>
+                            <option value="<?php echo $value->nick; ?>"><?php echo $value->nick; ?></option>  
+                            <?php endforeach; ?>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Regional <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="regiao" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="regional" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
@@ -209,15 +210,15 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Latidude <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Latidude <span class="required"></span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="lat" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="lat" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Longitude <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Longitude <span class="required"></span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="nick" name="long" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="nick" name="long" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
@@ -273,8 +274,13 @@
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>Cliente</th>
+                          <th>Regional</th>
                           <th>Name</th>
-                          <th>Nome Fantasia</th>
+                          <th>Municipio</th>
+                          <th>UF</th>
+                          <th>Latitude</th>
+                          <th>Longitude</th>
                           <th>Ativo</th>
                           <th>Ação</th>
                         </tr>
@@ -283,12 +289,17 @@
                       <tbody>
                         <tr>
                           <td><?php echo $value->id; ?></td>
+                          <td><?php echo $value->cliente; ?></td>
+                          <td><?php echo $value->regional; ?></td>
                           <td><?php echo $value->nome; ?></td>
-                          <td><?php echo $value->nick; ?></td>
+                          <td><?php echo $value->municipio; ?></td>
+                          <td><?php echo $value->uf; ?></td>
+                          <td><?php echo $value->latitude; ?></td>
+                          <td><?php echo $value->longitude; ?></td>
                           <td><?php echo $value->ativo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-system.php?acao=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
-                            <?php echo "<a href='oat-system.php?acao=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
+                            <?php echo "<a href='oat-system.php?acao=oat-clientes&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
+                            <?php echo "<a href='oat-system.php?acao=oat-clientes&acao1=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>

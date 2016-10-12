@@ -23,7 +23,7 @@
             // edicao
             if($acao=='oat-sistemas'){include("admin/pages/oat-system/sistemas.php");}
                 // edicao
-            if($acao=='oat-serviços'){include("admin/pages/oat-system/serviços.php");}
+            if($acao=='oat-servicos'){include("admin/pages/oat-system/servicos.php");}
                 // edicao
             if($acao=='oat-despesas'){include("admin/pages/oat-system/despesas.php");}
 

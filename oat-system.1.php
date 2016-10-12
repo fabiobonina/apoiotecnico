@@ -372,7 +372,7 @@ $cliente = new Clientes();
                           <td><?php echo $value->nick; ?></td>
                           <td><?php echo $value->ativo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-system.php?acao=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
+                            <?php echo "<a href='oat-system.1.php?acao=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
                             <?php echo "<a href='oat-system.php?acao=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>

@@ -1,17 +1,17 @@
 				<?php
 
-					$cliente = new Clientes();
+					$servico = new Servicos();
 						#CADASTRAR
 						if(isset($_POST['cadastrar'])):
-							$nome = $_POST['nome'];
-							$nick =$_POST["nick"];
-							$ativo =$_POST["ativo"];
+              $id = strtoupper($_POST['id']);
+							$descricao = strtoupper ($_POST['descricao']);
+							$ativo = strtoupper ($_POST["ativo"]);
 
-							$cliente->setNome($nome);
-							$cliente->setNick($nick);
-							$cliente->setAtivo($ativo);
+              $servico->setCod($id);
+							$servico->setDescricao($descricao);
+							$servico->setAtivo($ativo);
 							# Insert
-							if($cliente->insert()){
+							if($servico->insert()){
 								echo "Inserido com sucesso!";
 							}
 						endif;
@@ -19,22 +19,20 @@
 						if(isset($_POST['atualizar'])):
 
 							$id = $_POST['id'];
-							$nome = $_POST['nome'];
-							$nick =$_POST["nick"];
-							$ativo =$_POST["ativo"];
+							$descricao = strtoupper ($_POST['descricao']);
+							$ativo = strtoupper ($_POST["ativo"]);
 
-							$cliente->setNome($nome);
-							$cliente->setNick($nick);
-							$cliente->setAtivo($ativo);
+							$servico->setDescricao($descricao);
+							$servico->setAtivo($ativo);
 
-							if($cliente->update($id)){
+							if($servico->update($id)){
 								echo "Atualizado com sucesso!";
 							}
 						endif;
 						#DELETAR
 						if(isset($_GET['acao1']) && $_GET['acao1'] == 'deletar'):
 							$id = (int)$_GET['id'];
-							if($cliente->delete($id)){
+							if($servico->delete($id)){
 								echo "Deletado com sucesso!";
 							}
 						endif;
@@ -44,7 +42,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Clientes <small>Lista de dados</small></h3>
+                <h3>Servicos <small>Lista de dados</small></h3>
               </div>
 
               <div class="title_right">
@@ -63,15 +61,15 @@
               <?php
               if(isset($_GET['acao1']) && $_GET['acao1'] == 'editar'){
 
-                $id = (int)$_GET['id'];
-                $resultado = $cliente->find($id);
+                $id = $_GET['id'];
+                $resultado = $servico->find($id);
               ?>
 
 		            <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Editar Cliente <small>Altere os dados</small></h2>
+                    <h2>Editar servico <small>Altere os dados</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -93,15 +91,9 @@
                     <br />
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nome <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Descrição <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="nome" value="<?php echo $resultado->nome; ?>" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Razão Social <span class="required">*</span>                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="nick" name="nick" value="<?php echo $resultado->nick; ?>" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="descricao" value="<?php echo $resultado->descricao; ?>"  size=30 maxlength=30 required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
@@ -120,7 +112,7 @@
                         </div>
                       </div>
 
-		                    </form>
+		                </form>
                   </div>
                 </div>
               </div>
@@ -132,7 +124,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Novo Cliente <small>Insira os dados</small></h2>
+                    <h2>Novo servico <small>Insira os dados</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -153,19 +145,17 @@
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-
+                      
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nome <span class="required">*</span>
-                        </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Codigo <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="nome" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="id" required="required" size=6 maxlength=6 style="text-transform:uppercase;" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Razão Social <span class="required">*</span>
-                        </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Descrição <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="nick" name="nick" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="descricao" required="required" size=30 maxlength=30 class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
@@ -199,7 +189,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Lista<small>Clientes</small></h2>
+                    <h2>Lista<small>Servicos</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -225,23 +215,21 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Name</th>
-                          <th>Nome Fantasia</th>
+                          <th>Descrição</th>
                           <th>Ativo</th>
                           <th>Ação</th>
                         </tr>
                       </thead>
 
-                			<?php foreach($cliente->findAll() as $key => $value): ?>
+                			<?php foreach($servico->findAll() as $key => $value): ?>
                       <tbody>
                         <tr>
                           <td><?php echo $value->id; ?></td>
-                          <td><?php echo $value->nome; ?></td>
-                          <td><?php echo $value->nick; ?></td>
+                          <td><?php echo $value->descricao; ?></td>
                           <td><?php echo $value->ativo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-system.php?acao=oat-clientes&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
-                            <?php echo "<a href='oat-system.php?acao=oat-clientes&acao1=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
+                            <?php echo "<a href='oat-system.php?acao=oat-servicos&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
+                            <?php echo "<a href='oat-system.php?acao=oat-servicos&acao1=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>
