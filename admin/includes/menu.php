@@ -4,7 +4,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<index class="php"></index>" class="site_title"><i class="fa fa-paw"></i> <span>SkyHub | Web Mobi</span></a>
+              <a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span>SkyHub | Web Mobi</span></a>
             </div>
             <div class="clearfix"></div>
             <!-- menu profile quick info -->
@@ -35,12 +35,11 @@
                   </li>
                   <li><a><i class="fa fa-wrench"></i> OAT-Ordem Atend. Tec. <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.php">General Form</a></li>
-                      <li><a href="form_advanced.php">Advanced Components</a></li>
-                      <li><a href="form_validation.php">Form Validation</a></li>
-                      <li><a href="form_wizards.php">Form Wizard</a></li>
-                      <li><a href="form_upload.php">Form Upload</a></li>
-                      <li><a href="form_buttons.php">Form Buttons</a></li>
+                      <li><a href="oat-operacao.php?acao=oat-criar">Criar</a></li>
+                      <li><a href="oat-operacao.php?acao=oat-amarar">Amarar OS</a></li>
+                      <li><a href="oat-operacao.php?acao=oat-retorno">Retorno</a></li>
+                      <li><a href="oat-operacao.php?acao=oat-finalizar">Finalisar</a></li>
+                      <li><a href="oat-operacao.php?acao=oat-concluidas">Concluidas</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>

@@ -4,11 +4,17 @@ require_once 'Crud.php';
 class Sistemas extends Crud{
 	
 	protected $table = 'tb_sistema';
+	private $cod;
 	private $descricao;
 	private $ativo;
 
+	public function setCod($cod){
+		$cod = iconv('UTF-8', 'ASCII//TRANSLIT', $cod);
+		$this->cod = strtoupper ($cod);
+	}
 	public function setDescricao($descricao){
-		$this->descricao = $descricao;
+		$descricao = iconv('UTF-8', 'ASCII//TRANSLIT', $descricao);
+		$this->descricao = strtoupper ($descricao);
 	}
 	public function getDescricao(){
 		return $this->descricao;
@@ -19,9 +25,10 @@ class Sistemas extends Crud{
 
 	public function insert(){
 
-		$sql  = "INSERT INTO $this->table (descricao, ativo) ";
-		$sql .= "VALUES (:descricao, :ativo)";
+		$sql  = "INSERT INTO $this->table (id, descricao, ativo) ";
+		$sql .= "VALUES (:id, :descricao, :ativo)";
 		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':id',$this->cod);
 		$stmt->bindParam(':descricao',$this->descricao);
 		$stmt->bindParam(':ativo',$this->ativo);
 

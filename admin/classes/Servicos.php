@@ -9,10 +9,12 @@ class Servicos extends Crud{
 	private $ativo;
 
 	public function setCod($cod){
-		$this->cod = $cod;
+		$cod = iconv('UTF-8', 'ASCII//TRANSLIT', $cod);
+		$this->cod = strtoupper ($cod);
 	}
 	public function setDescricao($descricao){
-		$this->descricao = $descricao;
+		$descricao = iconv('UTF-8', 'ASCII//TRANSLIT', $descricao);
+		$this->descricao = strtoupper ($descricao);
 	}
 	public function getDescricao(){
 		return $this->descricao;

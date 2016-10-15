@@ -75,53 +75,17 @@ class Localidades extends Crud{
 		
 	}
 
-	public function logar(){
+	public function search($cliente){
 
-		// SELECIONAR BANCO DE DADOS
-		
-		$sql = "SELECT * from $this->table WHERE BINARY nickuser=:nickuser AND BINARY senha=:senha ";
+		$sql = "SELECT * from $this->table WHERE BINARY cliente=:cliente ";
+		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':cliente',$this->cliente);
 
-			$stmt = DB::prepare($sql);
-			$stmt->bindParam(':nickuser', $this->nickuser);
-			$stmt->bindParam(':senha', $this->senha);
-			$stmt->execute();
-			$contar = $stmt->rowCount();
-			if($contar>0){
-				//$usuario = $this->nickuser;
-				//$senha	 = $this->senha;
-				//$_SESSION['usuarioUser'] = $usuario;
-				//$_SESSION['senhaUser'] = $senha;
-				
-				$loop = $stmt->fetchAll();
-				foreach ($loop as $show){
-					$loginId = $show->id;
-					$loginNome = $show->nome;
-					$loginEmail = $show->email;
-					$loginUser = $show->nickuser;
-					$loginSenha = $show->senha;
-					$loginNivel = $show->nivel;
-				}
-				$_SESSION['loginId'] = $loginId;
-				$_SESSION['loginNome'] = $loginNome;
-				$_SESSION['loginEmail'] = $loginEmail;
-				$_SESSION['loginUser'] = $loginUser;
-				$_SESSION['loginSenha'] = $loginSenha;
-				$_SESSION['loginNivel'] = $loginNivel;
-
-				echo '<div class="alert alert-success">
-					  <button type="button" class="close" data-dismiss="alert">×</button>
-                      <strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
-                </div>';
-				
-				header("Refresh: 6, index.php?acao=welcome");
-			}else{
-				echo '<div class="alert alert-danger">
-                      <button type="button" class="close" data-dismiss="alert">×</button>
-                      <strong>Erro ao logar!</strong> Os dados estão incorretos.
-                </div>';
-			}
+		return $stmt->execute();
 		
 	}
 
 
+
+$sql = "SELECT * from $this->table WHERE BINARY nickuser=:nickuser AND BINARY senha=:senha ";
 }

@@ -32,4 +32,12 @@ abstract class Crud extends DB{
 		return $stmt->execute(); 
 	}
 
+	public function ativo($ativo){
+		$sql  = "SELECT * FROM $this->table WHERE ativo = :ativo";
+		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
+		$stmt->execute();
+		return $stmt->fetch();
+	}
+
 }
