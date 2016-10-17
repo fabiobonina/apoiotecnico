@@ -69,14 +69,14 @@ class Oats extends Crud{
 
 	public function insert(){
 
-		$sql  = "INSERT INTO $this->table (nickuser, tb_clientes_id, tb_localidades_id, tb_servicos_id, tb_sistema_id, data_sol, filial, os, data_os, data_fech, data_term, status, ativo) ";
-		$sql .= "VALUES (:nickuser, :tb_clientes_id, :tb_localidades_id, :tb_servicos_id, :tb_sistema_id, :data_sol, :filial, :os, :data_os, :data_fech, :data_term, :status, :ativo)";
+		$sql  = "INSERT INTO $this->table (nickuser, cliente, localidade, servico, sistema, data_sol, filial, os, data_os, data_fech, data_term, status, ativo) ";
+		$sql .= "VALUES (:nickuser, :cliente, :localidade, :servico, :sistema, :data_sol, :filial, :os, :data_os, :data_fech, :data_term, :status, :ativo)";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':nickuser',$this->nickUser);
-		$stmt->bindParam(':tb_clientes_id',$this->cliente);
-		$stmt->bindParam(':tb_localidades_id',$this->localidade);
-		$stmt->bindParam(':tb_servicos_id',$this->servico);
-		$stmt->bindParam(':tb_sistema_id',$this->sistema);
+		$stmt->bindParam(':cliente',$this->cliente);
+		$stmt->bindParam(':localidade',$this->localidade);
+		$stmt->bindParam(':servico',$this->servico);
+		$stmt->bindParam(':sistema',$this->sistema);
 		$stmt->bindParam(':data_sol',$this->dataOat);
 		$stmt->bindParam(':filial',$this->filial);
 		$stmt->bindParam(':os',$this->os);
@@ -91,13 +91,13 @@ class Oats extends Crud{
 	}
 
 	public function update($id){
-		$sql  = "UPDATE $this->table SET nickuser = :nickuser, tb_clientes_id = :tb_clientes_id, tb_localidades_id = :tb_localidades_id, tb_servicos_id = :tb_servicos_id, tb_sistema_id = :tb_sistema_id, data_sol = :data_sol, filial = :filial, os = :os, data_os = :data_os, data_fech = :data_fech, data_term = :data_term, status = :status, ativo = :ativo WHERE id = :id";
+		$sql  = "UPDATE $this->table SET nickuser = :nickuser, cliente = :cliente, localidade = :localidade, servico = :servico, sistema = :sistema, data_sol = :data_sol, filial = :filial, os = :os, data_os = :data_os, data_fech = :data_fech, data_term = :data_term, status = :status, ativo = :ativo WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':nickuser',$this->nickUser);
-		$stmt->bindParam(':tb_clientes_id',$this->cliente);
-		$stmt->bindParam(':tb_localidades_id',$this->localidade);
-		$stmt->bindParam(':tb_servicos_id',$this->servico);
-		$stmt->bindParam(':tb_sistema_id',$this->sistema);
+		$stmt->bindParam(':cliente',$this->cliente);
+		$stmt->bindParam(':localidade',$this->localidade);
+		$stmt->bindParam(':servico',$this->servico);
+		$stmt->bindParam(':sistema',$this->sistema);
 		$stmt->bindParam(':data_sol',$this->dataOat);
 		$stmt->bindParam(':filial',$this->filial);
 		$stmt->bindParam(':os',$this->os);

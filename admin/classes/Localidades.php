@@ -86,6 +86,4 @@ class Localidades extends Crud{
 	}
 
 
-
-$sql = "SELECT * from $this->table WHERE BINARY nickuser=:nickuser AND BINARY senha=:senha ";
 }

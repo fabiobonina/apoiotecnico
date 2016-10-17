@@ -1,6 +1,8 @@
   <!-- Header -->
   <?php include("admin/includes/tab/header.php");?>
   <!-- /Header -->
+      <script src="js/jquery-1.3.2.min.js"></script>
+    <script src="js/combo.js"></script>
 
             <!-- menu profile quick info -->
             <?php include("admin/includes/menu.php");?>
