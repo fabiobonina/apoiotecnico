@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Out-2016 às 12:48
--- Versão do servidor: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- Generation Time: 18-Out-2016 às 13:09
+-- Versão do servidor: 10.1.16-MariaDB
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -76,7 +76,8 @@ CREATE TABLE `tb_clientes` (
 --
 
 INSERT INTO `tb_clientes` (`id`, `nome`, `nick`, `ativo`) VALUES
-(1, 'Fabio Bonina', 'fabio', '0');
+(1, 'Fabio Bonina', 'FABIO', '0'),
+(2, 'ALEXANDRE', 'ALEXANDRE', '0');
 
 -- --------------------------------------------------------
 
@@ -110,6 +111,16 @@ CREATE TABLE `tb_localidades` (
   `longitude` float(10,6) DEFAULT NULL,
   `ativo` enum('0','1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_localidades`
+--
+
+INSERT INTO `tb_localidades` (`id`, `cliente`, `regional`, `nome`, `municipio`, `uf`, `latitude`, `longitude`, `ativo`) VALUES
+(1, 'fabio', NULL, 'ETA', 'ITAPISSUMA', 'PE', 0.000000, 0.000000, '0'),
+(2, 'fabio', '', 'ETA', 'ITAPISSUMA', 'PE', 0.000000, 0.000000, '0'),
+(3, 'fabio', '', 'ETA', 'ITAPISSUMA', 'PE', 0.000000, 0.000000, '0'),
+(4, 'fabio', '', 'ETA', 'ITAPISSUMA', 'PE', 0.000000, 0.000000, '0');
 
 -- --------------------------------------------------------
 
@@ -186,9 +197,18 @@ CREATE TABLE `tb_postagens` (
 
 CREATE TABLE `tb_servicos` (
   `id` varchar(6) NOT NULL,
-  `nome` varchar(30) NOT NULL,
+  `descricao` varchar(30) NOT NULL,
   `ativo` enum('0','1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_servicos`
+--
+
+INSERT INTO `tb_servicos` (`id`, `descricao`, `ativo`) VALUES
+('ACAO01', 'ACAO', '0'),
+('SER001', 'SERVICO', '0'),
+('tes001', 'TESTE', '0');
 
 -- --------------------------------------------------------
 
@@ -198,9 +218,16 @@ CREATE TABLE `tb_servicos` (
 
 CREATE TABLE `tb_sistema` (
   `id` varchar(10) NOT NULL,
-  `descricao` varchar(45) NOT NULL,
+  `descricao` varchar(30) NOT NULL,
   `ativo` enum('0','1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_sistema`
+--
+
+INSERT INTO `tb_sistema` (`id`, `descricao`, `ativo`) VALUES
+('SBGCL-SCL', 'SISTEMA CLORACAO', '0');
 
 -- --------------------------------------------------------
 
@@ -325,12 +352,17 @@ ALTER TABLE `tipo_despesa`
 -- AUTO_INCREMENT for table `tb_clientes`
 --
 ALTER TABLE `tb_clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_insumos`
 --
 ALTER TABLE `tb_insumos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_localidades`
+--
+ALTER TABLE `tb_localidades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_mod`
 --
@@ -373,12 +405,6 @@ ALTER TABLE `tb_insumos`
 ALTER TABLE `tb_mod`
   ADD CONSTRAINT `fk_tb_mod_tb_oat1` FOREIGN KEY (`tb_oat_id`) REFERENCES `tb_oat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_mod_tb_tecnicos1` FOREIGN KEY (`tb_tecnicos_id`) REFERENCES `tb_tecnicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `tb_oat`
---
-ALTER TABLE `tb_oat`
-  ADD CONSTRAINT `fk_tb_oat_tb_localidades1` FOREIGN KEY (`tb_localidades_id`) REFERENCES `tb_localidades` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `tb_osdespesa`
