@@ -42,18 +42,21 @@ if(isset($_GET['acao'])){
 		}
 	}
 }
+if(isset($_POST['cadastrar'])):
 
-#Novo Usuario
-		if(isset($_POST['cadastrar'])):
-
+    #Novo Usuario
 			$nome  = $_POST['nome'];
 			$email = $_POST['email'];
+      $emailR = $_POST['emailR'];
 			$nickuser=$_POST["nickuser"];
 			$senha=$_POST["senha"];
+      $senhaR=$_POST["senhaR"];
 			$nivel_usuario = "0";
 			$ativo = "0";
 			$datacadastro = date("Y-m-d H:i:s");
 			$datalogin = date("Y-m-d H:i:s");
+
+  if($email == $emailR && $senha == $senhaR){
 
 			$usuario->setNome($nome);
 			$usuario->setEmail($email);
@@ -68,7 +71,13 @@ if(isset($_GET['acao'])){
 				echo "Inserido com sucesso!";
 			}
 
-		endif;
+    }else{
+            echo '<div class="alert alert-danger">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <strong>Erro nos dados!</strong> Verefique email ou senha.
+              </div>';
+    }
+  endif;
 
 		?>
 
@@ -103,7 +112,7 @@ if(isset($_GET['acao'])){
         <div class="animate form login_form">
           <section class="login_content">
             <form action="#" method="post">
-              <h1>SkyHub Login</h1>
+              <h1>Login</h1>
               <div>
                 <input type="text" name="nickuser" class="form-control" placeholder="Usuário" required="" />
               </div>
@@ -127,7 +136,7 @@ if(isset($_GET['acao'])){
 
                 <div>
                   <h1><i class="fa fa-paw"></i> SkyHub | Web Mobi</h1>
-                  <p>©2016 All Rights Reserved. Bootstrap 3 template. Privacy and Terms</p>
+                  <p>©2016 Todos os direitos reservados. SkyHub | Web Mobi. </p>
                 </div>
               </div>
             </form>
@@ -136,26 +145,35 @@ if(isset($_GET['acao'])){
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
-              <h1>Faça sua Conta</h1>
+            <form method="post" action="">
+              <h1>Novo Usuario</h1>
               <div>
                 <input type="text" name="nome" class="form-control" placeholder="Nome" required="" />
+              </div>
+              <div>
+                <input type="text" name="nickuser" class="form-control" placeholder="Usuário" required="" />
               </div>
               <div>
                 <input type="email" name="email" class="form-control" placeholder="Email" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="email" name="emailR" class="form-control" placeholder="Confirmar Email" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
+                <input type="password" name="senha" class="form-control" placeholder="Senha" required="" />
+              </div>
+              <div>    			
+      			    <input type="password" name="senhaR" class="form-control" placeholder="Confirmar Senha" />
+  			      </div>
+              <div>
+                <input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-default submit">
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
+                <p class="change_link">Já é usuario ?
+                  <a href="#signin" class="to_register"> Logar </a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -163,7 +181,7 @@ if(isset($_GET['acao'])){
 
                 <div>
                   <h1><i class="fa fa-paw"></i> SkyHub | Web Mobi</h1>
-                  <p>©2016 All Rights Reserved. Bootstrap 3 template. Privacy and Terms</p>
+                  <p>©2016 Todos os direitos reservados. SkyHub | Web Mobi.</p>
                 </div>
               </div>
             </form>

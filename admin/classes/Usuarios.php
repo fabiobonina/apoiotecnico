@@ -108,7 +108,7 @@ class Usuarios extends Crud{
                       <strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
                 </div>';
 				
-				header("Refresh: 6, index.php?acao=welcome");
+				header("Refresh: 3, index.php?acao=welcome");
 			}else{
 				echo '<div class="alert alert-danger">
                       <button type="button" class="close" data-dismiss="alert">×</button>

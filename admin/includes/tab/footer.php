@@ -1,7 +1,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            <p> ©2016 Todos os direitos reservados. SkyHub | Web Mobi.</p>
           </div>
           <div class="clearfix"></div>
         </footer>
