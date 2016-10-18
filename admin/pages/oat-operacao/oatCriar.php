@@ -6,29 +6,31 @@
           $localidades = new Localidades();
           $sistemas = new Sistemas();
           $servicos = new Servicos();
-						#CADASTRAR
-						if(isset($_POST['cadastrar'])):
-              $user = $_POST['user'];
+						#ADD
+						if(isset($_POST['add1']) OR isset($_POST['add2'])):
+              $user = $userNome;
 							$cliente = $_POST['cliente'];
-              $localidade = $_POST['localidade'];
-              $servico = $_POST['servico'];
-              $sistema = $_POST['sistema'];
-              $dataOat = date("Y-m-d H:i:s");
-              $status = "0";
-							$ativo = "0";
+              if(isset($_POST['add2'])){
+                $localidade = $_POST['localidade'];
+                $servico = $_POST['servico'];
+                $sistema = $_POST['sistema'];
+                $dataOat = date("Y-m-d H:i:s");
+                $status = "0";
+                $ativo = "0";
 
-              $oat->setUser($user);
-							$oat->setCliente($cliente);
-							$oat->setLocalidade($localidade);
-              $oat->setServico($servico);
-							$oat->setSistema($sistema);
-              $oat->setDataOat($dataOat);
-              $oat->setStatus($status);
-							$oat->setAtivo($ativo);
-							# Insert
-							if($sistema->insert()){
-								echo "OAT aberta com sucesso!";
-							}
+                $oat->setUser($user);
+                $oat->setCliente($cliente);
+                $oat->setLocalidade($localidade);
+                $oat->setServico($servico);
+                $oat->setSistema($sistema);
+                $oat->setDataOat($dataOat);
+                $oat->setStatus($status);
+                $oat->setAtivo($ativo);
+                # Insert
+                if($sistema->insert()){
+                  echo "OAT aberta com sucesso!";
+                }
+              }
 						endif;
 						#ATUALIZAR
 						if(isset($_POST['atualizar'])):
@@ -142,7 +144,7 @@
 		                      <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <a type="submit" href="oat-system.php?acao=oat-sistemas" class="btn btn-primary">Cancelar</a>
+                          <a type="submit" href="oat-operacao.php?acao=oat-criar" class="btn btn-primary">Cancelar</a>
                           <button type="submit" name="atualizar" class="btn btn-success">Salvar</button>
                         </div>
                       </div>
@@ -155,16 +157,13 @@
 
 		        <?php }else{ ?>
               <?php
-              if(isset($_POST['acao2']) && $_POST['acao2'] == 'avancar'){
-
-                $cliente1 = $_POST['cliente'];
-                $resultado = $sistema->find($id);
+              if(isset($_POST['add1'])){
               ?>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Novo sistema <small>Insira os dados</small></h2>
+                    <h2>Nova OAT <small>Insira os dados 2/2</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                       <li class="dropdown">
@@ -184,21 +183,23 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Localidade <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="localidade" id="localidade"class="form-control col-md-7 col-xs-12">
-                            <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0) { ?>
-                            <option value="<?php echo $value->id; ?>"><?php echo $value->nome; ?></option>  
-                            <?php } endforeach; ?>
-                          </select>
+                        				<?php echo '<select id="localidade" name="localidade" class="form-control col-md-7 col-xs-12" >';
+                                      foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 && $value->cliente == $cliente) {
+                                      echo '<option value =',$value->id,'>',$value->nome,'</option>';
+                                      }endforeach;
+                                      echo '</select></br>';
+                                ?>	
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Servico <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="servico" class="form-control col-md-7 col-xs-12">
-                            <?php foreach($servicos->findAll() as $key => $value):if($value->ativo == 0) { ?>
-                            <option value="<?php echo $value->id; ?>"><?php echo $value->descricao; ?></option>  
-                            <?php } endforeach; ?>
-                          </select>
+                                <?php echo '<select id="servico" name="servico" class="form-control col-md-7 col-xs-12" >';
+                                      foreach($servicos->findAll() as $key => $value):if($value->ativo == 0) {
+                                      echo '<option value =',$value->id,'>',$value->descricao,'</option>';
+                                      }endforeach;
+                                      echo '</select></br>';
+                                ?>	
                         </div>
                       </div>
                       <div class="form-group">
@@ -226,22 +227,21 @@
                       </div>
                       <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Ativo <span class="required">*</span></label>
-                      <p>
-                        S:<input type="radio" class="flat" name="ativo" id="ativo0" value="0" checked="" required />
-                        N:<input type="radio" class="flat" name="ativo" id="ativo1" value="1" />
-                      </p>
-                      
+                        <p>
+                          S:<input type="radio" class="flat" name="ativo" id="ativo0" value="0" checked="" required />
+                          N:<input type="radio" class="flat" name="ativo" id="ativo1" value="1" />
+                        </p>
                       </div>
 
-		                      <div class="ln_solid"></div>
+		                  <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <a type="submit" href="oat-system.php?acao=oat-sistemas" class="btn btn-primary">Cancelar</a>
-                          <button type="submit" name="cadastrar" class="btn btn-success">Cadastrar</button>
+                          <a type="submit" href="oat-operacao.php?acao=oat-criar" class="btn btn-primary">Cancelar</a>
+                          <button type="submit" name="add2" class="btn btn-success">Cadastrar</button>
                         </div>
                       </div>
 
-		                    </form>
+		                </form>
                   </div>
                 </div>
               </div>
@@ -251,7 +251,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Novo sistema <small>Insira os dados</small></h2>
+                    <h2>Novo OAT <small>Insira os dados 1/2</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                       <li class="dropdown">
@@ -271,20 +271,18 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cliente <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        				<?php 
-                                  echo '<select id="cliente" name="cliente" class="form-control col-md-7 col-xs-12" onchange="buscar_cidades();">';
-                                  foreach($clientes->findAll() as $key => $value):if($value->ativo == 0) {
-                                    echo '<option value =',$value->nick,'>',$value->nick,'</option>';
-                                  }endforeach;
-                                  echo '</select></br>';
+                        				<?php echo '<select id="cliente" name="cliente" class="form-control col-md-7 col-xs-12" onchange="buscar_cidades();">';
+                                      foreach($clientes->findAll() as $key => $value):if($value->ativo == 0) {
+                                      echo '<option value =',$value->nick,'>',$value->nick,'</option>';
+                                      }endforeach; echo '</select></br>';
                                 ?>	
                         </div>
                       </div>
 		                  <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <a type="submit" href="oat-system.php?acao=oat-sistemas" class="btn btn-primary">Cancelar</a>
-                          <a type="submit" href="oat-system.php?acao=oat-sistemas&acao2=avancar&cliente=' . $value->nick . '" class="btn btn-success">Avançar</button>
+                          <a type="submit" href="oat-operacao.php?acao=oat-criar" class="btn btn-primary">Cancelar</a>
+                          <button type="submit" name="add1" class="btn btn-success">Avançar</button>
                         </div>
                       </div>
 		                </form>
@@ -292,10 +290,11 @@
                 </div>
               </div>
             </div>
-            <!--Cliente-->
-            <?php } ?>
-        <!--/Cliente-->
-		        <?php } ?>
+                   <!--Cliente-->
+
+		        <?php 
+              }
+            } ?>
 
             <div class="row">
               <!--Tabela Lista-->
@@ -341,8 +340,8 @@
                           <td><?php echo $value->descricao; ?></td>
                           <td><?php echo $value->ativo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-system.php?acao=oat-sistemas&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
-                            <?php echo "<a href='oat-system.php?acao=oat-sistemas&acao1=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-criar&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-criar&acao1=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>
