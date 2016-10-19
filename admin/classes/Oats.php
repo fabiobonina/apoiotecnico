@@ -20,27 +20,22 @@ class Oats extends Crud{
 	private $ativo;
 
 	public function setUser($nickUser){
-		$nickUser = iconv('UTF-8', 'ASCII//TRANSLIT', $nickUser);
-		$this->nickUser = strtoupper ($nickUser);
+		$this->nickUser = $nickUser;
 	}
 	public function getUser(){
 		return $this->nickUser;
 	}
 	public function setCliente($cliente){
-		$cliente = iconv('UTF-8', 'ASCII//TRANSLIT', $cliente);
-		$this->cliente = strtoupper ($cliente);
+		$this->cliente = $cliente;
 	}
 	public function setLocalidade($localidade){
-		$localidade = iconv('UTF-8', 'ASCII//TRANSLIT', $localidade);
-		$this->localidade = strtoupper ($localidade);
+		$this->localidade = $localidade;
 	}
 	public function setServico($servico){
-		$servico = iconv('UTF-8', 'ASCII//TRANSLIT', $servico);
-		$this->servico = strtoupper ($servico);
+		$this->servico = $servico;
 	}
 	public function setSistema($sistema){
-		$idCliente = iconv('UTF-8', 'ASCII//TRANSLIT', $sistema);
-		$this->sistema = strtoupper ($sistema);
+		$this->sistema = $sistema;
 	}
 	public function setDataOat($dataOat){
 		$this->dataOat = $dataOat;
@@ -68,25 +63,31 @@ class Oats extends Crud{
 	}
 
 	public function insert(){
+		try
+		{
+			$sql  = "INSERT INTO $this->table (nickuser, cliente, localidade, servico, sistema, data_sol, filial, os, data_os, data_fech, data_term, status, ativo) ";
+			$sql .= "VALUES (:nickuser, :cliente, :localidade, :servico, :sistema, :data_sol, :filial, :os, :data_os, :data_fech, :data_term, :status, :ativo)";
+			$stmt = DB::prepare($sql);
+			$stmt->bindParam(':nickuser',$this->nickUser);
+			$stmt->bindParam(':cliente',$this->cliente);
+			$stmt->bindParam(':localidade',$this->localidade);
+			$stmt->bindParam(':servico',$this->servico);
+			$stmt->bindParam(':sistema',$this->sistema);
+			$stmt->bindParam(':data_sol',$this->dataOat);
+			$stmt->bindParam(':filial',$this->filial);
+			$stmt->bindParam(':os',$this->os);
+			$stmt->bindParam(':data_os',$this->dataOs);
+			$stmt->bindParam(':data_fech',$this->dataFech);
+			$stmt->bindParam(':data_term',$this->dataTerm);
+			$stmt->bindParam(':status',$this->status);
+			$stmt->bindParam(':ativo',$this->ativo);
 
-		$sql  = "INSERT INTO $this->table (nickuser, cliente, localidade, servico, sistema, data_sol, filial, os, data_os, data_fech, data_term, status, ativo) ";
-		$sql .= "VALUES (:nickuser, :cliente, :localidade, :servico, :sistema, :data_sol, :filial, :os, :data_os, :data_fech, :data_term, :status, :ativo)";
-		$stmt = DB::prepare($sql);
-		$stmt->bindParam(':nickuser',$this->nickUser);
-		$stmt->bindParam(':cliente',$this->cliente);
-		$stmt->bindParam(':localidade',$this->localidade);
-		$stmt->bindParam(':servico',$this->servico);
-		$stmt->bindParam(':sistema',$this->sistema);
-		$stmt->bindParam(':data_sol',$this->dataOat);
-		$stmt->bindParam(':filial',$this->filial);
-		$stmt->bindParam(':os',$this->os);
-		$stmt->bindParam(':data_os',$this->dataOs);
-		$stmt->bindParam(':data_fech',$this->dataFech);
-		$stmt->bindParam(':data_term',$this->dataTerm);
-		$stmt->bindParam(':status',$this->status);
-		$stmt->bindParam(':ativo',$this->ativo);
-
-		return $stmt->execute(); 
+			return $stmt->execute();
+		}
+		catch(PDOException $erro)
+		{
+			return $erro;
+		}
 
 	}
 

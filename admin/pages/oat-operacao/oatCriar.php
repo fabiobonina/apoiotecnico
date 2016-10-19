@@ -27,7 +27,7 @@
                 $oat->setStatus($status);
                 $oat->setAtivo($ativo);
                 # Insert
-                if($sistema->insert()){
+                if($oat->insert()){
                   echo "OAT aberta com sucesso!";
                 }
               }
@@ -52,14 +52,14 @@
               $oat->setStatus($status);
 							$oat->setAtivo($ativo);
 
-							if($sistema->update($id)){
+							if($oat->update($id)){
 								echo "OAT Atualizado com sucesso!";
 							}
 						endif;
 						#DELETAR
 						if(isset($_GET['acao1']) && $_GET['acao1'] == 'deletar'):
 							$id = (int)$_GET['id'];
-							if($sistema->delete($id)){
+							if($oat->delete($id)){
 								echo "Deletado com sucesso!";
 							}
 						endif;
@@ -91,7 +91,9 @@
                 $id = $_GET['id'];
                 $resultado = $sistema->find($id);
               ?>
-
+              <?php
+              if(isset($_GET['edt1'])){
+              ?>
 		        <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -154,8 +156,13 @@
                 </div>
               </div>
             </div>
+            <?php }else{ ?>
+            <!--Editar-->
 
-		        <?php }else{ ?>
+
+
+
+		        <?php }} else{ ?>
               <?php
               if(isset($_POST['add1'])){
               ?>
@@ -191,6 +198,8 @@
                                 ?>	
                         </div>
                       </div>
+                      <input type="hidden" id="cliente" name="cliente" value="<?php echo $cliente; ?>"  size=30 maxlength=30 required="required" class="form-control col-md-7 col-xs-12">
+                        
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Servico <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -212,19 +221,6 @@
                           </select>
                         </div>
                       </div>
-                      
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Codigo <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="id" required="required" size=10 maxlength=10 style="text-transform:uppercase;" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Descrição <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="descricao" required="required" size=30 maxlength=30 class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
                       <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Ativo <span class="required">*</span></label>
                         <p>
@@ -240,7 +236,6 @@
                           <button type="submit" name="add2" class="btn btn-success">Cadastrar</button>
                         </div>
                       </div>
-
 		                </form>
                   </div>
                 </div>
@@ -327,7 +322,12 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Descrição</th>
+                          <th>Usuario</th>
+                          <th>Cliente</th>
+                          <th>Localidade</th>
+                          <th>Servico</th>
+                          <th>Sistema</th>
+                          <th>Data Solitação</th>
                           <th>Ativo</th>
                           <th>Ação</th>
                         </tr>
@@ -337,7 +337,12 @@
                       <tbody>
                         <tr>
                           <td><?php echo $value->id; ?></td>
-                          <td><?php echo $value->descricao; ?></td>
+                          <td><?php echo $value->nickuser; ?></td>
+                          <td><?php echo $value->cliente; ?></td>
+                          <td><?php echo $value->localidade; ?></td>
+                          <td><?php echo $value->servico; ?></td>
+                          <td><?php echo $value->sistema; ?></td>
+                          <td><?php echo $value->data_sol; ?></td>
                           <td><?php echo $value->ativo; ?></td>
                           <td>
                             <?php echo "<a href='oat-operacao.php?acao=oat-criar&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
