@@ -17,15 +17,15 @@
           if(isset($_GET['acao'])){
             $acao = $_GET['acao'];	
             
-            if($acao=='oat-criar'){include("admin/pages/oat-operacao/oatCriar.php");}	
+            if($acao=='oat-criar'){include("admin/pages/oat/operacao/criar/criar.php");}	
             // cadastro
-            if($acao=='oat-amarar'){include("admin/pages/oat-operacao/oatAmarar.php");}	
+            if($acao=='oat-amarar'){include("admin/pages/oat/operacao/oatAmarar.php");}	
             // exibicao
-            if($acao=='oat-retorno'){include("admin/pages/oat-operacao/oatRetorno.php");}
+            if($acao=='oat-retorno'){include("admin/pages/oat/operacao/oatRetorno.php");}
             // edicao
-            if($acao=='oat-finalizar'){include("admin/pages/oat-operacao/oatFinalizar.php");}
+            if($acao=='oat-finalizar'){include("admin/pages/oat/operacao/oatFinalizar.php");}
                 // edicao
-            if($acao=='oat-concluidas'){include("admin/pages/oat-operacao/oatConcluidas.php");}
+            if($acao=='oat-concluidas'){include("admin/pages/oat/operacao/oatConcluidas.php");}
 
           }
         ?>
