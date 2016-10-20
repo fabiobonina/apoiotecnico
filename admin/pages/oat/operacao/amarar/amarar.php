@@ -95,14 +95,10 @@
             
            //if($acao=='add'){include("admin/pages/oat/operacao/criar/add.php");}	
             // cadastro
-           if($acao=='editar'){include("admin/pages/oat/operacao/criar/edt.php");}	
-            // exibicao
-           if($acao=='oat-retorno'){include("admin/pages/oat-operacao/oatRetorno.php");
-           }
-          }else{
-		          //include("pages/inicio.php");
-                include("admin/pages/oat/operacao/criar/add.php");
+           if($acao=='editar'){include("admin/pages/oat/operacao/amarar/os.php");}
+
           }
+
         ?>
 
             <div class="row">
@@ -140,6 +136,8 @@
                           <th>Cliente</th>
                           <th>Localidade</th>
                           <th>Servico</th>
+                          <th>Filial</th>
+                          <th>OS</th>
                           <th>Sistema</th>
                           <th>Data Solitação</th>
                           <th>Ativo</th>
@@ -154,13 +152,15 @@
                           <td><?php echo $value->nickuser; ?></td>
                           <td><?php echo $value->cliente; ?></td>
                           <td><?php echo $value->localidade; ?></td>
+                          <td><?php echo $value->filial; ?></td>
+                          <td><?php echo $value->os; ?></td>
                           <td><?php echo $value->servico; ?></td>
                           <td><?php echo $value->sistema; ?></td>
                           <td><?php echo $value->data_sol; ?></td>
                           <td><?php echo $value->ativo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-criar&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-criar&acao1=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-amarar&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Amarar OS </a>"; ?>
+                    
                           </td>
                         </tr>
                       </tbody>
