@@ -4,6 +4,79 @@
       $resultado = $oat->find($id);
  
       ?>
+    <table width="100%" border='0'>
+        <td colspan="11" name="cliente">Cunsulta Pessoas</td>
+        <tr>
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                <tr class="bg_vrd_b">
+                    <td>
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td>Codigo:</td>
+                                    <td>&nbsp;</td>
+                                    <td>CPF:</td>
+                                    <td>&nbsp;</td>
+                                    <td>RG:</td>
+                                    <td>&nbsp;</td>
+                                    <td>Dt. Nascimento:</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="codPessoa"  value="<%= pessoas.getCodigo()%>" disabled="disabled" id="cpf" style="width:150px" class="box"></td>
+                                    <td>&nbsp;</td>
+                                    <td><input type="text" name="cpf" value="<%= pessoas.getCpf()%>" disabled="disabled" id="matricula" style="width:150px" class="box"></td>
+                                    <td>&nbsp;</td>
+                                    <td><input type="text" name="identidade" value="<%= pessoas.getIdentidade()%>" disabled="disabled" id="matricula" style="width:150px" class="box"></td>
+                                    <td>&nbsp;</td>
+                                    <td><input type="text" name="nascimento" value="<%= pessoas.getNascimento()%>" disabled="disabled" id="matricula" style="width:150px" class="box"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1" class="pT12 pL4">Nome:</td>
+                                    <td>&nbsp;</td>
+                                    <td class="pT12 pL4">Sexo:</td>
+                                    <td>&nbsp;</td>
+                                    <td class="pT12 pL4">Estado de Civil</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1" class="pT5 pL4"><input type="text" name="nome" value="<%= pessoas.getNome()%>" disabled="disabled" id="nome" style="width:450px"  class="box"></td>
+                                    <td>&nbsp;</td>
+                                    <td class="pT5 pL4"><input type="text" name="nome" value="<%= pessoas.getSexo()%>" disabled="disabled" id="nome" style="width:150px" class="box"></td>
+                                    <td>&nbsp;</td>
+                                    <td class="pT5 pL4"><input type="text" name="nome" value="<%= pessoas.getEstadoCivil()%>" disabled="disabled" id="nome" style="width:150px" class="box"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1" class="pT12 pL4">Email:</td>
+                                    <td>&nbsp;</td>
+                                    <td class="pT12 pL4">Telefone:</td>
+                                    <td>&nbsp;</td>
+                                    <td class="pT12 pL4">Celular:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1" class="pT5 pL4"><input type="text" name="email" value="<%= pessoas.getEmail()%>" disabled="disabled" id="nome" style="width:450px" class="box"></td>
+                                    <td>&nbsp;</td>
+                                    <td class="pT5 pL4"><input type="text" name="telefoneFixo" value="<%= pessoas.getTelefoneFixo()%>" disabled="disabled" id="matricula" style="width:150px" class="box"></td>
+                                    <td>&nbsp;</td>
+                                    <td><input type="text" name="telefoneCelular" value="<%= pessoas.getTelefoneCelular()%>" disabled="disabled" id="matricula" style="width:150px" class="box"></td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </tbody>
+
+                        </table>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+
+
+
+
 		    <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
