@@ -110,6 +110,36 @@ class Oats extends Crud{
 		$stmt->bindParam(':id', $id);
 		return $stmt->execute();	
 	}
+
+	public function amarar($id){
+		$sql  = "UPDATE $this->table SET filial = :filial, os = :os, data_os = :data_os, status = :status WHERE id = :id";
+		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':filial',$this->filial);
+		$stmt->bindParam(':os',$this->os);
+		$stmt->bindParam(':data_os',$this->dataOs);
+		$stmt->bindParam(':status',$this->status);
+		$stmt->bindParam(':id', $id);
+		return $stmt->execute();	
+	}
+	public function retorno($id){
+		$sql  = "UPDATE $this->table SET data_fech = :data_fech, status = :status, WHERE id = :id";
+		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':data_fech',$this->dataFech);
+		$stmt->bindParam(':status',$this->status);
+		$stmt->bindParam(':id', $id);
+		return $stmt->execute();	
+	}
+
+
+	public function finalizar($id){
+		$sql  = "UPDATE $this->table SET data_term = :data_term, status = :status, WHERE id = :id";
+		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':data_term',$this->dataTerm);
+		$stmt->bindParam(':status',$this->status);
+		$stmt->bindParam(':id', $id);
+		return $stmt->execute();	
+	}
+
 	public function findOat($status){
 		$sql  = "SELECT * FROM $this->table WHERE BINARY status=:status ";
 		$stmt = DB::prepare($sql);

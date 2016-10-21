@@ -6,21 +6,57 @@
           $localidades = new Localidades();
           $sistemas = new Sistemas();
           $servicos = new Servicos();
+						#ADD
+						if(isset($_POST['add1']) OR isset($_POST['add2'])):
+              $user = $userNome;
+							$cliente = $_POST['cliente'];
+              if(isset($_POST['add2'])){
+                $localidade = $_POST['localidade'];
+                $servico = $_POST['servico'];
+                $sistema = $_POST['sistema'];
+                $dataOat = date("Y-m-d H:i:s");
+                $status = "0";
+                $ativo = "0";
+
+                $oat->setUser($user);
+                $oat->setCliente($cliente);
+                $oat->setLocalidade($localidade);
+                $oat->setServico($servico);
+                $oat->setSistema($sistema);
+                $oat->setDataOat($dataOat);
+                $oat->setStatus($status);
+                $oat->setAtivo($ativo);
+                # Insert
+                if($oat->insert()){
+                  echo "OAT aberta com sucesso!";
+                }
+              }
+						endif;
 						#ATUALIZAR
-						if(isset($_POST['amarar'])):
+						if(isset($_POST['edt']) OR isset($_POST['edt2'])):
               $id = $_POST['id'];
-              $filial = $_POST['filial'];
-              $os = $_POST['os'];
-              $dataOs = date("Y-m-d H:i:s");
-              $status = "1";
+              $user = $userNome;
+							$cliente = $_POST['cliente'];
+              if(isset($_POST['edt2'])){
+                $localidade = $_POST['localidade'];
+                $servico = $_POST['servico'];
+                $sistema = $_POST['sistema'];
+                $dataOat = date("Y-m-d H:i:s");
+                $status = "0";
+                $ativo = $_POST['ativo'];
 
-              $oat->setFilial($filial);
-              $oat->setOs($os);
-              $oat->setDataOs($dataOs);
-              $oat->setStatus($status);
+                $oat->setUser($user);
+                $oat->setCliente($cliente);
+                $oat->setLocalidade($localidade);
+                $oat->setServico($servico);
+                $oat->setSistema($sistema);
+                $oat->setDataOat($dataOat);
+                $oat->setStatus($status);
+                $oat->setAtivo($ativo);
 
-              if($oat->amarar($id)){
-                echo "OS Amarada a OAT!";
+                if($oat->update($id)){
+                  echo "OAT Atualizado com sucesso!";
+                }
               }
 						endif;
 						#DELETAR
@@ -59,10 +95,14 @@
             
            //if($acao=='add'){include("admin/pages/oat/operacao/criar/add.php");}	
             // cadastro
-           if($acao=='editar'){include("admin/pages/oat/operacao/amarar/os.php");}
-
+           if($acao=='editar'){include("admin/pages/oat/operacao/criar/edt.php");}	
+            // exibicao
+           if($acao=='oat-retorno'){include("admin/pages/oat-operacao/oatRetorno.php");
+           }
+          }else{
+		          //include("pages/inicio.php");
+                include("admin/pages/oat/operacao/criar/add.php");
           }
-
         ?>
 
             <div class="row">
@@ -100,8 +140,6 @@
                           <th>Cliente</th>
                           <th>Localidade</th>
                           <th>Servico</th>
-                          <th>Filial</th>
-                          <th>OS</th>
                           <th>Sistema</th>
                           <th>Data Solitação</th>
                           <th>Ativo</th>
@@ -116,14 +154,13 @@
                           <td><?php echo $value->nickuser; ?></td>
                           <td><?php echo $value->cliente; ?></td>
                           <td><?php echo $value->localidade; ?></td>
-                          <td><?php echo $value->filial; ?></td>
-                          <td><?php echo $value->os; ?></td>
                           <td><?php echo $value->servico; ?></td>
                           <td><?php echo $value->sistema; ?></td>
                           <td><?php echo $value->data_sol; ?></td>
                           <td><?php echo $value->ativo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-amarar&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Amarar OS </a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-criar&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-criar&acao1=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>
