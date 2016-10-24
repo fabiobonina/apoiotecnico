@@ -184,7 +184,7 @@
                         N:<input type="radio" class="flat" name="ativo" id="ativo1" value="1" <?php if($resultado->ativo == 1){?>checked="" <?php }?>/>
                       </p>
                       </div>
-                      <input type="hidden" name="id" value="<?php echo $resultado->id; ?>"><br />
+                      <input type="hidden" name="id" value="<?php $id; ?>"><br />
 		                      <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

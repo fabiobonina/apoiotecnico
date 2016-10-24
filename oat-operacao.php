@@ -21,11 +21,11 @@
             // cadastro
             if($acao=='oat-amarar'){include("admin/pages/oat/operacao/amarar/amarar.php");}	
             // exibicao
-            if($acao=='oat-retorno'){include("admin/pages/oat/operacao/retorno/retorno.php");}
+            if($acao=='oat-retorno'){include("admin/pages/oat/operacao/retorno/oat.php");}
             // edicao
-            if($acao=='oat-finalizar'){include("admin/pages/oat/operacao/finalizar/finalizar.php");}
+            if($acao=='oat-finalizar'){include("admin/pages/oat/operacao/finalizar/oat.php");}
                 // edicao
-            if($acao=='oat-concluidas'){include("admin/pages/oat/operacao/concluidas/concluidas.php");}
+            if($acao=='oat-concluidas'){include("admin/pages/oat/operacao/concluidas/oat.php");}
 
           }
         ?>

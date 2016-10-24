@@ -108,7 +108,7 @@ class Oats extends Crud{
 		$stmt->bindParam(':status',$this->status);
 		$stmt->bindParam(':ativo',$this->ativo);
 		$stmt->bindParam(':id', $id);
-		return $stmt->execute();	
+		return $stmt->execute();
 	}
 
 	public function amarar($id){
@@ -119,7 +119,8 @@ class Oats extends Crud{
 		$stmt->bindParam(':data_os',$this->dataOs);
 		$stmt->bindParam(':status',$this->status);
 		$stmt->bindParam(':id', $id);
-		return $stmt->execute();	
+		return $stmt->execute();
+
 	}
 	public function retorno($id){
 		$sql  = "UPDATE $this->table SET data_fech = :data_fech, status = :status, WHERE id = :id";

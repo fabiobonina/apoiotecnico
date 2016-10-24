@@ -6,7 +6,7 @@
           $localidades = new Localidades();
           $sistemas = new Sistemas();
           $servicos = new Servicos();
-						#ATUALIZAR
+						#AMARAR
 						if(isset($_POST['amarar'])):
               $id = $_POST['id'];
               $filial = $_POST['filial'];
@@ -21,6 +21,7 @@
 
               if($oat->amarar($id)){
                 echo "OS Amarada a OAT!";
+                header("Refresh: 1, oat-operacao.php?acao=oat-amarar");	
               }
 						endif;
 						#DELETAR
@@ -57,12 +58,11 @@
           if(isset($_GET['acao1'])){
             $acao = $_GET['acao1'];	
             
-           //if($acao=='add'){include("admin/pages/oat/operacao/criar/add.php");}	
+           if($acao=='add'){include("admin/pages/oat/operacao/criar/add.php");}	
             // cadastro
            if($acao=='editar'){include("admin/pages/oat/operacao/amarar/os.php");}
 
           }
-
         ?>
 
             <div class="row">
