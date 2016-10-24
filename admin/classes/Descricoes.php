@@ -9,10 +9,10 @@ class Descricoes extends Crud{
 	private $ativo;
 
 	public function setOat($oat){
-		$this->oat;
+		$this->oat = $oat;
 	}
 	public function setDescricao($descricao){
-		$this->descricao;
+		$this->descricao = $descricao;
 	}
 	public function getDescricao(){
 		return $this->descricao;

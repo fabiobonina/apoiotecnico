@@ -23,13 +23,15 @@
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-                      <input type="hidden" name="oat" value="<?php $id; ?>"><br />
-
+                    
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="hidden" name="oat" value="<?php echo $id; ?>"><br />
+                      </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Descrição <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <textarea class="form-control" rows="3" placeholder='Descrição do Serviço"'></textarea>
+                          <textarea class="form-control" name="descricao" rows="3" placeholder="Descrição do Serviço"></textarea>
                         </div>
                       </div>
 

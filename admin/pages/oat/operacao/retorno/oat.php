@@ -9,7 +9,10 @@
           $descricoes = new Descricoes();
 
           #DESCRICAO ADD
-          if(isset($_POST['DescAdd'])):
+          if(isset($_POST['descAdd'])):
+            if(!isset($_POST['oat']) OR !isset($_POST['descricao'])){
+              echo "Dados incopletos";
+            }
             $oat = $_POST['oat'];
             $descricao = $_POST['descricao'];
 
@@ -18,7 +21,7 @@
             # Insert
             if($descricoes->insert()){
               echo "Descricao salva com sucesso!";
-              header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=' $oat '");	
+              header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat );	
             }
           endif;
 
@@ -32,7 +35,7 @@
 
             if($descricao->update($id)){
               echo "Descricao salvo com Sucesso!";
-              header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=' $oat '");	
+              header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat);	
             }
 					endif;
 						#RETORNO

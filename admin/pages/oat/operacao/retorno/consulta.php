@@ -105,8 +105,8 @@
 		                  <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <a type="submit" href="oat-operacao.php?acao=oat-retorno&acao1=consulta&id=<?php $id ?>" class="btn btn-primary">Cancelar</a>
-                          <a type="submit" href="oat-operacao.php?acao=oat-retorno&acao1=consulta&id=<?php $id ?>&acao2=descAdd" class='btn btn-success' ><i class='fa  fa-edit'></i>Editar </a>"; ?>
+                          <a type="submit" href="oat-operacao.php?acao=oat-retorno&acao1=consulta&id=<?php echo $id ?>" class="btn btn-primary">Cancelar</a>
+                          <a type="submit" href="oat-operacao.php?acao=oat-retorno&acao1=consulta&id=<?php echo $id ?>&acao2=descAdd" class='btn btn-success' ><i class='fa  fa-edit'></i>Adicionar Descrição </a>
                         </div>
                       </div>
 		                </form>
@@ -154,6 +154,7 @@
                         <tr>
                           <th>#</th>
                           <th>Descrição</th>
+                          <th>Ação</th>
                         </tr>
                       </thead>
 
@@ -163,7 +164,7 @@
                           <td><?php echo $value->id; ?></td>
                           <td><?php echo $value->descricao; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-retorno&acao1=consultat&id=" . $id . "'><i class='fa  fa-edit'></i>Amarar OS </a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $id ."&acao2=descEdt&cod=".$value->id."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>
