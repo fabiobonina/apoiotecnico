@@ -27,13 +27,17 @@
 
           #DESCRICAO Editar
           if(isset($_POST['descEdt'])):
+            if(!isset($_POST['oat']) OR !isset($_POST['descricao']) OR !isset($_POST['cod'])){
+              echo "Dados incopletos";
+            }
+            $id = $_POST['cod'];
             $oat = $_POST['oat'];
             $descricao = $_POST['descricao'];
 
             $descricoes->setOat($oat);
             $descricoes->setDescricao($descricao);
 
-            if($descricao->update($id)){
+            if($descricoes->update($id)){
               echo "Descricao salvo com Sucesso!";
               header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat);	
             }
@@ -82,7 +86,6 @@
               if(isset($_GET['acao1'])){
               $acao = $_GET['acao1'];	
               if($acao=='consulta'){include("admin/pages/oat/operacao/retorno/consulta.php");}
-              if($acao=='descEdt'){include("admin/pages/oat/operacao/retorno/descEdt.php");}
               }else{
                   include("admin/pages/oat/operacao/retorno/retorno.php");
               }

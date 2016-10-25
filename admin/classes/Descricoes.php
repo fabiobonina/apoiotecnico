@@ -44,5 +44,12 @@ class Descricoes extends Crud{
 		
 	}
 
+	public function findDesc($Cod){
+		$sql  = "SELECT * FROM $this->table WHERE id = :id";
+		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':id', $Cod, PDO::PARAM_INT);
+		$stmt->execute();
+		return $stmt->fetch();
+	}
 
 }
