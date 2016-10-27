@@ -114,7 +114,8 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="javascript:window.history.go(-1)" class="btn btn-primary">Voltar</a>
-                          <?php echo "<button href='oat-operacao.php?acao=oat-criretornoar&acao1=fechar&id=" . $oatId . "' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success'><i class='fa  fa-check-square-o'></i>Fechar OAT</button>"; ?>
+                          <?php echo "<button name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success'><i class='fa  fa-check-square-o'></i>Fechar OAT</button>"; ?>
+                          
                         </div>
                       </div>
 		                </form>
@@ -156,7 +157,7 @@
                         </tr>
                       </thead>
 
-                			<?php foreach($ativos->findAll() as $key => $value):if($value->cliente == $oatCliente && $value->localidade == $oatLocal ) { 
+                			<?php foreach($ativos->findAll() as $key => $value):if($value->cliente == $oatCliente && $value->localidade == $oatLocalId ) { 
                          $ativoId = $value->id;
                          $ativoPlaq = $value->plaqueta;
                         ?>
@@ -164,7 +165,8 @@
                         <tr>
                           <td><?php echo $ativoPlaq; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oatId ."&acao2=descEdt&cod=".$ativoId."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oatId ."&acao2=ativEdt&cod=".$ativoId."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-retorno&acao1=consulta&id=" . $oatId . "&acao2=ativDel&cod=".$ativoId." ' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>

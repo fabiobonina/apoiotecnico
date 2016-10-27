@@ -99,9 +99,9 @@
                           <th>Usuario</th>
                           <th>Cliente</th>
                           <th>Localidade</th>
-                          <th>Servico</th>
                           <th>Filial</th>
                           <th>OS</th>
+                          <th>Servico</th>
                           <th>Sistema</th>
                           <th>Data Solitação</th>
                           <th>Ativo</th>
@@ -109,21 +109,43 @@
                         </tr>
                       </thead>
 
-                			<?php foreach($oat->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 0) { ?>
+                			<?php foreach($oat->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 0) { 
+                        $oatId = $value->id;
+                        $oatUsuario = $value->nickuser;
+                        $oatCliente = $value->cliente;
+                        $oatLocalId = $value->localidade;
+                        $oatFilial = $value->filial;
+                        $oatOs = $value->os;
+                        $oatServId = $value->servico;
+                        $oatSistId = $value->sistema;
+                        $oatDataSol = $value->data_sol;
+                        $oatAtivo = $value->ativo;
+                        
+                        foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
+                          $oatLocal = $value->nome;
+                        }endforeach;             
+                        foreach($servicos->findAll() as $key => $value):if($value->id == $oatServId) {
+                          $oatServico = $value->descricao;
+                        }endforeach;
+                        foreach($sistemas->findAll() as $key => $value):if($value->id == $oatSistId) {
+                          $oatSistema =  $value->descricao;
+                        }endforeach;
+                        
+                      ?>
                       <tbody>
                         <tr>
-                          <td><?php echo $value->id; ?></td>
-                          <td><?php echo $value->nickuser; ?></td>
-                          <td><?php echo $value->cliente; ?></td>
-                          <td><?php echo $value->localidade; ?></td>
-                          <td><?php echo $value->filial; ?></td>
-                          <td><?php echo $value->os; ?></td>
-                          <td><?php echo $value->servico; ?></td>
-                          <td><?php echo $value->sistema; ?></td>
-                          <td><?php echo $value->data_sol; ?></td>
-                          <td><?php echo $value->ativo; ?></td>
+                          <td><?php echo $oatId; ?></td>
+                          <td><?php echo $oatUsuario; ?></td>
+                          <td><?php echo $oatCliente; ?></td>
+                          <td><?php echo $oatLocal; ?></td>
+                          <td><?php echo $oatFilial; ?></td>
+                          <td><?php echo $oatOs; ?></td>
+                          <td><?php echo $oatServico; ?></td>
+                          <td><?php echo $oatSistema; ?></td>
+                          <td><?php echo $oatDataSol; ?></td>
+                          <td><?php echo $oatAtivo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-amarar&acao1=editar&id=" . $value->id . "'><i class='fa  fa-edit'></i>Amarar OS </a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-amarar&acao1=editar&id=" . $oatId . "'><i class='fa  fa-edit'></i>Amarar OS </a>"; ?>
                           </td>
                         </tr>
                       </tbody>

@@ -1,7 +1,10 @@
 <?php
 require_once 'Crud.php';
 
+try {
 class Ativos extends Crud{
+	
+
 	
 	protected $table = 'tb_ativo';
 	private $cliente;
@@ -20,16 +23,20 @@ class Ativos extends Crud{
 	public function getPlaqueta(){
 		return $this->plaqueta;
 	}
+	public function setData($data){
+		$this->data = $data;
+	}
 
 
 	public function insert(){
 
-		$sql  = "INSERT INTO $this->table (cliente, localidade, plaqueta) ";
-		$sql .= "VALUES (:cliente, :localidade, :plaqueta)";
+		$sql  = "INSERT INTO $this->table (cliente, localidade, plaqueta, data) ";
+		$sql .= "VALUES (:cliente, :localidade, :plaqueta, :data)";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':cliente',$this->cliente);
 		$stmt->bindParam(':localidade',$this->localidade);
 		$stmt->bindParam(':plaqueta',$this->plaqueta);
+		$stmt->bindParam(':data',$this->data);
 
 		return $stmt->execute(); 
 
@@ -37,11 +44,12 @@ class Ativos extends Crud{
 
 	public function update($id){
 
-		$sql  = "UPDATE $this->table SET cliente = :cliente, localidade = :localidade, plaqueta = :plaqueta WHERE id = :id ";
+		$sql  = "UPDATE $this->table SET cliente = :cliente, localidade = :localidade, plaqueta = :plaqueta, data = :data WHERE id = :id ";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':cliente',$this->cliente);
 		$stmt->bindParam(':localidade', $this->localidade);
 		$stmt->bindParam(':plaqueta',$this->plaqueta);
+		$stmt->bindParam(':data',$this->data);
 		$stmt->bindParam(':id', $id);
 		return $stmt->execute();
 		
@@ -55,5 +63,14 @@ class Ativos extends Crud{
 		return $stmt->fetch();
 	}
 
+
+	
+
+
+}
+}catch( Exception $e ) {
+
+    echo $e->getMessage();
+    return false;
 
 }

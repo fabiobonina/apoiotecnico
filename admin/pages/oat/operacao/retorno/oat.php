@@ -18,10 +18,12 @@
             $cliente = $_POST['cliente'];
             $localidade = $_POST['localidade'];
             $plaqueta = $_POST['plaqueta'];
+            $data = date("Y-m-d H:i:s");
 
             $ativos->setCliente($cliente);
             $ativos->setLocalidade($localidade);
             $ativos->setPlaqueta($plaqueta);
+            $ativos->setData($data);
             # Insert
             if($ativos->insert()){
               echo "Descricao salva com sucesso!";
@@ -34,19 +36,33 @@
             if(!isset($_POST['cliente']) OR !isset($_POST['localidade']) OR !isset($_POST['plaqueta']) OR !isset($_POST['cod'])){
               echo "Dados incopletos";
             }
+            $id = $_POST['id'];
+            $oat = $_POST['oat'];
             $cliente = $_POST['cliente'];
             $localidade = $_POST['localidade'];
             $plaqueta = $_POST['plaqueta'];
+            $data = date("Y-m-d H:i:s");
 
             $ativos->setCliente($cliente);
             $ativos->setLocalidade($localidade);
             $ativos->setPlaqueta($plaqueta);
+            $ativos->setData($data);
 
             if($ativos->update($id)){
               echo "Descricao salvo com Sucesso!";
               header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat);	
             }
 					endif;
+          #DELETAR
+          	if(isset($_GET['acao2']) && $_GET['acao2'] == 'ativDel'):
+
+							$id = (int)$_GET['cod'];
+              $oat = $_GET['id'];
+							if($ativos->delete($id)){
+								echo "Deletado com sucesso!";
+                header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat);	
+							}
+						endif;
 
           #DESCRICAO ADD
           if(isset($_POST['descAdd'])):
@@ -84,18 +100,16 @@
 					endif;
 						#RETORNO
 						if(isset($_POST['fechar'])):
-              $id = $_POST['oatId'];
-              $os = $_POST['os'];
+              $id = $_POST['id'];
               $dataFech = date("Y-m-d H:i:s");
               $status = "2";
 
-              $oats->setOs($os);
               $oats->setDataFech($dataFech);
               $oats->setStatus($status);
 
-              if($oats->retrono($id)){
+              if($oats->retorno($id)){
                 echo "OAT Fechada!";
-                header("Refresh: 1, oat-operacao.php?acao=oat-retrono");	
+                header("Refresh: 1, oat-operacao.php?acao=oat-retorno");	
               }
 						endif;
 

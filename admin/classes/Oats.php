@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Crud.php';
-
+try {
 class Oats extends Crud{
 	
 	protected $table = 'tb_oat';
@@ -123,7 +123,7 @@ class Oats extends Crud{
 
 	}
 	public function retorno($id){
-		$sql  = "UPDATE $this->table SET data_fech = :data_fech, status = :status, WHERE id = :id";
+		$sql  = "UPDATE $this->table SET data_fech = :data_fech, status = :status WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':data_fech',$this->dataFech);
 		$stmt->bindParam(':status',$this->status);
@@ -148,5 +148,11 @@ class Oats extends Crud{
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+
+}
+}catch( Exception $e ) {
+
+    echo $e->getMessage();
+    return false;
 
 }
