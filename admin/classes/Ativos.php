@@ -15,8 +15,7 @@ class Ativos extends Crud{
 		$this->localidade = $localidade;
 	}
 	public function setPlaqueta($plaqueta){
-		$plaqueta = iconv('UTF-8', 'ASCII//TRANSLIT', $plaqueta);
-		$this-$plaqueta = strtoupper ($plaqueta);
+		$this->plaqueta = $plaqueta;
 	}
 	public function getPlaqueta(){
 		return $this->plaqueta;

@@ -14,6 +14,7 @@
             if(!isset($_POST['cliente']) OR !isset($_POST['localidade']) OR !isset($_POST['plaqueta'])){
               echo "Dados incopletos";
             }
+            $oat = $_POST['oat'];
             $cliente = $_POST['cliente'];
             $localidade = $_POST['localidade'];
             $plaqueta = $_POST['plaqueta'];
@@ -82,8 +83,8 @@
             }
 					endif;
 						#RETORNO
-						if(isset($_POST['retorno'])):
-              $id = $_POST['id'];
+						if(isset($_POST['fechar'])):
+              $id = $_POST['oatId'];
               $os = $_POST['os'];
               $dataFech = date("Y-m-d H:i:s");
               $status = "2";

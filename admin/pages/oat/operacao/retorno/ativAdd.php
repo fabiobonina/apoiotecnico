@@ -1,15 +1,8 @@
-      <?php
-
-      $cod = $_GET['cod'];
-      $resultado = $descricoes->findDesc($cod);
-
-
-      ?>
-	      <div class="row">
+            <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Descrição do Servico <small>Insira os dados</small></h2>
+                    <h2>Novo Ativo<small>Insira os dados</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -30,24 +23,20 @@
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Descrição <span class="required">*</span>
-                        </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <textarea class="form-control" name="descricao" rows="3" placeholder="Descrição do Serviço"><?php echo $resultado->descricao; ?></textarea>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">N° Plaqueta <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="plaqueta" name="plaqueta" required="required" size=11 maxlength=11 class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                      <div class="col-md-3 col-sm-3 col-xs-12">
-                      <input type="hidden" name="cod" value="<?php echo $cod; ?>" class="form-control col-md-7 col-xs-12" >
-                      <input type="hidden" name="oat" value="<?php echo $id; ?>" class="form-control col-md-7 col-xs-12">
-                      </div>
-
-		            <div class="ln_solid"></div>
+                      <input type="hidden" name="oat" value="<?php echo $oatId; ?>">
+                      <input type="hidden" name="cliente" value="<?php echo $oatCliente; ?>">
+                      <input type="hidden" name="localidade" value="<?php echo $oatLocalId; ?>">
+		                <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="javascript:window.history.go(-1)" class="btn btn-primary">Voltar</a>
-                          <button type="submit" name="descEdt" class="btn btn-success">Salvar</button>
+                          <button type="submit" name="ativAdd" class="btn btn-success">Cadastrar</button>
                         </div>
                       </div>
 		            </form>
