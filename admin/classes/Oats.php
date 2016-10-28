@@ -133,7 +133,7 @@ class Oats extends Crud{
 
 
 	public function finalizar($id){
-		$sql  = "UPDATE $this->table SET data_term = :data_term, status = :status, WHERE id = :id";
+		$sql  = "UPDATE $this->table SET data_term = :data_term, status = :status WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':data_term',$this->dataTerm);
 		$stmt->bindParam(':status',$this->status);

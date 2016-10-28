@@ -109,12 +109,12 @@
 
 
                    <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-                      <input type="hidden" name="id" value="<?php echo $oatId; ?>">
+                      <input type="hidden" name="id" value="<?php echo $oatId; ?>"><br />
 		                  <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="javascript:window.history.go(-1)" class="btn btn-primary">Voltar</a>
-                          <?php echo "<button type='submit' name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success'><i class='fa  fa-check-square-o'></i>Fechar OAT</button>"; ?>
+                          <?php echo "<button type='submit' name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success'><i class='fa  fa-check-square-o'></i>Encerrar OAT</button>"; ?>
                           
                         </div>
                       </div>
@@ -129,7 +129,7 @@
                   <div class="x_title">
                     <h2><small>Ativo </small>
                     <form data-parsley-validate method="get" action="">
-                      <a type="submit" href="oat-operacao.php?acao=oat-retorno&acao1=consulta&id=<?php echo $id ?>&acao2=ativAdd" ><i class='fa  fa-plus'></i>Adicionar</a>
+                      <a type="submit" href="oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=<?php echo $id ?>&acao2=ativAdd" ><i class='fa  fa-plus'></i>Adicionar</a>
 		                </form></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -165,8 +165,8 @@
                         <tr>
                           <td><?php echo $ativoPlaq; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oatId ."&acao2=ativEdt&cod=".$ativoId."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-retorno&acao1=consulta&id=" . $oatId . "&acao2=ativDel&cod=".$ativoId." ' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oatId ."&acao2=ativEdt&cod=".$ativoId."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=" . $oatId . "&acao2=ativDel&cod=".$ativoId." ' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>
@@ -182,11 +182,11 @@
         <?php
           if(isset($_GET['acao2'])){
             $acao = $_GET['acao2'];
-           if($acao=='descAdd'){include("admin/pages/oat/operacao/retorno/descAdd.php");}	
+           if($acao=='descCons'){include("admin/pages/oat/operacao/finalizar/descCons.php");}	
             // cadastro
-           if($acao=='descEdt'){include("admin/pages/oat/operacao/retorno/descEdt.php");}
-           if($acao=='ativAdd'){include("admin/pages/oat/operacao/retorno/ativAdd.php");}
-           if($acao=='ativEdt'){include("admin/pages/oat/operacao/retorno/ativEdt.php");}
+           if($acao=='descEdt'){include("admin/pages/oat/operacao/finalizar/descEdt.php");}
+           if($acao=='ativAdd'){include("admin/pages/oat/operacao/finalizar/ativAdd.php");}
+           if($acao=='ativEdt'){include("admin/pages/oat/operacao/finalizar/ativEdt.php");}
           }else{
         ?>
             <div class="row">
@@ -196,7 +196,7 @@
                   <div class="x_title">
                     <h2><small>Descrição </small>
                     <form data-parsley-validate method="get" action="">
-                      <a type="submit" href="oat-operacao.php?acao=oat-retorno&acao1=consulta&id=<?php echo $id ?>&acao2=descAdd" ><i class='fa  fa-plus'></i>Adicionar</a>
+                      <a type="submit" href="oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=<?php echo $id ?>&acao2=descAdd" ><i class='fa  fa-plus'></i>Adicionar</a>
 		                </form></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -231,7 +231,8 @@
                           <td><?php echo $value->id; ?></td>
                           <td><?php echo $value->descricao; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oatId ."&acao2=descEdt&cod=".$value->id."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oatId ."&acao2=descEdt&cod=".$value->id."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oatId. "&acao2=descCons&cod=".$value->id."'><i class='fa  fa-eye'></i>Visializar</a>";?>
                           </td>
                         </tr>
                       </tbody>

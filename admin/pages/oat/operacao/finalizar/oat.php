@@ -27,7 +27,7 @@
             # Insert
             if($ativos->insert()){
               echo "Descricao salva com sucesso!";
-              header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat );	
+              header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat );	
             }
           endif;
 
@@ -50,7 +50,7 @@
 
             if($ativos->update($id)){
               echo "Descricao salvo com Sucesso!";
-              header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat);	
+              header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat);	
             }
 					endif;
           #DELETAR
@@ -60,7 +60,17 @@
               $oat = $_GET['id'];
 							if($ativos->delete($id)){
 								echo "Deletado com sucesso!";
-                header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat);	
+                header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat);	
+							}
+						endif;
+            #DELETAR
+          	if(isset($_GET['acao2']) && $_GET['acao2'] == 'descDel'):
+
+							$id = (int)$_GET['cod'];
+              $oat = $_GET['id'];
+							if($ativos->delete($id)){
+								echo "Deletado com sucesso!";
+                header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat);	
 							}
 						endif;
 
@@ -77,7 +87,7 @@
             # Insert
             if($descricoes->insert()){
               echo "Descricao salva com sucesso!";
-              header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat );	
+              header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat );	
             }
           endif;
 
@@ -94,26 +104,22 @@
             $descricoes->setDescricao($descricao);
 
             if($descricoes->update($id)){
-              echo "-------------Descricao salvo com Sucesso!--------";
-              header("Refresh: 1, oat-operacao.php?acao=oat-retorno&acao1=consulta&id=". $oat);	
+              echo "Descricao salvo com Sucesso!";
+              header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat);	
             }
 					endif;
-						#RETORNO
-						if(isset($_POST['fechar'])):
-            if(!isset($_POST['id'])){
-              echo "Dados incopletos";
-            }
+						#FINALIZAR
+						if(isset($_POST['concluir'])):
               $id = $_POST['id'];
-              $dataFech = date("Y-m-d H:i:s");
-              $status = "2";
+              $dataTerm = date("Y-m-d H:i:s");
+              $status = "3";
 
               $oats->setDataFech($dataFech);
               $oats->setStatus($status);
 
-              if($oats->retorno($id)){
-
-                echo "------------------OAT Fechada!----------",$id;
-                header("Refresh: 1, oat-operacao.php?acao=oat-retorno");	
+              if($oats->finalizar($id)){
+                echo "OAT Encerada!";
+                header("Refresh: 1, oat-operacao.php?acao=oat-finalizar");	
               }
 						endif;
 
@@ -143,9 +149,9 @@
             <?php
               if(isset($_GET['acao1'])){
               $acao = $_GET['acao1'];	
-              if($acao=='consulta'){include("admin/pages/oat/operacao/retorno/consulta.php");}
+              if($acao=='consulta'){include("admin/pages/oat/operacao/finalizar/consulta.php");}
               }else{
-                  include("admin/pages/oat/operacao/retorno/retorno.php");
+                  include("admin/pages/oat/operacao/finalizar/finalizar.php");
               }
             ?>
 
