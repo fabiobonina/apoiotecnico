@@ -68,30 +68,14 @@
 						endif;
             
 				?>
-<script type="text/javascript">
-    $(document).ready(function() {
-         
-        // Captura o retorno do retornaCliente.php
-        $.getJSON('localidadesTeste.php', function(data){
-            var cliente = [];
-             
-            // Armazena na array capturando somente o nome do cliente
-            $(data).each(function(key, value) {
-                cliente.push(value.cliente);
-            });
-             
-            // Chamo o Auto complete do JQuery ui setando o id do input, array com os dados e o mínimo de caracteres para disparar o AutoComplete
-            $('#txtCliente').autocomplete({ source: cliente, minLength: 3});
-        });
-    });
-</script>
+
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Sistemas <small>Lista de dados</small></h3>
+                <h3>OAT <small>Solicitar</small></h3>
               </div>
 
               <div class="title_right">
@@ -112,7 +96,6 @@
           if(isset($_GET['acao1'])){
             $acao = $_GET['acao1'];	
             
-           //if($acao=='add'){include("admin/pages/oat/operacao/criar/add.php");}	
             // cadastro
            if($acao=='editar'){include("admin/pages/oat/operacao/criar/edt.php");}	
             // exibicao
@@ -129,7 +112,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Lista<small>OATs Abertas</small></h2>
+                    <h2>OAT<small>Solicitadas</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

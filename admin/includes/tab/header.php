@@ -21,7 +21,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -30,6 +30,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>SkyHub | Web Mobi</title>
+    <link href="admin/img/fa-paw.png" rel="icon" type="image/png" />
+
 
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

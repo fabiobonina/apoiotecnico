@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `system_tec` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `system_tec` DEFAULT CHARACTER SET latin1 ;
 USE `system_tec` ;
 
 -- -----------------------------------------------------
@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS `tb_ativo` (
   `data` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   INDEX `fk_cliente` (`cliente` ASC),
+  INDEX `fk_localidade` (`localidade` ASC),
   CONSTRAINT `cliente`
     FOREIGN KEY (`cliente`)
     REFERENCES `tb_clientes` (`nick`)
@@ -109,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `tb_servicos` (
   `ativo` ENUM('0', '1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -121,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `tb_sistema` (
   `ativo` ENUM('0', '1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -143,11 +144,10 @@ CREATE TABLE IF NOT EXISTS `tb_oat` (
   `status` ENUM('0', '1', '2', '3') NOT NULL DEFAULT '0',
   `ativo` ENUM('0', '1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  INDEX `fk_localidades_idx` (`localidade` ASC),
-  INDEX `fk_servicos_idx` (`servico` ASC),
-  INDEX `fk_sistema_idx` (`sistema` ASC),
-  INDEX `nuckuser_idx` (`nickuser` ASC),
-  PRIMARY KEY (`id`),
+  INDEX `fk_localidade` (`localidade` ASC),
+  INDEX `fk_servico` (`servico` ASC),
+  INDEX `fk_sistema` (`sistema` ASC),
+  INDEX `fk_nuckuser` (`nickuser` ASC),
   CONSTRAINT `nickuser`
     FOREIGN KEY (`nickuser`)
     REFERENCES `login` (`nickuser`)
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `tb_descricao` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `tipo_despesa` (
   `ativo` ENUM('0', '1') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------

@@ -89,8 +89,10 @@ if(isset($_POST['cadastrar'])):
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+  
 
     <title>SkyHub | Web Mobi</title>
+    <link href="admin/img/fa-paw.png" rel="icon" type="image/png" />
 
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

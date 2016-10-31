@@ -18,7 +18,7 @@ if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginSenha']))){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -27,6 +27,7 @@ if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginSenha']))){
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>SkyHub | Web Mobi</title>
+    <link href="admin/img/fa-paw.png" rel="icon" type="image/png" />
 
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,4 +42,5 @@ if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginSenha']))){
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
+    
     </head>
