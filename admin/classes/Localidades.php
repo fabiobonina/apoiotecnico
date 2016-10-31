@@ -85,5 +85,12 @@ class Localidades extends Crud{
 		
 	}
 
+		public function buscar(){
+		$sql  = "SELECT * FROM $this->table";
+		$stmt = DB::prepare($sql);
+		$stmt->execute();
+		echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+	}
+
 
 }

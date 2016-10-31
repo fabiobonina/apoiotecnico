@@ -66,7 +66,26 @@
 								echo "Deletado com sucesso!";
 							}
 						endif;
+            
 				?>
+<script type="text/javascript">
+    $(document).ready(function() {
+         
+        // Captura o retorno do retornaCliente.php
+        $.getJSON('localidadesTeste.php', function(data){
+            var cliente = [];
+             
+            // Armazena na array capturando somente o nome do cliente
+            $(data).each(function(key, value) {
+                cliente.push(value.cliente);
+            });
+             
+            // Chamo o Auto complete do JQuery ui setando o id do input, array com os dados e o mínimo de caracteres para disparar o AutoComplete
+            $('#txtCliente').autocomplete({ source: cliente, minLength: 3});
+        });
+    });
+</script>
+
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
