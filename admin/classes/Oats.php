@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Crud.php';
-try {
+//try {
 class Oats extends Crud{
 	
 	protected $table = 'tb_oat';
@@ -83,10 +83,9 @@ class Oats extends Crud{
 			$stmt->bindParam(':ativo',$this->ativo);
 
 			return $stmt->execute();
-		}
-		catch(PDOException $erro)
-		{
-			return $erro;
+		}catch( Exception $e ) {
+
+    		echo $e->getMessage();
 		}
 
 	}
@@ -150,9 +149,9 @@ class Oats extends Crud{
 	}
 
 }
-}catch( Exception $e ) {
+//}catch( Exception $e ) {
 
-    echo $e->getMessage();
-    return false;
+    //echo $e->getMessage();
+    
 
-}
+//}

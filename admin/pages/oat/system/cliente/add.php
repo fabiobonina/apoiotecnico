@@ -2,7 +2,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Novo servico <small>Insira os dados</small></h2>
+                    <h2>Novo Cliente <small>Insira os dados</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -23,35 +23,40 @@
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-                    
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="hidden" name="oat" value="<?php echo $id; ?>"><br />
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nome <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="nome" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Descrição <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Razão Social <span class="required">*</span>
                         </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <textarea class="form-control" name="descricao" rows="3" placeholder="Descrição do Serviço">
-                          Qual foi a ocorrência:
-                          Qual foi a causa:
-                          Qual a solução:
-                          Data e Hora Inicial;
-                          Data e Hora Final;
-                          Quilometragem Inicial;
-                          Quilometragem Final
-                          Numeração de Ativo (plaqueta)
-                          Gastos Gerais (Peças, alimentação, hospedagem, etc)</textarea>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="nick" name="nick" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Ativo <span class="required">*</span></label>
+                      <p>
+                        S:
+                        <input type="radio" class="flat" name="ativo" id="ativo0" value="0" checked="" required /> N:
+                        <input type="radio" class="flat" name="ativo" id="ativo1" value="1" />
+                      </p>
+                      
+                      </div>
+
+		                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button type="submit" class="btn btn-primary">Cancelar</button>
+                          <button type="submit" name="cadastrar" class="btn btn-success">Cadastrar</button>
                         </div>
                       </div>
 
-		                <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <a href="javascript:window.history.go(-1)" class="btn btn-primary">Voltar</a>
-                          <button type="submit" name="descAdd" class="btn btn-success">Cadastrar</button>
-                        </div>
-                      </div>
-		            </form>
+		                    </form>
                   </div>
                 </div>
               </div>

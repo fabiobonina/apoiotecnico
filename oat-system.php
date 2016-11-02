@@ -15,17 +15,17 @@
           if(isset($_GET['acao'])){
             $acao = $_GET['acao'];	
             
-            if($acao=='oat-clientes'){include("admin/pages/oat-system/clientes.php");}	
+            if($acao=='clientes'){include("admin/pages/oat/system/cliente/clientes.php");}	
             // cadastro
-            if($acao=='oat-localidades'){include("admin/pages/oat-system/localidades.php");}	
+            if($acao=='localidades'){include("admin/pages/oat/system/localidade/localidades.php");}	
             // exibicao
-            if($acao=='oat-tecnicos'){include("admin/pages/oat-system/tecnicos.php");}
+            if($acao=='tecnicos'){include("admin/pages/oat/system/tecnico/tecnicos.php");}
             // edicao
-            if($acao=='oat-sistemas'){include("admin/pages/oat-system/sistemas.php");}
+            if($acao=='sistemas'){include("admin/pages/oat/system/sistema/sistemas.php");}
                 // edicao
-            if($acao=='oat-servicos'){include("admin/pages/oat-system/servicos.php");}
+            if($acao=='servicos'){include("admin/pages/oat/system/servico/servicos.php");}
                 // edicao
-            if($acao=='oat-despesas'){include("admin/pages/oat-system/despesas.php");}
+            if($acao=='despesas'){include("admin/pages/oat/system/despesa/despesas.php");}
 
           }
         ?>

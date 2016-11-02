@@ -779,6 +779,7 @@ INSERT INTO `tb_servicos` (`id`, `descricao`, `ativo`) VALUES
 ('OP0001', 'REABASTECIMENTO DE PRODUTO', '0'),
 ('OP0002', 'ACOPLAMENTO DE CILINDRO', '0'),
 ('PV0001', 'PREVENTIVO', '0'),
+('NV0001', 'NOVA INSTALACAO', '0'),
 ('VT0001', 'VISITA TECNICA', '0');
 
 -- --------------------------------------------------------

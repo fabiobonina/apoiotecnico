@@ -2,7 +2,7 @@
 require_once 'Crud.php';
 
 	
- $table = 'tb_clientes';
+ $table = 'tb_localides';
 
 
 		$sql  = "SELECT * FROM $this->table";

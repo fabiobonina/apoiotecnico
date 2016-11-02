@@ -33,11 +33,11 @@
                   </li>
                   <li><a><i class="fa fa-wrench"></i> OAT-Ordem Atend. Tec. <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="oat-operacao.php?acao=oat-criar">Criar</a></li>
-                      <li><a href="oat-operacao.php?acao=oat-amarar">Amarar OS</a></li>
-                      <li><a href="oat-operacao.php?acao=oat-retorno">Retorno</a></li>
-                      <li><a href="oat-operacao.php?acao=oat-finalizar">Finalisar</a></li>
-                      <li><a href="oat-operacao.php?acao=oat-concluidas">Concluidas</a></li>
+                      <li><a href="oat-operacao.php?acao=criar">Abrir OAT</a></li>
+                      <li><a href="oat-operacao.php?acao=amarar">Amarar OS</a></li>
+                      <li><a href="oat-operacao.php?acao=retorno">Retorno OAT</a></li>
+                      <li><a href="oat-operacao.php?acao=finalizar">Finalizar OAT</a></li>
+                      <li><a href="oat-operacao.php?acao=concluidas">OAT Concluidas</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -47,12 +47,12 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-cog"></i> OAT Config <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="oat-system.php?acao=oat-clientes">Clientes</a></li>
-                      <li><a href="oat-system.php?acao=oat-localidades">Localidades</a></li>
-                      <li><a href="oat-system.php?acao=oat-tecnicos">Tecnicos</a></li>
-                      <li><a href="oat-system.php?acao=oat-sistemas">Sistemas</a></li>
-                      <li><a href="oat-system.php?acao=oat-servicos">Serviços</a></li>
-                      <li><a href="oat-system.php?acao=oat-despesas">Tipo Despesa</a></li>
+                      <li><a href="oat-system.php?acao=clientes">Clientes</a></li>
+                      <li><a href="oat-system.php?acao=localidades">Localidades</a></li>
+                      <li><a href="oat-system.php?acao=tecnicos">Tecnicos</a></li>
+                      <li><a href="oat-system.php?acao=sistemas">Sistemas</a></li>
+                      <li><a href="oat-system.php?acao=servicos">Serviços</a></li>
+                      <li><a href="oat-system.php?acao=despesas">Tipo Despesa</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>

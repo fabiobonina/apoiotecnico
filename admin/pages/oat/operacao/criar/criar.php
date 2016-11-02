@@ -7,43 +7,46 @@
           $sistemas = new Sistemas();
           $servicos = new Servicos();
 						#ADD
-						if(isset($_POST['add1']) OR isset($_POST['add2'])):
-              $user = $userNome;
-							$cliente = $_POST['cliente'];
-              if(isset($_POST['add2'])){
-                $localidade = $_POST['localidade'];
-                $servico = $_POST['servico'];
-                $sistema = $_POST['sistema'];
-                $dataOat = date("Y-m-d H:i:s");
-                $status = "0";
-                $ativo = "0";
+						if(isset($_POST['cadastrar'])):
+              $user = $userUsuario;
+							$localidade = $_POST['id'];
+              foreach($localidades->findAll() as $key => $value):if($value->id == $localidade) {
+              $cliente = $value->cliente;
+              }endforeach;
+              $servico = $_POST['servico'];
+              $sistema = $_POST['sistema'];
+              $dataOat = date("Y-m-d H:i:s");
+              $status = "0";
+              $ativo = "0";
 
-                $oat->setUser($user);
-                $oat->setCliente($cliente);
-                $oat->setLocalidade($localidade);
-                $oat->setServico($servico);
-                $oat->setSistema($sistema);
-                $oat->setDataOat($dataOat);
-                $oat->setStatus($status);
-                $oat->setAtivo($ativo);
-                # Insert
-                if($oat->insert()){
-                  echo "OAT aberta com sucesso!";
-                }
+              $oat->setUser($user);
+              $oat->setCliente($cliente);
+              $oat->setLocalidade($localidade);
+              $oat->setServico($servico);
+              $oat->setSistema($sistema);
+              $oat->setDataOat($dataOat);
+              $oat->setStatus($status);
+              $oat->setAtivo($ativo);
+              # Insert
+              if($oat->insert()){
+                echo "OAT aberta com sucesso!";
+                 header("Refresh: 1, oat-operacao.php?acao=criar");	
               }
+
 						endif;
 						#ATUALIZAR
-						if(isset($_POST['edt']) OR isset($_POST['edt2'])):
-              $id = $_POST['id'];
-              $user = $userNome;
-							$cliente = $_POST['cliente'];
-              if(isset($_POST['edt2'])){
-                $localidade = $_POST['localidade'];
-                $servico = $_POST['servico'];
-                $sistema = $_POST['sistema'];
-                $dataOat = date("Y-m-d H:i:s");
-                $status = "0";
-                $ativo = $_POST['ativo'];
+						if(isset($_POST['editar'])):
+              $oatId = $_POST['oatId'];
+              $user = $userUsuario;
+							$localidade = $_POST['id'];
+              foreach($localidades->findAll() as $key => $value):if($value->id == $localidade) {
+              $cliente = $value->cliente;
+              }endforeach;
+              $servico = $_POST['servico'];
+              $sistema = $_POST['sistema'];
+              $dataOat = date("Y-m-d H:i:s");
+              $status = "0";
+              $ativo = "0";
 
                 $oat->setUser($user);
                 $oat->setCliente($cliente);
@@ -54,16 +57,17 @@
                 $oat->setStatus($status);
                 $oat->setAtivo($ativo);
 
-                if($oat->update($id)){
+                if($oat->update($oatId)){
                   echo "OAT Atualizado com sucesso!";
+                  header("Refresh: 1, oat-operacao.php?acao=criar");	
                 }
-              }
 						endif;
 						#DELETAR
 						if(isset($_GET['acao1']) && $_GET['acao1'] == 'deletar'):
-							$id = (int)$_GET['id'];
-							if($oat->delete($id)){
+							$oatId = (int)$_GET['oatId'];
+							if($oat->delete($oatId)){
 								echo "Deletado com sucesso!";
+                header("Refresh: 1, oat-operacao.php?acao=criar");	
 							}
 						endif;
             
@@ -97,13 +101,11 @@
             $acao = $_GET['acao1'];	
             
             // cadastro
-           if($acao=='editar'){include("admin/pages/oat/operacao/criar/edt.php");}	
+           if($acao=='edt'){include("admin/pages/oat/operacao/criar/edt.php");}	
             // exibicao
-           if($acao=='oat-retorno'){include("admin/pages/oat-operacao/oatRetorno.php");
+           if($acao=='add'){include("admin/pages/oat/operacao/criar/add.php");
            }
-          }else{
-		          //include("pages/inicio.php");
-                include("admin/pages/oat/operacao/criar/add.php");
+          
           }
         ?>
 
@@ -112,7 +114,9 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>OAT<small>Solicitadas</small></h2>
+                    <h2>OAT<small>Solicitadas</small><form data-parsley-validate method="get" action="">
+                      <a type="submit" href="oat-operacao.php?acao=criar&acao1=add" ><i class='fa  fa-plus'></i>Adicionar</a>
+		                </form></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -182,8 +186,8 @@
                           <td><?php echo $oatDataSol; ?></td>
                           <td><?php echo $oatAtivo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-criar&acao1=editar&id=" . $oatId . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-criar&acao1=deletar&id=" . $oatId . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=criar&acao1=edt&oatId=" . $oatId . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=criar&acao1=deletar&oatId=" . $oatId . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>
