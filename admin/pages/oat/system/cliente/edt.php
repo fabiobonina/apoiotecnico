@@ -1,8 +1,6 @@
               <?php
-              if(isset($_GET['acao1']) && $_GET['acao1'] == 'editar'){
-
                 $id = (int)$_GET['id'];
-                $resultado = $cliente->find($id);
+                $resultado = $clientes->find($id);
               ?>
 
 		            <div class="row">

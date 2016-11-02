@@ -16,7 +16,8 @@ class Usuarios extends Crud{
 
 
 	public function setNome($nome){
-		$this->nome = $nome;
+		$nome = iconv('UTF-8', 'ASCII//TRANSLIT', $nome);
+		$this->nome = strtoupper ($nome);
 	}
 	public function getNome(){
 		return $this->nome;
@@ -45,7 +46,7 @@ class Usuarios extends Crud{
 
 
 	public function insert(){
-
+		try{
 		$sql  = "INSERT INTO $this->table (nome, email, nickuser, senha, nivel, ativo, data_cadastro, data_ultimo_login) ";
 		$sql .= "VALUES (:nome, :email, :nickuser, :senha, :nivel, :ativo, :data_cadastro, :data_ultimo_login)";
 		$stmt = DB::prepare($sql);
@@ -58,20 +59,26 @@ class Usuarios extends Crud{
 		$stmt->bindParam(':data_cadastro',$this->datacadastro);
 		$stmt->bindParam(':data_ultimo_login',$this->datalogin);
 
-		return $stmt->execute(); 
+		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 
 	}
 
 	public function update($id){
-
-		$sql  = "UPDATE $this->table SET nome = :nome, email = :email, nickuser = :nickuser, senha = :senha, WHERE id = :id";
-		$stmt = DB::prepare($sql);
-		$stmt->bindParam(':nome', $this->nome);
-		$stmt->bindParam(':email', $this->email);
-		$stmt->bindParam(':nickuser',$this->nickuser);
-		$stmt->bindParam(':senha',$this->senha);
-		$stmt->bindParam(':id', $id);
-		return $stmt->execute();
+		try{
+			$sql  = "UPDATE $this->table SET nome = :nome, email = :email, nickuser = :nickuser, senha = :senha, WHERE id = :id";
+			$stmt = DB::prepare($sql);
+			$stmt->bindParam(':nome', $this->nome);
+			$stmt->bindParam(':email', $this->email);
+			$stmt->bindParam(':nickuser',$this->nickuser);
+			$stmt->bindParam(':senha',$this->senha);
+			$stmt->bindParam(':id', $id);
+			return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 		
 	}
 
@@ -80,41 +87,44 @@ class Usuarios extends Crud{
 		// SELECIONAR BANCO DE DADOS
 		
 		$sql = "SELECT * from $this->table WHERE BINARY nickuser=:nickuser AND BINARY senha=:senha ";
+			try{
+				$stmt = DB::prepare($sql);
+				$stmt->bindParam(':nickuser', $this->nickuser);
+				$stmt->bindParam(':senha', $this->senha);
+				$stmt->execute();
+				$contar = $stmt->rowCount();
+				if($contar>0){
+					$loop = $stmt->fetchAll();
+					foreach ($loop as $show){
+						$loginId = $show->id;
+						$loginNome = $show->nome;
+						$loginEmail = $show->email;
+						$loginUser = $show->nickuser;
+						$loginSenha = $show->senha;
+						$loginNivel = $show->nivel;
+					}
+					$_SESSION['loginId'] = $loginId;
+					$_SESSION['loginNome'] = $loginNome;
+					$_SESSION['loginEmail'] = $loginEmail;
+					$_SESSION['loginUser'] = $loginUser;
+					$_SESSION['loginSenha'] = $loginSenha;
+					$_SESSION['loginNivel'] = $loginNivel;
 
-			$stmt = DB::prepare($sql);
-			$stmt->bindParam(':nickuser', $this->nickuser);
-			$stmt->bindParam(':senha', $this->senha);
-			$stmt->execute();
-			$contar = $stmt->rowCount();
-			if($contar>0){
-				$loop = $stmt->fetchAll();
-				foreach ($loop as $show){
-					$loginId = $show->id;
-					$loginNome = $show->nome;
-					$loginEmail = $show->email;
-					$loginUser = $show->nickuser;
-					$loginSenha = $show->senha;
-					$loginNivel = $show->nivel;
+					echo '<div class="alert alert-success">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
+					</div>';
+					
+					header("Refresh: 3, index.php?acao=welcome");
+				}else{
+					echo '<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<strong>Erro ao logar!</strong> Os dados estão incorretos.
+					</div>';
 				}
-				$_SESSION['loginId'] = $loginId;
-				$_SESSION['loginNome'] = $loginNome;
-				$_SESSION['loginEmail'] = $loginEmail;
-				$_SESSION['loginUser'] = $loginUser;
-				$_SESSION['loginSenha'] = $loginSenha;
-				$_SESSION['loginNivel'] = $loginNivel;
-
-				echo '<div class="alert alert-success">
-					  <button type="button" class="close" data-dismiss="alert">×</button>
-                      <strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
-                </div>';
-				
-				header("Refresh: 3, index.php?acao=welcome");
-			}else{
-				echo '<div class="alert alert-danger">
-                      <button type="button" class="close" data-dismiss="alert">×</button>
-                      <strong>Erro ao logar!</strong> Os dados estão incorretos.
-                </div>';
-			}
+			} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 		
 	}
 

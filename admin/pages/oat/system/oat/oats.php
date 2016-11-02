@@ -129,7 +129,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>OAT <small>Abertas</small></h3>
+                <h3>OAT <small>Consulta</small></h3>
               </div>
 
               <div class="title_right">
@@ -151,7 +151,7 @@
               $acao = $_GET['acao1'];	
               if($acao=='consulta'){include("admin/pages/oat/operacao/finalizar/consulta.php");}
               }else{
-                  include("admin/pages/oat/operacao/finalizar/finalizar.php");
+                  include("admin/pages/oat/system/oat/oatLista.php");
               }
             ?>
 

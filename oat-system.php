@@ -26,6 +26,10 @@
             if($acao=='servicos'){include("admin/pages/oat/system/servico/servicos.php");}
                 // edicao
             if($acao=='despesas'){include("admin/pages/oat/system/despesa/despesas.php");}
+            // oat
+            if($acao=='oat'){include("admin/pages/oat/system/oat/oats.php");}
+            // oat
+            if($acao=='ativo'){include("admin/pages/oat/system/ativo/ativos.php");}
 
           }
         ?>

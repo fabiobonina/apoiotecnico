@@ -22,18 +22,22 @@ class Descricoes extends Crud{
 	}
 
 	public function insert(){
-
+		try{
 		$sql  = "INSERT INTO $this->table (oat, descricao) ";
 		$sql .= "VALUES (:oat, :descricao)";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':oat',$this->oat);
 		$stmt->bindParam(':descricao',$this->descricao);
 
-		return $stmt->execute(); 
+		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 
 	}
 
 	public function update($id){
+		try{
 
 		$sql  = "UPDATE $this->table SET oat = :oat, descricao = :descricao  WHERE id = :id ";
 		$stmt = DB::prepare($sql);
@@ -41,15 +45,22 @@ class Descricoes extends Crud{
 		$stmt->bindParam(':descricao', $this->descricao);
 		$stmt->bindParam(':id', $id);
 		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 		
 	}
 
 	public function findDesc($Cod){
+		try{
 		$sql  = "SELECT * FROM $this->table WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':id', $Cod, PDO::PARAM_INT);
 		$stmt->execute();
 		return $stmt->fetch();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 	}
 
 }

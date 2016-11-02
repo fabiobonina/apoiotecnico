@@ -18,7 +18,8 @@ class Ativos extends Crud{
 		$this->localidade = $localidade;
 	}
 	public function setPlaqueta($plaqueta){
-		$this->plaqueta = $plaqueta;
+		$palqueta = iconv('UTF-8', 'ASCII//TRANSLIT', $palqueta);
+		$this->palqueta = strtoupper ($palqueta);
 	}
 	public function getPlaqueta(){
 		return $this->plaqueta;
@@ -29,7 +30,7 @@ class Ativos extends Crud{
 
 
 	public function insert(){
-
+		try{
 		$sql  = "INSERT INTO $this->table (cliente, localidade, plaqueta, data) ";
 		$sql .= "VALUES (:cliente, :localidade, :plaqueta, :data)";
 		$stmt = DB::prepare($sql);
@@ -38,12 +39,15 @@ class Ativos extends Crud{
 		$stmt->bindParam(':plaqueta',$this->plaqueta);
 		$stmt->bindParam(':data',$this->data);
 
-		return $stmt->execute(); 
+		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 
 	}
 
 	public function update($id){
-
+		try{
 		$sql  = "UPDATE $this->table SET cliente = :cliente, localidade = :localidade, plaqueta = :plaqueta, data = :data WHERE id = :id ";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':cliente',$this->cliente);
@@ -52,15 +56,22 @@ class Ativos extends Crud{
 		$stmt->bindParam(':data',$this->data);
 		$stmt->bindParam(':id', $id);
 		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 		
 	}
 
 	public function findAtiv($Cod){
+		try{
 		$sql  = "SELECT * FROM $this->table WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':id', $Cod, PDO::PARAM_INT);
 		$stmt->execute();
 		return $stmt->fetch();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 	}
 
 

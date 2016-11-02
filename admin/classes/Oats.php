@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Crud.php';
-//try {
+
 class Oats extends Crud{
 	
 	protected $table = 'tb_oat';
@@ -63,8 +63,7 @@ class Oats extends Crud{
 	}
 
 	public function insert(){
-		try
-		{
+		try{
 			$sql  = "INSERT INTO $this->table (nickuser, cliente, localidade, servico, sistema, data_sol, filial, os, data_os, data_fech, data_term, status, ativo) ";
 			$sql .= "VALUES (:nickuser, :cliente, :localidade, :servico, :sistema, :data_sol, :filial, :os, :data_os, :data_fech, :data_term, :status, :ativo)";
 			$stmt = DB::prepare($sql);
@@ -83,14 +82,14 @@ class Oats extends Crud{
 			$stmt->bindParam(':ativo',$this->ativo);
 
 			return $stmt->execute();
-		}catch( Exception $e ) {
-
-    		echo $e->getMessage();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
 		}
 
 	}
 
 	public function update($id){
+		try{
 		$sql  = "UPDATE $this->table SET nickuser = :nickuser, cliente = :cliente, localidade = :localidade, servico = :servico, sistema = :sistema, data_sol = :data_sol, filial = :filial, os = :os, data_os = :data_os, data_fech = :data_fech, data_term = :data_term, status = :status, ativo = :ativo WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':nickuser',$this->nickUser);
@@ -108,9 +107,13 @@ class Oats extends Crud{
 		$stmt->bindParam(':ativo',$this->ativo);
 		$stmt->bindParam(':id', $id);
 		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 	}
 
 	public function amarar($id){
+		try{
 		$sql  = "UPDATE $this->table SET filial = :filial, os = :os, data_os = :data_os, status = :status WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':filial',$this->filial);
@@ -119,39 +122,48 @@ class Oats extends Crud{
 		$stmt->bindParam(':status',$this->status);
 		$stmt->bindParam(':id', $id);
 		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 
 	}
 	public function retorno($id){
+		try{
 		$sql  = "UPDATE $this->table SET data_fech = :data_fech, status = :status WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':data_fech',$this->dataFech);
 		$stmt->bindParam(':status',$this->status);
 		$stmt->bindParam(':id', $id);
-		return $stmt->execute();	
+		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}	
 	}
 
 
 	public function finalizar($id){
+		try{
 		$sql  = "UPDATE $this->table SET data_term = :data_term, status = :status WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':data_term',$this->dataTerm);
 		$stmt->bindParam(':status',$this->status);
 		$stmt->bindParam(':id', $id);
-		return $stmt->execute();	
+		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}	
 	}
 
 	public function findOat($status){
+		try{
 		$sql  = "SELECT * FROM $this->table WHERE BINARY status=:status ";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':status', $status, PDO::PARAM_INT);
 		$stmt->execute();
 		return $stmt->fetchAll();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 	}
 
 }
-//}catch( Exception $e ) {
-
-    //echo $e->getMessage();
-    
-
-//}

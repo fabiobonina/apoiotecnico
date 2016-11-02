@@ -1,18 +1,22 @@
 				<?php
 
-					$cliente = new Clientes();
+					$clientes = new Clientes();
 						#CADASTRAR
 						if(isset($_POST['cadastrar'])):
 							$nome = $_POST['nome'];
 							$nick =$_POST["nick"];
 							$ativo =$_POST["ativo"];
 
-							$cliente->setNome($nome);
-							$cliente->setNick($nick);
-							$cliente->setAtivo($ativo);
+							$clientes->setNome($nome);
+							$clientes->setNick($nick);
+							$clientes->setAtivo($ativo);
 							# Insert
-							if($cliente->insert()){
-								echo "Inserido com sucesso!";
+							if($clientes->insert()){
+								echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Inserido com sucesso!</strong> Redirecionando ...
+                    </div>';
+                header("Refresh: 1, oat-system.php?acao=clientes");
 							}
 						endif;
 						#ATUALIZAR
@@ -23,19 +27,27 @@
 							$nick =$_POST["nick"];
 							$ativo =$_POST["ativo"];
 
-							$cliente->setNome($nome);
-							$cliente->setNick($nick);
-							$cliente->setAtivo($ativo);
+							$clientes->setNome($nome);
+							$clientes->setNick($nick);
+							$clientes->setAtivo($ativo);
 
-							if($cliente->update($id)){
-								echo "Atualizado com sucesso!";
+							if($clientes->update($id)){
+								echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Atualizado com sucesso!</strong> Redirecionando ...
+                    </div>';
+                header("Refresh: 1, oat-system.php?acao=clientes");
 							}
 						endif;
 						#DELETAR
 						if(isset($_GET['acao1']) && $_GET['acao1'] == 'deletar'):
-							$id = (int)$_GET['id'];
-							if($cliente->delete($id)){
-								echo "Deletado com sucesso!";
+							$id = $_GET['id'];
+							if($clientes->delete($id)){
+								echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Deletado com sucesso!</strong> Redirecionando ...
+                    </div>';
+                header("Refresh: 1, oat-system.php?acao=clientes");
 							}
 						endif;
 				?>
@@ -60,17 +72,17 @@
             </div>
 
             <div class="clearfix"></div>
-        <?php
-          if(isset($_GET['acao1'])){
-            $acao = $_GET['acao1'];	
-            
-            // edt
-           if($acao=='edt'){include("admin/pages/oat/system/cliente/edt.php");}	
-            // add
-           if($acao=='add'){include("admin/pages/oat/system/cliente/add.php");}
-          
-          }
-        ?>
+            <?php
+              if(isset($_GET['acao1'])){
+                $acao = $_GET['acao1'];	
+                
+                // edt
+              if($acao=='edt'){include("admin/pages/oat/system/cliente/edt.php");}	
+                // add
+              if($acao=='add'){include("admin/pages/oat/system/cliente/add.php");}
+              
+              }
+            ?>
 
 
             <div class="row">
@@ -113,7 +125,7 @@
                         </tr>
                       </thead>
 
-                			<?php foreach($cliente->findAll() as $key => $value): ?>
+                			<?php foreach($clientes->findAll() as $key => $value): ?>
                       <tbody>
                         <tr>
                           <td><?php echo $value->id; ?></td>

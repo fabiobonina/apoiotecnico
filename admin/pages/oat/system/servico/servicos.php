@@ -16,7 +16,7 @@
 					          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Inserido com sucesso!</strong> Redirecionando ...
                     </div>';
-                header("Refresh: 1, oat-systema.php?acao=servicos");	
+                header("Refresh: 1, oat-system.php?acao=servicos");	
 							}
 						endif;
 						#ATUALIZAR
@@ -34,18 +34,18 @@
 					          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Atualizado com sucesso!</strong> Redirecionando ...
                     </div>';
-                header("Refresh: 1, oat-systema.php?acao=servicos");
+                header("Refresh: 1, oat-system.php?acao=servicos");
 							}
 						endif;
 						#DELETAR
 						if(isset($_GET['acao1']) && $_GET['acao1'] == 'deletar'):
-							$id = (int)$_GET['id'];
+							$id = $_GET['id'];
 							if($servico->delete($id)){
 								echo '<div class="alert alert-success">
 					          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Deletado com sucesso!</strong> Redirecionando ...
                     </div>';
-                header("Refresh: 1, oat-systema.php?acao=servicos");	
+                header("Refresh: 1, oat-system.php?acao=servicos");	
 							}
 						endif;
 				?>
@@ -88,7 +88,7 @@
                   <div class="x_title">
                     <h2>Lista<small>Servicos</small>
                     <form data-parsley-validate method="get" action="">
-                      <a type="submit" href="oat-system.php?acao=servico&acao1=add?>" ><i class='fa  fa-plus'></i>Adicionar</a>
+                      <a type="submit" href="oat-system.php?acao=servicos&acao1=add" ><i class='fa  fa-plus'></i>Adicionar</a>
 		                </form></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

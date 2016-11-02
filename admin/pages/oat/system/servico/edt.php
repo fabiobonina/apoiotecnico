@@ -1,6 +1,4 @@
               <?php
-              if(isset($_GET['acao1']) && $_GET['acao1'] == 'editar'){
-
                 $id = $_GET['id'];
                 $resultado = $servico->find($id);
               ?>

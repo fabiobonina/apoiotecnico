@@ -14,7 +14,8 @@ class Localidades extends Crud{
 	private $ativo;
 
 	public function setNome($nome){
-		$this->nome = $nome;
+		$nome = iconv('UTF-8', 'ASCII//TRANSLIT', $nome);
+		$this->nome = strtoupper ($nome);
 	}
 	public function getNome(){
 		return $this->nome;
@@ -23,13 +24,16 @@ class Localidades extends Crud{
 		$this->cliente = $cliente;
 	}
 	public function setRegional($regional){
-		$this->regional = $regional;
+		$regionaal = iconv('UTF-8', 'ASCII//TRANSLIT', $regionaal);
+		$this->regionaal = strtoupper ($regionaal);
 	}
 	public function setMunicipio($municipio){
-		$this->municipio = $municipio;
+		$municipio = iconv('UTF-8', 'ASCII//TRANSLIT', $municipio);
+		$this->municipio = strtoupper ($municipio);
 	}
 	public function setUf($uf){
-		$this->uf = $uf;
+		$uf = iconv('UTF-8', 'ASCII//TRANSLIT', $uf);
+		$this->uf = strtoupper ($uf);
 	}
 	public function setLat($latitude){
 		$this->latitude = $latitude;
@@ -42,6 +46,7 @@ class Localidades extends Crud{
 	}
 
 	public function insert(){
+		try{
 
 		$sql  = "INSERT INTO $this->table (cliente, regional, nome, municipio, uf, latitude, longitude, ativo) ";
 		$sql .= "VALUES (:cliente, :regional, :nome, :municipio, :uf, :latitude, :longitude, :ativo)";
@@ -55,12 +60,15 @@ class Localidades extends Crud{
 		$stmt->bindParam(':longitude',$this->longitude);
 		$stmt->bindParam(':ativo',$this->ativo);
 
-		return $stmt->execute(); 
+		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 
 	}
 
 	public function update($id){
-
+		try{
 		$sql  = "UPDATE $this->table SET cliente = :cliente, regional = :regional, nome = :nome, municipio = :municipio, uf = :uf, 	latidude = :latidude, ativo = :ativo WHERE id = :id ";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':cliente',$this->cliente);
@@ -72,16 +80,22 @@ class Localidades extends Crud{
 		$stmt->bindParam(':longitude',$this->longitude);
 		$stmt->bindParam(':ativo',$this->ativo);
 		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 		
 	}
 
 	public function search($cliente){
-
+		try{
 		$sql = "SELECT * from $this->table WHERE BINARY cliente=:cliente ";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':cliente',$this->cliente);
 
 		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 		
 	}
 

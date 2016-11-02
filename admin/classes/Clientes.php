@@ -9,13 +9,15 @@ class Clientes extends Crud{
 	private $ativo;
 
 	public function setNome($nome){
-		$this->nome = $nome;
+		$nome = iconv('UTF-8', 'ASCII//TRANSLIT', $nome);
+		$this->nome = strtoupper ($nome);
 	}
 	public function getNome(){
 		return $this->nome;
 	}
 	public function setNick($nick){
-		$this->nick = $nick;
+		$nick = iconv('UTF-8', 'ASCII//TRANSLIT', $nick);
+		$this->nick = strtoupper ($nick);
 	}
 	public function setAtivo($ativo){
 		$this->ativo = $ativo;

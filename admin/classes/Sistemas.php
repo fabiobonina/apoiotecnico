@@ -24,7 +24,7 @@ class Sistemas extends Crud{
 	}
 
 	public function insert(){
-
+		try{
 		$sql  = "INSERT INTO $this->table (id, descricao, ativo) ";
 		$sql .= "VALUES (:id, :descricao, :ativo)";
 		$stmt = DB::prepare($sql);
@@ -32,18 +32,24 @@ class Sistemas extends Crud{
 		$stmt->bindParam(':descricao',$this->descricao);
 		$stmt->bindParam(':ativo',$this->ativo);
 
-		return $stmt->execute(); 
+		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 
 	}
 
 	public function update($id){
-
+		try{
 		$sql  = "UPDATE $this->table SET descricao = :descricao, ativo = :ativo WHERE id = :id ";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':descricao', $this->descricao);
 		$stmt->bindParam(':ativo',$this->ativo);
 		$stmt->bindParam(':id', $id);
 		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
 		
 	}
 

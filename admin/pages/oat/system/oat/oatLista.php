@@ -3,7 +3,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>OAT<small>Fechadas</small></h2>
+                    <h2>OAT<small>Lista</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -27,17 +27,20 @@
                           <th>Usuario</th>
                           <th>Cliente</th>
                           <th>Localidade</th>
-                          <th>Servico</th>
                           <th>Filial</th>
                           <th>OS</th>
+                          <th>Servico</th>
                           <th>Sistema</th>
                           <th>Data Solitação</th>
+                          <th>Data Fechamento</th>
+                          <th>Data Conclusão</th>
+                          <th>Status</th>
                           <th>Ativo</th>
                           <th>Ação</th>
                         </tr>
                       </thead>
 
-                			<?php foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 2) { 
+                			<?php foreach($oats->findAll() as $key => $value):if($value->ativo == 0) { 
                           $oatId = $value->id;
                           $oatUsuario = $value->nickuser;
                           $oatCliente = $value->cliente;
@@ -47,6 +50,9 @@
                           $oatServId = $value->servico;
                           $oatSistId = $value->sistema;
                           $oatDataSol = $value->data_sol;
+                          $oatDataFec = $value->data_fech;
+                          $oatDataTer = $value->data_term;
+                          $oatStatus = $value->status;
                           $oatAtivo = $value->ativo;
                           foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
                             $oatLocal = $value->nome;

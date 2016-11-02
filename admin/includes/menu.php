@@ -42,6 +42,7 @@
                   </li>
                 </ul>
               </div>
+              <?php if($userNivel > 0){ ?>
               <div class="menu_section">
                 <h3>Configuração</h3>
                 <ul class="nav side-menu">
@@ -53,19 +54,23 @@
                       <li><a href="oat-system.php?acao=sistemas">Sistemas</a></li>
                       <li><a href="oat-system.php?acao=servicos">Serviços</a></li>
                       <li><a href="oat-system.php?acao=despesas">Tipo Despesa</a></li>
+                      <li><a href="oat-system.php?acao=oat">OAT</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     </ul>
                   </li>
+                  <?php if($userNivel > 2){ ?>
                   <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     </ul>
-                  </li>                  
+                  </li>   
+                  <?php }?>               
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
               </div>
+              <?php } ?>
 
             </div>
             <!-- /sidebar menu -->
