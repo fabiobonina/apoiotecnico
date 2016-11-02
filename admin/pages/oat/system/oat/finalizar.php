@@ -47,9 +47,6 @@
                           $oatServId = $value->servico;
                           $oatSistId = $value->sistema;
                           $oatDataSol = $value->data_sol;
-                          $oatDataFec = $value->data_fech;
-                          $oatDataTer = $value->data_term;
-                          $oatStatus = $value->status;
                           $oatAtivo = $value->ativo;
                           foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
                             $oatLocal = $value->nome;
@@ -75,12 +72,9 @@
                           <td><?php echo $oatServico; ?></td>
                           <td><?php echo $oatSistema; ?></td>
                           <td><?php echo $oatDataSol; ?></td>
-                          <td><?php echo $oatDataFec; ?></td>
-                          <td><?php echo $oatDataTar; ?></td>
-                          <td><?php echo $oatStatus; ?></td>
                           <td><?php echo $oatAtivo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-system.php?acao=oat&acao1=consulta&id=" . $oatId . "'><i class='fa  fa-edit'></i>Cunsulta</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=" . $oatId . "'><i class='fa  fa-edit'></i>Cunsulta</a>"; ?>
                             
                           </td>
                         </tr>
