@@ -1,5 +1,5 @@
               <?php
-                $id = (int)$_GET['id'];
+                $id = $_GET['id'];
                 $resultado = $localidades->find($id);
               ?>
 
@@ -32,7 +32,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cliente <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="cliente" class="form-control col-md-7 col-xs-12">
-                          
+                            <option value="<?php echo $resultado->cliente; ?>"><?php echo $resultado->cliente; ?></option>  
                             <?php foreach($clientes->findAll() as $key => $value):if($value->ativo == 0) { ?>
                             <option value="<?php echo $value->nick; ?>"><?php echo $value->nick; ?></option>  
                             <?php } endforeach; ?>
@@ -40,7 +40,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Regional <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Regional <span class="required"></span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="first-name" name="regional" value="<?php echo $resultado->regional; ?>" class="form-control col-md-7 col-xs-12">
                         </div>
@@ -72,7 +72,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Longitude <span class="required"></span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="nick" name="long" value="<?php echo $resultado->longitude; ?>" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="long" name="long" value="<?php echo $resultado->longitude; ?>" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 
@@ -83,7 +83,7 @@
                         N:<input type="radio" class="flat" name="ativo" id="ativo1" value="1" <?php if($resultado->ativo == 1){?>checked="" <?php }?>/>
                       </p>
                       </div>
-                      <input type="hidden" name="id" value="<?php $id; ?>"><br />
+                      <input type="hidden" name="id" value="<?php echo $id; ?>"><br />
 		                      <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
