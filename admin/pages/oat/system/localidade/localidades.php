@@ -1,6 +1,8 @@
 				<?php
 
-					$localidade = new Localidades();
+					$localidades = new Localidades();
+          $clientes = new Clientes();
+
 						#CADASTRAR
 						if(isset($_POST['cadastrar'])):
               $cliente = $_POST['cliente'];
@@ -12,16 +14,16 @@
 							$long =$_POST["long"];
 							$ativo = $_POST["ativo"];
 
-							$localidade->setCliente($cliente);
-							$localidade->setRegional($regional);
-              $localidade->setNome($nome);
-							$localidade->setMunicipio($municipio);
-							$localidade->setUf($uf);
-              $localidade->setLat($lat);
-							$localidade->setLong($long);
-							$localidade->setAtivo($ativo);
+							$localidades->setCliente($cliente);
+							$localidades->setRegional($regional);
+              $localidades->setNome($nome);
+							$localidades->setMunicipio($municipio);
+							$localidades->setUf($uf);
+              $localidades->setLat($lat);
+							$localidades->setLong($long);
+							$localidades->setAtivo($ativo);
 							# Insert
-							if($localidade->insert()){
+							if($localidades->insert()){
 								echo '<div class="alert alert-success">
 					          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Inserido com sucesso!</strong> Redirecionando ...
@@ -42,16 +44,16 @@
 							$long =$_POST["long"];
 							$ativo =$_POST["ativo"];
 
-							$localidade->setCliente($cliente);
-							$localidade->setRegional($regional);
-              $localidade->setNome($nome);
-							$localidade->setMunicipio($municipio);
-							$localidade->setUf($uf);
-              $localidade->setLat($lat);
-							$localidade->setLong($long);
-							$localidade->setAtivo($ativo);
+							$localidades->setCliente($cliente);
+							$localidades->setRegional($regional);
+              $localidades->setNome($nome);
+							$localidades->setMunicipio($municipio);
+							$localidades->setUf($uf);
+              $localidades->setLat($lat);
+							$localidades->setLong($long);
+							$localidades->setAtivo($ativo);
 
-							if($localidade->update($id)){
+							if($localidades->update($id)){
 								echo '<div class="alert alert-success">
 					          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Atualizado com sucesso!</strong> Redirecionando ...
@@ -62,7 +64,7 @@
 						#DELETAR
 						if(isset($_GET['acao1']) && $_GET['acao1'] == 'deletar'):
 							$id = (int)$_GET['id'];
-							if($localidade->delete($id)){
+							if($localidades->delete($id)){
 								echo '<div class="alert alert-success">
 					          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Deletado com sucesso!</strong> Redirecionando ...
@@ -71,7 +73,7 @@
 							}
 						endif;
 
-            $cliente = new Clientes();
+            
 				?>
         <!-- page content -->
         <div class="right_col" role="main">
@@ -112,7 +114,7 @@
                   <div class="x_title">
                     <h2>Lista<small>Clientes</small>
                     <form data-parsley-validate method="get" action="">
-                      <a type="submit" href="oat-system.php?acao=localidade&acao1=add?>" ><i class='fa  fa-plus'></i>Adicionar</a>
+                      <a type="submit" href="oat-system.php?acao=localidades&acao1=add" ><i class='fa  fa-plus'></i>Adicionar</a>
 		                </form></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -150,7 +152,7 @@
                           <th>Ação</th>
                         </tr>
                       </thead>
-                			<?php foreach($localidade->findAll() as $key => $value): ?>
+                			<?php foreach($localidades->findAll() as $key => $value): ?>
                       <tbody>
                         <tr>
                           <td><?php echo $value->id; ?></td>
@@ -164,7 +166,7 @@
                           <td><?php echo $value->ativo; ?></td>
                           <td>
                             <?php echo "<a href='oat-system.php?acao=localidades&acao1=edt&id=" . $value->id . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
-                            <?php echo "<a href='oat-system.php?acao=locealidades&acao1=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
+                            <?php echo "<a href='oat-system.php?acao=localidades&acao1=deletar&id=" . $value->id . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>

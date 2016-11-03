@@ -27,7 +27,7 @@
                 // edicao
             if($acao=='despesas'){include("admin/pages/oat/system/despesa/despesas.php");}
             // oat
-            if($acao=='oat'){include("admin/pages/oat/system/oat/oats.php");}
+            if($acao=='oat'){include("admin/pages/oat/system/oat/oat.php");}
             // oat
             if($acao=='ativo'){include("admin/pages/oat/system/ativo/ativos.php");}
 

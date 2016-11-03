@@ -3,7 +3,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>OAT<small>Abertas</small></h2>
+                    <h2>OAT<small>Fechadas</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -32,12 +32,15 @@
                           <th>OS</th>
                           <th>Sistema</th>
                           <th>Data Solitação</th>
+                          <th>Data Fechamento</th>
+                          <th>Data Termino</th>
+                          <th>Status</th>
                           <th>Ativo</th>
                           <th>Ação</th>
                         </tr>
                       </thead>
 
-                			<?php foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 1) { 
+                			<?php foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 2) { 
                           $oatId = $value->id;
                           $oatUsuario = $value->nickuser;
                           $oatCliente = $value->cliente;
@@ -47,6 +50,9 @@
                           $oatServId = $value->servico;
                           $oatSistId = $value->sistema;
                           $oatDataSol = $value->data_sol;
+                          $oatDataFec = $value->data_fech;
+                          $oatDataTer = $value->data_term;
+                          $oatStatus = $value->status;
                           $oatAtivo = $value->ativo;
                           foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
                             $oatLocal = $value->nome;
@@ -72,9 +78,13 @@
                           <td><?php echo $oatServico; ?></td>
                           <td><?php echo $oatSistema; ?></td>
                           <td><?php echo $oatDataSol; ?></td>
+                          <td><?php echo $oatDataFec; ?></td>
+                          <td><?php echo $oatDataTer; ?></td>
+                          <td><?php echo $oatStatus; ?></td>
                           <td><?php echo $oatAtivo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=retorno&acao1=consulta&oat=" . $oatId . "'><i class='fa  fa-edit'></i>Cunsulta</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=concluidas&acao1=consulta&oat=" . $oatId . "'><i class='fa  fa-edit'></i>Cunsulta</a>"; ?>
+                            
                           </td>
                         </tr>
                       </tbody>

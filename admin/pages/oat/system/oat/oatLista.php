@@ -40,7 +40,7 @@
                         </tr>
                       </thead>
 
-                			<?php foreach($oats->findAll() as $key => $value):if($value->ativo == 0) { 
+                			<?php foreach($oats->findAll() as $key => $value):{ 
                           $oatId = $value->id;
                           $oatUsuario = $value->nickuser;
                           $oatCliente = $value->cliente;
@@ -78,6 +78,9 @@
                           <td><?php echo $oatServico; ?></td>
                           <td><?php echo $oatSistema; ?></td>
                           <td><?php echo $oatDataSol; ?></td>
+                          <td><?php echo $oatDataFec; ?></td>
+                          <td><?php echo $oatDataTer; ?></td>
+                          <td><?php echo $oatStatus; ?></td>
                           <td><?php echo $oatAtivo; ?></td>
                           <td>
                             <?php echo "<a href='oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=" . $oatId . "'><i class='fa  fa-edit'></i>Cunsulta</a>"; ?>

@@ -35,15 +35,15 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Descrição <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <textarea class="form-control" name="descricao" rows="3" placeholder="Descrição do Serviço"><?php echo $resultado->descricao; ?></textarea>
+                          <textarea class="form-control" name="descricao" rows="10" placeholder="Descrição do Serviço"><?php echo $resultado->descricao; ?></textarea>
                         </div>
                       </div>
                       <div class="col-md-3 col-sm-3 col-xs-12">
                       <input type="hidden" name="cod" value="<?php echo $cod; ?>" class="form-control col-md-7 col-xs-12" >
-                      <input type="hidden" name="oat" value="<?php echo $id; ?>" class="form-control col-md-7 col-xs-12">
+                      <input type="hidden" name="oat" value="<?php echo $oatId; ?>" class="form-control col-md-7 col-xs-12">
                       </div>
 
-		            <div class="ln_solid"></div>
+		                  <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="javascript:window.history.go(-1)" class="btn btn-primary">Voltar</a>

@@ -51,7 +51,7 @@
                         <tr>
                           <td>OAT:</td>
                           <td>
-                            <input type="text" disabled="disabled" name="oatId" value="<?php echo $oatId; ?>" disabled="disabled" class="col-md-3 col-xs-3">
+                            <input type="text" disabled="disabled" name="oat" value="<?php echo $oatId; ?>" disabled="disabled" class="col-md-3 col-xs-3">
                           </td>
                           <td>&nbsp;</td>
                           <td>Usuario:</td>
@@ -108,12 +108,12 @@
 
 
                    <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-                      <input type="hidden" name="oat" value="<?php echo $oatId; ?>">
+                      <input type="hidden" name="oat" value="<?php echo $oatId; ?>"><br />
 		                  <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <a href="oat-operacao.php?acao=retorno" class="btn btn-primary">Voltar</a>
-                          <?php echo "<button type='submit' name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success'><i class='fa  fa-check-square-o'></i>Fechar OAT</button>"; ?>
+                          <a href="oat-operacao.php?acao=concluidas" class="btn btn-primary">Voltar</a>
+                          <?php echo "<button type='submit' name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success'><i class='fa  fa-check-square-o'></i>Encerrar OAT</button>"; ?>
                           
                         </div>
                       </div>
@@ -128,7 +128,7 @@
                   <div class="x_title">
                     <h2><small>Ativo </small>
                     <form data-parsley-validate method="get" action="">
-                      <a type="submit" href="oat-operacao.php?acao=retorno&acao1=consulta&oat=<?php echo $oatId ?>&acao2=ativAdd" ><i class='fa  fa-plus'></i>Adicionar</a>
+                      <a type="submit" href="oat-operacao.php?acao=concluidas&acao1=consulta&oat=<?php echo $aotId ?>&acao2=ativAdd" ><i class='fa  fa-plus'></i>Adicionar</a>
 		                </form></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -164,8 +164,8 @@
                         <tr>
                           <td><?php echo $ativoPlaq; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=retorno&acao1=consulta&oat=". $oatId ."&acao2=ativEdt&cod=".$ativoId."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
-                            <?php echo "<a href='oat-operacao.php?acao=retorno&acao1=consulta&oat=" . $oatId . "&acao2=ativDel&cod=".$ativoId." ' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=concluidas&acao1=consulta&oat=". $oatId ."&acao2=ativEdt&cod=".$ativoId."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=concluidas&acao1=consulta&oat=" . $oatId . "&acao2=ativDel&cod=".$ativoId." ' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>
@@ -181,11 +181,11 @@
         <?php
           if(isset($_GET['acao2'])){
             $acao = $_GET['acao2'];
-           if($acao=='descAdd'){include("admin/pages/oat/operacao/retorno/descAdd.php");}	
+           if($acao=='descCons'){include("admin/pages/oat/operacao/concluidas/descCons.php");}	
             // cadastro
-           if($acao=='descEdt'){include("admin/pages/oat/operacao/retorno/descEdt.php");}
-           if($acao=='ativAdd'){include("admin/pages/oat/operacao/retorno/ativAdd.php");}
-           if($acao=='ativEdt'){include("admin/pages/oat/operacao/retorno/ativEdt.php");}
+           if($acao=='descEdt'){include("admin/pages/oat/operacao/concluidas/descEdt.php");}
+           if($acao=='ativAdd'){include("admin/pages/oat/operacao/concluidas/ativAdd.php");}
+           if($acao=='ativEdt'){include("admin/pages/oat/operacao/concluidas/ativEdt.php");}
           }else{
         ?>
             <div class="row">
@@ -193,10 +193,7 @@
               <div class="col-md-8 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><small>Descrição </small>
-                    <form data-parsley-validate method="get" action="">
-                      <a type="submit" href="oat-operacao.php?acao=retorno&acao1=consulta&oat=<?php echo $oatId ?>&acao2=descAdd" ><i class='fa  fa-plus'></i>Adicionar</a>
-		                </form></h2>
+                    <h2><small>Descrição </small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -230,7 +227,8 @@
                           <td><?php echo $value->id; ?></td>
                           <td><?php echo $value->descricao; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=retorno&acao1=consulta&oat=". $oatId ."&acao2=descEdt&cod=".$value->id."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=concluidas&acao1=consulta&oat=". $oatId ."&acao2=descEdt&cod=".$value->id."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=concluidas&acao1=consulta&oat=". $oatId. "&acao2=descCons&cod=".$value->id."'><i class='fa  fa-eye'></i>Visializar</a>";?>
                           </td>
                         </tr>
                       </tbody>

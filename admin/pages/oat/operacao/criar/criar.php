@@ -9,7 +9,7 @@
 						#ADD
 						if(isset($_POST['cadastrar'])):
               $user = $userUsuario;
-							$localidade = $_POST['id'];
+							$localidade = $_POST['localId'];
               foreach($localidades->findAll() as $key => $value):if($value->id == $localidade) {
               $cliente = $value->cliente;
               }endforeach;
@@ -29,7 +29,10 @@
               $oat->setAtivo($ativo);
               # Insert
               if($oat->insert()){
-                echo "OAT aberta com sucesso!";
+                echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Inserido com sucesso!</strong> Redirecionando ...
+                    </div>';
                  header("Refresh: 1, oat-operacao.php?acao=criar");	
               }
 
@@ -38,7 +41,7 @@
 						if(isset($_POST['editar'])):
               $oatId = $_POST['oatId'];
               $user = $userUsuario;
-							$localidade = $_POST['id'];
+							$localidade = $_POST['localId'];
               foreach($localidades->findAll() as $key => $value):if($value->id == $localidade) {
               $cliente = $value->cliente;
               }endforeach;
@@ -58,7 +61,10 @@
                 $oat->setAtivo($ativo);
 
                 if($oat->update($oatId)){
-                  echo "OAT Atualizado com sucesso!";
+                  echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Atualizada com sucesso!</strong> Redirecionando ...
+                    </div>';
                   header("Refresh: 1, oat-operacao.php?acao=criar");	
                 }
 						endif;
@@ -66,7 +72,10 @@
 						if(isset($_GET['acao1']) && $_GET['acao1'] == 'deletar'):
 							$oatId = (int)$_GET['oatId'];
 							if($oat->delete($oatId)){
-								echo "Deletado com sucesso!";
+								echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Deletada com sucesso!</strong> Redirecionando ...
+                    </div>';
                 header("Refresh: 1, oat-operacao.php?acao=criar");	
 							}
 						endif;
@@ -114,7 +123,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>OAT<small>Solicitadas</small><form data-parsley-validate method="get" action="">
+                    <h2><small>Solicitadas</small><form data-parsley-validate method="get" action="">
                       <a type="submit" href="oat-operacao.php?acao=criar&acao1=add" ><i class='fa  fa-plus'></i>Adicionar</a>
 		                </form></h2>
                     <ul class="nav navbar-right panel_toolbox">

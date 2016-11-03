@@ -1,8 +1,6 @@
               <?php
-              if(isset($_GET['acao1']) && $_GET['acao1'] == 'editar'){
-
                 $id = (int)$_GET['id'];
-                $resultado = $localidade->find($id);
+                $resultado = $localidades->find($id);
               ?>
 
 		        <div class="row">
@@ -28,25 +26,14 @@
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nome <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="nome" value="<?php echo $resultado->nome; ?>" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Razão Social <span class="required">*</span>                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="nick" name="nick" value="<?php echo $resultado->nick; ?>" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
+
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cliente <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="cliente" class="form-control col-md-7 col-xs-12">
                           
-                            <?php foreach($cliente->findAll() as $key => $value):if($value->ativo == 0) { ?>
+                            <?php foreach($clientes->findAll() as $key => $value):if($value->ativo == 0) { ?>
                             <option value="<?php echo $value->nick; ?>"><?php echo $value->nick; ?></option>  
                             <?php } endforeach; ?>
                           </select>
@@ -55,37 +42,37 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Regional <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="regional" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="regional" value="<?php echo $resultado->regional; ?>" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nome <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="nome" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="nome" value="<?php echo $resultado->nome; ?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Municipio <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="municipio" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="municipio" value="<?php echo $resultado->municipio; ?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">UF <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="uf" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="uf" required="required" value="<?php echo $resultado->uf; ?>" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Latidude <span class="required"></span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="lat" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="lat" value="<?php echo $resultado->latitude; ?>" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Longitude <span class="required"></span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="nick" name="long" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="nick" name="long" value="<?php echo $resultado->longitude; ?>" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 

@@ -33,10 +33,9 @@
                       <button type="button" class="close" data-dismiss="alert">×</button>
                       <strong>Salva com sucesso!</strong> Redirecionando ...
                       </div>';
-                header("Refresh: 1, oat-operacao.php?acao=retorno&acao1=consulta&oat=". $oat );	
+                header("Refresh: 1, oat-system.php?acao=oat&acao1=consulta&oat=". $oat );	
               }
             }
-
           endif;
 
           #ATIVO Editar
@@ -66,24 +65,25 @@
                       <button type="button" class="close" data-dismiss="alert">×</button>
                       <strong>Salva com sucesso!</strong> Redirecionando ...
                       </div>';
-                header("Refresh: 1, oat-operacao.php?acao=retorno&acao1=consulta&oat=". $oat);	
+                header("Refresh: 1, oat-system.php?acao=oat&acao1=consulta&oat=". $oat);	
               }
             }
-            
 					endif;
-          #DELETAR
+          #ATIVO DELETAR
           	if(isset($_GET['acao2']) && $_GET['acao2'] == 'ativDel'):
 
-							$id = (int)$_GET['cod'];
+							$id = $_GET['cod'];
               $oat = $_GET['oat'];
 							if($ativos->delete($id)){
 								echo '<div class="alert alert-success">
-					          <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Deletado com sucesso!</strong> Redirecionando ...
-                    </div>';
-                header("Refresh: 1, oat-operacao.php?acao=retorno&acao1=consulta&oat=". $oat);	
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Deletado com sucesso!</strong> Redirecionando ...
+                      </div>';
+                header("Refresh: 1, oat-system.php?acao=oat&acao1=consulta&oat=". $oat);	
 							}
 						endif;
+            #DESCRIÇÃO DELETAR
+
 
           #DESCRICAO ADD
           if(isset($_POST['descAdd'])):
@@ -104,8 +104,21 @@
                       <button type="button" class="close" data-dismiss="alert">×</button>
                       <strong>Salva com sucesso!</strong> Redirecionando ...
                       </div>';
-                header("Refresh: 1, oat-operacao.php?acao=retorno&acao1=consulta&oat=". $oat );	
+                header("Refresh: 1, oat-system.php?acao=oat&acao1=consulta&oat=". $oat );	
               }
+            }
+            $oat = $_POST['oat'];
+            $descricao = $_POST['descricao'];
+
+            $descricoes->setOat($oat);
+            $descricoes->setDescricao($descricao);
+            # Insert
+            if($descricoes->insert()){
+              echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Salva com sucesso!</strong> Redirecionando ...
+                    </div>';
+              header("Refresh: 1, oat-system.php?acao=oat&acao1=consulta&oat=". $oat );	
             }
           endif;
 
@@ -129,36 +142,39 @@
                       <button type="button" class="close" data-dismiss="alert">×</button>
                       <strong>Salva com sucesso!</strong> Redirecionando ...
                       </div>';
-                header("Refresh: 1, oat-operacao.php?acao=retorno&acao1=consulta&oat=". $oat);	
+                header("Refresh: 1, oat-system.php?acao=oat&acao1=consulta&oat=". $oat);	
               }
             }
-            
+            if(isset($_GET['acao2']) && $_GET['acao2'] == 'descDel'):
+
+							$id = (int)$_GET['cod'];
+              $oat = $_GET['id'];
+							if($descricoes->delete($id)){
+								echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Deletado com sucesso!</strong> Redirecionando ...
+                    </div>';
+                header("Refresh: 1, oat-system.php?acao=oat&acao1=consulta&oat=". $oat);	
+							}
+						endif;
 					endif;
-          #RETORNO
-          if(isset($_POST['fechar'])):
-          if(!isset($_POST['oat'])){
-            echo '<div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Dados incompletos!</strong> Os dados estão incorretos.
-                  </div>';
-          }else{
-            $id = $_POST['oat'];
-            $dataFech = date("Y-m-d H:i:s");
-            $status = "2";
+						#FINALIZAR
+						if(isset($_POST['concluir'])):
+              $id = $_POST['id'];
+              $dataTerm = date("Y-m-d H:i:s");
+              $status = "3";
 
-            $oats->setDataFech($dataFech);
-            $oats->setStatus($status);
+              $oats->setDataFech($dataFech);
+              $oats->setStatus($status);
 
-            if($oats->retorno($id)){
-              echo '<div class="alert alert-success">
-                  <button type="button" class="close" data-dismiss="alert">×</button>
-                  <strong>OAT Fechada!</strong> Redirecionando ...
-                  </div>';
-              header("Refresh: 1, oat-operacao.php?acao=retorno");	
-            }
-          }
-            
-          endif;
+              if($oats->finalizar($id)){
+                echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>OAT Encerada!</strong> Redirecionando ...
+                    </div>';
+                header("Refresh: 1, oat-system.php?acao=oat");	
+              }
+						endif;
 
 				?>
         <!-- page content -->
@@ -186,9 +202,9 @@
             <?php
               if(isset($_GET['acao1'])){
               $acao = $_GET['acao1'];	
-              if($acao=='consulta'){include("admin/pages/oat/operacao/retorno/consulta.php");}
+              if($acao=='consulta'){include("admin/pages/oat/system/oat/consulta.php");}
               }else{
-                  include("admin/pages/oat/operacao/retorno/retorno.php");
+                  include("admin/pages/oat/system/oat/oatLista.php");
               }
             ?>
 

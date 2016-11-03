@@ -1,23 +1,24 @@
+
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 31-Out-2016 às 21:36
--- Versão do servidor: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Servidor: localhost
+-- Tempo de Geração: 03/11/2016 às 08:40:22
+-- Versão do Servidor: 10.0.20-MariaDB
+-- Versão do PHP: 5.2.17
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `system_tec`
+-- Banco de Dados: `u634432767_tec`
 --
 
 -- --------------------------------------------------------
@@ -26,8 +27,8 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `login`
 --
 
-CREATE TABLE `login` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `login` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
   `email` varchar(100) NOT NULL,
   `nickuser` varchar(30) NOT NULL,
@@ -35,15 +36,24 @@ CREATE TABLE `login` (
   `nivel` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `ativo` enum('0','1') NOT NULL DEFAULT '0',
   `data_cadastro` date NOT NULL DEFAULT '0000-00-00',
-  `data_ultimo_login` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `data_ultimo_login` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `niciuser_UNIQUE` (`nickuser`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Extraindo dados da tabela `login`
 --
 
 INSERT INTO `login` (`id`, `nome`, `email`, `nickuser`, `senha`, `nivel`, `ativo`, `data_cadastro`, `data_ultimo_login`) VALUES
-(1, 'Fabio Bonina', 'fabiobonina@gmail.com', 'fabio.bonina', '123abc', '3', '0', '2016-10-03', '2016-10-03 11:56:01');
+(1, 'Fabio Bonina', 'fabiobonina@gmail.com', 'fabio.bonina', '123abc', '3', '0', '2016-10-03', '2016-10-03 11:56:01'),
+(2, 'ALEXANDRE OLIVEIRA DE MELO', 'alexandre.melo@gruposabara.com', 'alexandre.melo', 'abc123', '0', '0', '2016-11-01', '2016-11-01 10:45:16'),
+(3, 'Rafael Santos Carlos', 'rafael.carlos@gruposabara.com', 'RAFAELCARLOS', 'rafael', '0', '0', '2016-11-01', '2016-11-01 11:03:17'),
+(4, 'Thonpson Carvalho', 'thonpson.carvalho@gruposabara.com', 'Thonpson', '210500', '0', '0', '2016-11-01', '2016-11-01 11:37:59'),
+(5, 'Francinei Pantoja de Oliveira ', 'francinei@gruposabara.com', 'Francinei', '123abc', '0', '0', '2016-11-01', '2016-11-01 13:00:53'),
+(6, 'Gladson de Oliveira Marinho', 'gladson.marinho@gruposabara.com', 'gladson.marinho', 'gl080208', '0', '0', '2016-11-01', '2016-11-01 16:13:08'),
+(7, 'Nahim Cardoso Pantoja', 'Nahim.pantoja@gruposabara.com', 'Nahim', 'nahimcp742', '0', '0', '2016-11-02', '2016-11-02 09:36:31');
 
 -- --------------------------------------------------------
 
@@ -51,13 +61,16 @@ INSERT INTO `login` (`id`, `nome`, `email`, `nickuser`, `senha`, `nivel`, `ativo
 -- Estrutura da tabela `tb_ativo`
 --
 
-CREATE TABLE `tb_ativo` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_ativo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cliente` varchar(30) NOT NULL,
   `localidade` int(11) NOT NULL,
   `plaqueta` varchar(11) NOT NULL,
-  `data` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `data` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `cliente` (`cliente`),
+  KEY `localidade` (`localidade`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -65,12 +78,14 @@ CREATE TABLE `tb_ativo` (
 -- Estrutura da tabela `tb_clientes`
 --
 
-CREATE TABLE `tb_clientes` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_clientes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `nick` varchar(30) NOT NULL,
-  `ativo` enum('0','1') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ativo` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nick` (`nick`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Extraindo dados da tabela `tb_clientes`
@@ -105,18 +120,19 @@ INSERT INTO `tb_clientes` (`id`, `nome`, `nick`, `ativo`) VALUES
 (25, 'SOLAR PETROLINA', 'SOLAR PETROLINA', '0'),
 (26, 'UFRN', 'UFRN', '0');
 
-
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `tb_descricao`
 --
 
-CREATE TABLE `tb_descricao` (
+CREATE TABLE IF NOT EXISTS `tb_descricao` (
   `id` int(11) NOT NULL,
   `oat` int(11) NOT NULL,
-  `descricao` varchar(400) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `descricao` varchar(400) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tb_oat` (`oat`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -124,14 +140,16 @@ CREATE TABLE `tb_descricao` (
 -- Estrutura da tabela `tb_insumos`
 --
 
-CREATE TABLE `tb_insumos` (
+CREATE TABLE IF NOT EXISTS `tb_insumos` (
   `id` int(11) NOT NULL,
   `tb_oat_id` int(11) NOT NULL,
   `descricao` varchar(100) NOT NULL,
   `quantidade` double NOT NULL,
   `valor` decimal(10,2) NOT NULL,
-  `obs` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `obs` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_osdespesa_tb_oat10` (`tb_oat_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -139,8 +157,8 @@ CREATE TABLE `tb_insumos` (
 -- Estrutura da tabela `tb_localidades`
 --
 
-CREATE TABLE `tb_localidades` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_localidades` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cliente` varchar(30) NOT NULL,
   `regional` varchar(100) DEFAULT NULL,
   `nome` varchar(50) NOT NULL,
@@ -148,8 +166,10 @@ CREATE TABLE `tb_localidades` (
   `uf` varchar(2) NOT NULL,
   `latitude` float(10,6) DEFAULT NULL,
   `longitude` float(10,6) DEFAULT NULL,
-  `ativo` enum('0','1') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ativo` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fk_clientes` (`cliente`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `tb_localidades`
@@ -690,20 +710,22 @@ INSERT INTO `tb_localidades` (`id`, `cliente`, `regional`, `nome`, `municipio`, 
 (531, 'SOLAR PETROLINA', '', 'PETROLINA', 'PETROLINA', 'PE', '', '', '0'),
 (532, 'UFRN', '', 'CAMPUS - NATAL', 'NATAL', 'RN', '', '', '0');
 
-
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `tb_mod`
 --
 
-CREATE TABLE `tb_mod` (
+CREATE TABLE IF NOT EXISTS `tb_mod` (
   `id` int(11) NOT NULL,
   `data_inicial` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `data_final` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `tb_tecnicos_id` int(11) NOT NULL,
-  `tb_oat_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tb_oat_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_mod_tb_tecnicos1_idx` (`tb_tecnicos_id`),
+  KEY `fk_tb_mod_tb_oat1_idx` (`tb_oat_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -711,8 +733,8 @@ CREATE TABLE `tb_mod` (
 -- Estrutura da tabela `tb_oat`
 --
 
-CREATE TABLE `tb_oat` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_oat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nickuser` varchar(30) NOT NULL,
   `cliente` varchar(30) NOT NULL,
   `localidade` int(11) NOT NULL,
@@ -725,8 +747,65 @@ CREATE TABLE `tb_oat` (
   `data_fech` datetime DEFAULT '0000-00-00 00:00:00',
   `data_term` datetime DEFAULT '0000-00-00 00:00:00',
   `status` enum('0','1','2','3','4') NOT NULL DEFAULT '0',
-  `ativo` enum('0','1') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ativo` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `nickuser` (`nickuser`,`cliente`,`localidade`,`servico`,`sistema`),
+  KEY `fk_cleinte` (`cliente`),
+  KEY `fk_localidades` (`localidade`),
+  KEY `servico` (`servico`),
+  KEY `sistema` (`sistema`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+
+--
+-- Extraindo dados da tabela `tb_oat`
+--
+
+INSERT INTO `tb_oat` (`id`, `nickuser`, `cliente`, `localidade`, `servico`, `sistema`, `data_sol`, `filial`, `os`, `data_os`, `data_fech`, `data_term`, `status`, `ativo`) VALUES
+(1, 'Rafael Santos Carlos', 'CASAL', 406, 'PV0001', 'SBGCL-SCL', '2016-11-01 11:04:45', NULL, NULL, NULL, NULL, NULL, '0', '0'),
+(2, 'Francinei Pantoja de Oliveira ', 'COSANPA', 423, 'CR0001', 'SBGCL-SCL', '2016-11-01 13:03:36', NULL, NULL, NULL, NULL, NULL, '0', '0'),
+(3, 'Gladson de Oliveira Marinho', 'CAERN', 157, 'VT0001', 'SBBDO-BMB', '2016-11-01 16:16:02', NULL, NULL, NULL, NULL, NULL, '0', '0'),
+(4, 'Francinei Pantoja de Oliveira ', 'COSANPA', 496, 'CR0001', 'SBPAC-SPC', '2016-11-01 17:06:49', NULL, NULL, NULL, NULL, NULL, '0', '0'),
+(8, 'Thonpson Carvalho', 'CAERN', 111, 'OP0001', 'SBDSD-SDS', '2016-11-01 18:59:18', 1, 665, '2016-11-01 19:06:10', NULL, NULL, '1', '0'),
+(6, 'Thonpson Carvalho', 'CAERN', 127, 'NV0001', 'SBDSD-SDS', '2016-11-01 18:54:19', 1, 650, '2016-11-01 19:06:37', NULL, NULL, '1', '0'),
+(7, 'Thonpson Carvalho', 'CAGEPA', 265, 'VT0001', 'SBGCL-SCL', '2016-11-01 18:55:48', 1, 646, '2016-11-01 19:05:03', NULL, NULL, '1', '0'),
+(9, 'Thonpson Carvalho', 'CAERN', 183, 'OP0001', 'SBDSD-SDS', '2016-11-01 19:00:16', 1, 702, '2016-11-01 19:07:11', NULL, NULL, '1', '0'),
+(10, 'Thonpson Carvalho', 'CAERN', 181, 'OP0001', 'SBDSD-SDS', '2016-11-01 19:00:53', 1, 703, '2016-11-01 19:07:36', NULL, NULL, '1', '0'),
+(11, 'Thonpson Carvalho', 'CAERN', 111, 'OP0001', 'SBDSD-SDS', '2016-11-01 19:01:22', 1, 704, '2016-11-01 19:07:55', NULL, NULL, '1', '0'),
+(12, 'Thonpson Carvalho', 'CAERN', 127, 'OP0001', 'SBDSD-SDS', '2016-11-01 19:01:47', 1, 705, '2016-11-01 19:08:15', NULL, NULL, '1', '0'),
+(13, 'Thonpson Carvalho', 'CAGEPA', 325, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:02:34', 1, 714, '2016-11-01 19:08:43', NULL, NULL, '1', '0'),
+(14, 'Thonpson Carvalho', 'CAERN', 102, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:03:00', 1, 720, '2016-11-01 19:09:02', NULL, NULL, '1', '0'),
+(15, 'Thonpson Carvalho', 'CAERN', 183, 'VT0001', 'SBDSD-SDS', '2016-11-01 19:03:28', 1, 741, '2016-11-01 19:09:27', NULL, NULL, '1', '0'),
+(16, 'Thonpson Carvalho', 'COSANPA', 423, 'OP0002', 'SBGCL-SCL', '2016-11-01 19:14:27', 4, 208, '2016-11-01 19:20:11', NULL, NULL, '1', '0'),
+(17, 'Thonpson Carvalho', 'CAEMA', 29, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:14:58', 4, 213, '2016-11-01 19:20:31', NULL, NULL, '1', '0'),
+(18, 'Thonpson Carvalho', 'COSANPA', 462, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:15:36', 4, 214, '2016-11-01 19:20:52', NULL, NULL, '1', '0'),
+(19, 'Thonpson Carvalho', 'CAERN', 202, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:15:56', 1, 781, '2016-11-01 19:21:25', NULL, NULL, '1', '0'),
+(20, 'Thonpson Carvalho', 'CAGEPA', 295, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:16:21', 1, 783, '2016-11-01 19:21:46', NULL, NULL, '1', '0'),
+(21, 'Thonpson Carvalho', 'CAGEPA', 267, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:16:50', 1, 784, '2016-11-01 19:22:38', NULL, NULL, '1', '0'),
+(22, 'Thonpson Carvalho', 'CAERN', 166, 'VT0001', 'SBDSD-SDS', '2016-11-01 19:17:21', 1, 790, '2016-11-01 19:22:54', NULL, NULL, '1', '0'),
+(23, 'Thonpson Carvalho', 'CAERN', 167, 'VT0001', 'SBDSD-SDS', '2016-11-01 19:17:42', 1, 791, '2016-11-01 19:23:13', NULL, NULL, '1', '0'),
+(24, 'Thonpson Carvalho', 'CAERN', 98, 'VT0001', 'SBGCL-SCL', '2016-11-01 19:18:56', 1, 771, '2016-11-01 19:19:38', NULL, NULL, '1', '0'),
+(25, 'Thonpson Carvalho', 'CAERN', 168, 'VT0001', 'SBDSD-SDS', '2016-11-01 19:24:10', 1, 792, '2016-11-01 19:25:25', NULL, NULL, '1', '0'),
+(26, 'Thonpson Carvalho', 'CAERN', 169, 'VT0001', 'SBDSD-SDS', '2016-11-01 19:24:33', 1, 793, '2016-11-01 19:25:44', NULL, NULL, '1', '0'),
+(27, 'Thonpson Carvalho', 'CAERN', 104, 'VT0001', 'SBDSD-SDS', '2016-11-01 19:31:44', 1, 794, '2016-11-01 19:38:44', NULL, NULL, '1', '0'),
+(30, 'Thonpson Carvalho', 'CAERN', 101, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:33:31', 1, 795, '2016-11-01 19:39:06', NULL, NULL, '1', '0'),
+(29, 'Thonpson Carvalho', 'CAERN', 100, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:32:43', 1, 796, '2016-11-01 19:39:28', NULL, NULL, '1', '0'),
+(31, 'Thonpson Carvalho', 'CAGEPA', 366, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:33:58', 1, 797, '2016-11-01 19:39:47', NULL, NULL, '1', '0'),
+(32, 'Thonpson Carvalho', 'CAGEPA', 282, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:34:26', 1, 798, '2016-11-01 19:40:06', NULL, NULL, '1', '0'),
+(33, 'Thonpson Carvalho', 'CAEMA', 28, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:34:47', 4, 217, '2016-11-01 19:40:27', NULL, NULL, '1', '0'),
+(34, 'Thonpson Carvalho', 'CAGEPA', 276, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:35:11', 1, 801, '2016-11-01 19:40:48', NULL, NULL, '1', '0'),
+(35, 'Thonpson Carvalho', 'CAEMA', 13, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:35:30', 4, 218, '2016-11-01 19:41:14', NULL, NULL, '1', '0'),
+(36, 'Thonpson Carvalho', 'CAERN', 173, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:36:05', 1, 805, '2016-11-01 19:41:36', NULL, NULL, '1', '0'),
+(37, 'Thonpson Carvalho', 'AGESPISA', 1, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:36:20', 4, 221, '2016-11-01 19:41:53', NULL, NULL, '1', '0'),
+(38, 'Thonpson Carvalho', 'CAERN', 127, 'OP0001', 'SBDSD-SDS', '2016-11-01 19:48:12', 1, 806, '2016-11-01 19:53:19', NULL, NULL, '1', '0'),
+(39, 'Thonpson Carvalho', 'CAERN', 126, 'VT0001', 'SBGCL-SCL', '2016-11-01 19:48:37', 1, 807, '2016-11-01 19:53:35', NULL, NULL, '1', '0'),
+(40, 'Thonpson Carvalho', 'CAGEPA', 247, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:48:58', 1, 808, '2016-11-01 19:53:50', NULL, NULL, '1', '0'),
+(41, 'Thonpson Carvalho', 'CAERN', 200, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:49:26', 1, 810, '2016-11-01 19:54:12', NULL, NULL, '1', '0'),
+(42, 'Thonpson Carvalho', 'CAERN', 101, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:49:54', 1, 813, '2016-11-01 19:54:31', NULL, NULL, '1', '0'),
+(43, 'Thonpson Carvalho', 'CAERN', 156, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:50:17', 1, 814, '2016-11-01 19:54:45', NULL, NULL, '1', '0'),
+(44, 'Thonpson Carvalho', 'CAERN', 127, 'OP0001', 'SBDSD-SDS', '2016-11-01 19:50:42', 1, 817, '2016-11-01 19:55:04', NULL, NULL, '1', '0'),
+(45, 'Thonpson Carvalho', 'CAGEPA', 281, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:51:06', 1, 818, '2016-11-01 19:55:19', NULL, NULL, '1', '0'),
+(46, 'Thonpson Carvalho', 'AGESPISA', 3, 'PV0001', 'SBGCL-SCL', '2016-11-01 19:51:26', 4, 227, '2016-11-01 19:55:34', NULL, NULL, '1', '0'),
+(47, 'Thonpson Carvalho', 'CAERN', 111, 'PV0001', 'SBDSD-SDS', '2016-11-01 19:51:53', 1, 819, '2016-11-01 19:55:51', NULL, NULL, '1', '0');
 
 -- --------------------------------------------------------
 
@@ -734,14 +813,17 @@ CREATE TABLE `tb_oat` (
 -- Estrutura da tabela `tb_osdespesa`
 --
 
-CREATE TABLE `tb_osdespesa` (
+CREATE TABLE IF NOT EXISTS `tb_osdespesa` (
   `id` int(11) NOT NULL,
   `tb_oat_id` int(11) NOT NULL,
   `tipo_despesa_id` int(11) NOT NULL,
   `quantidade` double NOT NULL,
   `valor` decimal(10,0) NOT NULL,
-  `obs` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `obs` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_osdespesa_tb_oat1_idx` (`tb_oat_id`),
+  KEY `fk_tb_osdespesa_tipo_despesa1_idx` (`tipo_despesa_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -749,14 +831,14 @@ CREATE TABLE `tb_osdespesa` (
 -- Estrutura da tabela `tb_postagens`
 --
 
-CREATE TABLE `tb_postagens` (
+CREATE TABLE IF NOT EXISTS `tb_postagens` (
   `id` int(11) NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `data` varchar(12) NOT NULL,
   `imagem` varchar(255) NOT NULL,
   `exibir` varchar(5) NOT NULL,
   `descricao` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -764,22 +846,23 @@ CREATE TABLE `tb_postagens` (
 -- Estrutura da tabela `tb_servicos`
 --
 
-CREATE TABLE `tb_servicos` (
+CREATE TABLE IF NOT EXISTS `tb_servicos` (
   `id` varchar(6) NOT NULL,
   `descricao` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `ativo` enum('0','1') CHARACTER SET utf8 NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ativo` enum('0','1') CHARACTER SET utf8 NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `tb_servicos`
 --
 
 INSERT INTO `tb_servicos` (`id`, `descricao`, `ativo`) VALUES
-('CR0001', 'CORRETIVO', '0'),
-('OP0001', 'REABASTECIMENTO DE PRODUTO', '0'),
-('OP0002', 'ACOPLAMENTO DE CILINDRO', '0'),
-('PV0001', 'PREVENTIVO', '0'),
 ('NV0001', 'NOVA INSTALACAO', '0'),
+('PV0001', 'PREVENTIVO', '0'),
+('OP0002', 'ACOPLAMENTO DE CILINDRO', '0'),
+('OP0001', 'REABASTECIMENTO DE PRODUTO', '0'),
+('CR0001', 'CORRETIVO', '0'),
 ('VT0001', 'VISITA TECNICA', '0');
 
 -- --------------------------------------------------------
@@ -788,11 +871,12 @@ INSERT INTO `tb_servicos` (`id`, `descricao`, `ativo`) VALUES
 -- Estrutura da tabela `tb_sistema`
 --
 
-CREATE TABLE `tb_sistema` (
+CREATE TABLE IF NOT EXISTS `tb_sistema` (
   `id` varchar(12) NOT NULL,
   `descricao` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `ativo` enum('0','1') CHARACTER SET utf8 NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ativo` enum('0','1') CHARACTER SET utf8 NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `tb_sistema`
@@ -814,11 +898,13 @@ INSERT INTO `tb_sistema` (`id`, `descricao`, `ativo`) VALUES
 -- Estrutura da tabela `tb_tecnicos`
 --
 
-CREATE TABLE `tb_tecnicos` (
+CREATE TABLE IF NOT EXISTS `tb_tecnicos` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `nick_user` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nick_user` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nickuser` (`nick_user`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -826,199 +912,12 @@ CREATE TABLE `tb_tecnicos` (
 -- Estrutura da tabela `tipo_despesa`
 --
 
-CREATE TABLE `tipo_despesa` (
+CREATE TABLE IF NOT EXISTS `tipo_despesa` (
   `id` int(11) NOT NULL,
   `tipo_despesa` varchar(45) NOT NULL,
-  `ativo` enum('0','1') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `niciuser_UNIQUE` (`nickuser`),
-  ADD UNIQUE KEY `email_UNIQUE` (`email`);
-
---
--- Indexes for table `tb_ativo`
---
-ALTER TABLE `tb_ativo`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cliente` (`cliente`),
-  ADD KEY `localidade` (`localidade`);
-
---
--- Indexes for table `tb_clientes`
---
-ALTER TABLE `tb_clientes`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nick` (`nick`);
-
---
--- Indexes for table `tb_descricao`
---
-ALTER TABLE `tb_descricao`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tb_oat` (`oat`);
-
---
--- Indexes for table `tb_insumos`
---
-ALTER TABLE `tb_insumos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tb_osdespesa_tb_oat10` (`tb_oat_id`);
-
---
--- Indexes for table `tb_localidades`
---
-ALTER TABLE `tb_localidades`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_clientes` (`cliente`);
-
---
--- Indexes for table `tb_mod`
---
-ALTER TABLE `tb_mod`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tb_mod_tb_tecnicos1_idx` (`tb_tecnicos_id`),
-  ADD KEY `fk_tb_mod_tb_oat1_idx` (`tb_oat_id`);
-
---
--- Indexes for table `tb_oat`
---
-ALTER TABLE `tb_oat`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `nickuser` (`nickuser`,`cliente`,`localidade`,`servico`,`sistema`),
-  ADD KEY `fk_cleinte` (`cliente`),
-  ADD KEY `fk_localidades` (`localidade`),
-  ADD KEY `servico` (`servico`),
-  ADD KEY `sistema` (`sistema`);
-
---
--- Indexes for table `tb_osdespesa`
---
-ALTER TABLE `tb_osdespesa`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tb_osdespesa_tb_oat1_idx` (`tb_oat_id`),
-  ADD KEY `fk_tb_osdespesa_tipo_despesa1_idx` (`tipo_despesa_id`);
-
---
--- Indexes for table `tb_servicos`
---
-ALTER TABLE `tb_servicos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tb_sistema`
---
-ALTER TABLE `tb_sistema`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tb_tecnicos`
---
-ALTER TABLE `tb_tecnicos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `nickuser` (`nick_user`);
-
---
--- Indexes for table `tipo_despesa`
---
-ALTER TABLE `tipo_despesa`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `login`
---
-ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `tb_ativo`
---
-ALTER TABLE `tb_ativo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tb_clientes`
---
-ALTER TABLE `tb_clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
---
--- AUTO_INCREMENT for table `tb_localidades`
---
-ALTER TABLE `tb_localidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1704;
---
--- AUTO_INCREMENT for table `tb_oat`
---
-ALTER TABLE `tb_oat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- Constraints for dumped tables
---
-
---
--- Limitadores para a tabela `tb_ativo`
---
-ALTER TABLE `tb_ativo`
-  ADD CONSTRAINT `fk_cliente` FOREIGN KEY (`cliente`) REFERENCES `tb_clientes` (`nick`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_localidade` FOREIGN KEY (`localidade`) REFERENCES `tb_localidades` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `tb_descricao`
---
-ALTER TABLE `tb_descricao`
-  ADD CONSTRAINT `oat` FOREIGN KEY (`oat`) REFERENCES `tb_oat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `tb_insumos`
---
-ALTER TABLE `tb_insumos`
-  ADD CONSTRAINT `fk_tb_osdespesa_tb_oat10` FOREIGN KEY (`tb_oat_id`) REFERENCES `tb_oat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `tb_localidades`
---
-ALTER TABLE `tb_localidades`
-  ADD CONSTRAINT `cliente` FOREIGN KEY (`cliente`) REFERENCES `tb_clientes` (`nick`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `tb_mod`
---
-ALTER TABLE `tb_mod`
-  ADD CONSTRAINT `fk_tb_mod_tb_oat1` FOREIGN KEY (`tb_oat_id`) REFERENCES `tb_oat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tb_mod_tb_tecnicos1` FOREIGN KEY (`tb_tecnicos_id`) REFERENCES `tb_tecnicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `tb_oat`
---
-ALTER TABLE `tb_oat`
-  ADD CONSTRAINT `fk_cleinte` FOREIGN KEY (`cliente`) REFERENCES `tb_clientes` (`nick`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_localidades` FOREIGN KEY (`localidade`) REFERENCES `tb_localidades` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_nickuser` FOREIGN KEY (`nickuser`) REFERENCES `login` (`nickuser`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_servico` FOREIGN KEY (`servico`) REFERENCES `tb_servicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_sistema` FOREIGN KEY (`sistema`) REFERENCES `tb_sistema` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `tb_osdespesa`
---
-ALTER TABLE `tb_osdespesa`
-  ADD CONSTRAINT `fk_tb_osdespesa_tb_oat1` FOREIGN KEY (`tb_oat_id`) REFERENCES `tb_oat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tb_osdespesa_tipo_despesa1` FOREIGN KEY (`tipo_despesa_id`) REFERENCES `tipo_despesa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `tb_tecnicos`
---
-ALTER TABLE `tb_tecnicos`
-  ADD CONSTRAINT `nickuser` FOREIGN KEY (`nick_user`) REFERENCES `login` (`nickuser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  `ativo` enum('0','1') NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

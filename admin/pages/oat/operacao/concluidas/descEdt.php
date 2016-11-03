@@ -3,7 +3,6 @@
       $cod = $_GET['cod'];
       $resultado = $descricoes->findDesc($cod);
 
-
       ?>
 	      <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -47,6 +46,7 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="javascript:window.history.go(-1)" class="btn btn-primary">Voltar</a>
+                          <button type="submit" name="descEdt" class="btn btn-success">Salvar</button>
                         </div>
                       </div>
 		                </form>

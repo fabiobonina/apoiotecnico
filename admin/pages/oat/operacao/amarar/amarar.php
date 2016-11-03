@@ -20,8 +20,11 @@
               $oat->setStatus($status);
 
               if($oat->amarar($id)){
-                echo "OS Amarada a OAT!";
-                header("Refresh: 1, oat-operacao.php?acao=oat-amarar");	
+                echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>OS amarada com sucesso!</strong> Redirecionando ...
+                    </div>';
+                header("Refresh: 1, oat-operacao.php?acao=amarar");	
               }
 						endif;
 						#DELETAR
@@ -37,7 +40,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Sistemas <small>Lista de dados</small></h3>
+                <h3>OAT <small>Lista</small></h3>
               </div>
 
               <div class="title_right">
@@ -70,7 +73,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Lista<small>OATs Abertas</small></h2>
+                    <h2><small>OATs Abertas</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -89,9 +92,6 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                      Dados da tabela.
-                    </p>
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
@@ -145,7 +145,7 @@
                           <td><?php echo $oatDataSol; ?></td>
                           <td><?php echo $oatAtivo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=oat-amarar&acao1=editar&id=" . $oatId . "'><i class='fa  fa-edit'></i>Amarar OS </a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=amarar&acao1=editar&id=" . $oatId . "'><i class='fa  fa-edit'></i>Amarar OS </a>"; ?>
                           </td>
                         </tr>
                       </tbody>

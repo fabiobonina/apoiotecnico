@@ -24,8 +24,8 @@ class Localidades extends Crud{
 		$this->cliente = $cliente;
 	}
 	public function setRegional($regional){
-		$regionaal = iconv('UTF-8', 'ASCII//TRANSLIT', $regionaal);
-		$this->regionaal = strtoupper ($regionaal);
+		$regional = iconv('UTF-8', 'ASCII//TRANSLIT', $regional);
+		$this->regional = strtoupper ($regional);
 	}
 	public function setMunicipio($municipio){
 		$municipio = iconv('UTF-8', 'ASCII//TRANSLIT', $municipio);
@@ -69,7 +69,7 @@ class Localidades extends Crud{
 
 	public function update($id){
 		try{
-		$sql  = "UPDATE $this->table SET cliente = :cliente, regional = :regional, nome = :nome, municipio = :municipio, uf = :uf, 	latidude = :latidude, ativo = :ativo WHERE id = :id ";
+		$sql  = "UPDATE $this->table SET cliente = :cliente, regional = :regional, nome = :nome, municipio = :municipio, uf = :uf, 	latitude = :latitude, longitude = :longitude, ativo = :ativo WHERE id = :id ";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':cliente',$this->cliente);
 		$stmt->bindParam(':regional',$this->regional);
@@ -79,6 +79,7 @@ class Localidades extends Crud{
 		$stmt->bindParam(':latitude',$this->latitude);
 		$stmt->bindParam(':longitude',$this->longitude);
 		$stmt->bindParam(':ativo',$this->ativo);
+		$stmt->bindParam(':id', $id);
 		return $stmt->execute();
 		} catch(PDOException $e) {
 			echo 'ERROR: ' . $e->getMessage();

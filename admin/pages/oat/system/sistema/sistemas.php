@@ -88,7 +88,7 @@
                   <div class="x_title">
                     <h2>Lista<small>Sistemas</small>
                     <form data-parsley-validate method="get" action="">
-                      <a type="submit" href="oat-system.php?acao=servicos&acao1=add" ><i class='fa  fa-plus'></i>Adicionar</a>
+                      <a type="submit" href="oat-system.php?acao=sistemas&acao1=add" ><i class='fa  fa-plus'></i>Adicionar</a>
 		                </form></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

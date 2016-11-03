@@ -40,7 +40,7 @@
                       </div>
                       <div class="col-md-3 col-sm-3 col-xs-12">
                       <input type="hidden" name="cod" value="<?php echo $cod; ?>" class="form-control col-md-7 col-xs-12" >
-                      <input type="hidden" name="oat" value="<?php echo $id; ?>" class="form-control col-md-7 col-xs-12">
+                      <input type="hidden" name="oat" value="<?php echo $oatId; ?>" class="form-control col-md-7 col-xs-12">
                       </div>
 
 		                  <div class="ln_solid"></div>

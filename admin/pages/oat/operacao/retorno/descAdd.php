@@ -25,22 +25,22 @@
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
                     
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="hidden" name="oat" value="<?php echo $id; ?>"><br />
+                      <input type="hidden" name="oat" value="<?php echo $oatId; ?>"><br />
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Descrição <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <textarea class="form-control" name="descricao" rows="3" placeholder="Descrição do Serviço">
-                          Qual foi a ocorrência:
-                          Qual foi a causa:
-                          Qual a solução:
-                          Data e Hora Inicial;
-                          Data e Hora Final;
-                          Quilometragem Inicial;
-                          Quilometragem Final
-                          Numeração de Ativo (plaqueta)
-                          Gastos Gerais (Peças, alimentação, hospedagem, etc)</textarea>
+                          <textarea class="form-control" name="descricao" rows="10" placeholder="Descrição do Serviço">
+OCORRÊNCIA:
+CAUSA:
+SOLUÇÃO:
+DATA E HORA INICIAL:
+DATA E HORA FINAL:
+KM INICIAL:
+KM FINAL:
+GASTOS GERAIS (PEÇAS, ALIMENTAÇÃO, HOSPEDAGEM, ETC)
+                          </textarea>
                         </div>
                       </div>
 

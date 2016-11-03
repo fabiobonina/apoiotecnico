@@ -12,72 +12,100 @@
           #ATIVO ADD
           if(isset($_POST['ativAdd'])):
             if(!isset($_POST['cliente']) OR !isset($_POST['localidade']) OR !isset($_POST['plaqueta'])){
-              echo "Dados incopletos";
-            }
-            $oat = $_POST['oat'];
-            $cliente = $_POST['cliente'];
-            $localidade = $_POST['localidade'];
-            $plaqueta = $_POST['plaqueta'];
-            $data = date("Y-m-d H:i:s");
+              echo '<div class="alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Dados incompletos!</strong> Os dados estão incorretos.
+                    </div>';
+            }else{
+              $oat = $_POST['oat'];
+              $cliente = $_POST['cliente'];
+              $localidade = $_POST['localidade'];
+              $plaqueta = $_POST['plaqueta'];
+              $data = date("Y-m-d H:i:s");
 
-            $ativos->setCliente($cliente);
-            $ativos->setLocalidade($localidade);
-            $ativos->setPlaqueta($plaqueta);
-            $ativos->setData($data);
-            # Insert
-            if($ativos->insert()){
-              echo "Descricao salva com sucesso!";
-              header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat );	
+              $ativos->setCliente($cliente);
+              $ativos->setLocalidade($localidade);
+              $ativos->setPlaqueta($plaqueta);
+              $ativos->setData($data);
+              # Insert
+              if($ativos->insert()){
+                echo '<div class="alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Salva com sucesso!</strong> Redirecionando ...
+                      </div>';
+                header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat );	
+              }
             }
           endif;
 
           #ATIVO Editar
           if(isset($_POST['ativEdt'])):
-            if(!isset($_POST['cliente']) OR !isset($_POST['localidade']) OR !isset($_POST['plaqueta']) OR !isset($_POST['cod'])){
-              echo "Dados incopletos";
-            }
-            $id = $_POST['id'];
-            $oat = $_POST['oat'];
-            $cliente = $_POST['cliente'];
-            $localidade = $_POST['localidade'];
-            $plaqueta = $_POST['plaqueta'];
-            $data = date("Y-m-d H:i:s");
+            if(!isset($_POST['localId']) OR !isset($_POST['plaqueta']) OR !isset($_POST['ativo'])){
+              echo '<div class="alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Dados incompletos!</strong> Os dados estão incorretos.
+                    </div>';
+            }else{
+              $id = $_POST['ativo'];
+              $oat = $_POST['oat'];
+              $localId = $_POST['localId'];
+              foreach($localidades->findAll() as $key => $value):if($value->id == $localId) {
+                $cliente = $value->cliente;
+              }endforeach;       
+              $plaqueta = $_POST['plaqueta'];
+              $data = date("Y-m-d H:i:s");
 
-            $ativos->setCliente($cliente);
-            $ativos->setLocalidade($localidade);
-            $ativos->setPlaqueta($plaqueta);
-            $ativos->setData($data);
+              $ativos->setCliente($cliente);
+              $ativos->setLocalidade($localId);
+              $ativos->setPlaqueta($plaqueta);
+              $ativos->setData($data);
 
-            if($ativos->update($id)){
-              echo "Descricao salvo com Sucesso!";
-              header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat);	
+              if($ativos->update($id)){
+                echo '<div class="alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Salva com sucesso!</strong> Redirecionando ...
+                      </div>';
+                header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat);	
+              }
             }
 					endif;
-          #DELETAR
+          #ATIVO DELETAR
           	if(isset($_GET['acao2']) && $_GET['acao2'] == 'ativDel'):
 
-							$id = (int)$_GET['cod'];
-              $oat = $_GET['id'];
+							$id = $_GET['cod'];
+              $oat = $_GET['oat'];
 							if($ativos->delete($id)){
-								echo "Deletado com sucesso!";
-                header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat);	
+								echo '<div class="alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Deletado com sucesso!</strong> Redirecionando ...
+                      </div>';
+                header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat);	
 							}
 						endif;
-            #DELETAR
-          	if(isset($_GET['acao2']) && $_GET['acao2'] == 'descDel'):
+            #DESCRIÇÃO DELETAR
 
-							$id = (int)$_GET['cod'];
-              $oat = $_GET['id'];
-							if($ativos->delete($id)){
-								echo "Deletado com sucesso!";
-                header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat);	
-							}
-						endif;
 
           #DESCRICAO ADD
           if(isset($_POST['descAdd'])):
             if(!isset($_POST['oat']) OR !isset($_POST['descricao'])){
-              echo "Dados incopletos";
+              echo '<div class="alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Dados incompletos!</strong> Os dados estão incorretos.
+                    </div>';
+            }else{
+              $oat = $_POST['oat'];
+              $descricao = $_POST['descricao'];
+
+              $descricoes->setOat($oat);
+              $descricoes->setDescricao($descricao);
+              # Insert
+              if($descricoes->insert()){
+                echo '<div class="alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Salva com sucesso!</strong> Redirecionando ...
+                      </div>';
+                header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat );	
+              }
             }
             $oat = $_POST['oat'];
             $descricao = $_POST['descricao'];
@@ -86,27 +114,49 @@
             $descricoes->setDescricao($descricao);
             # Insert
             if($descricoes->insert()){
-              echo "Descricao salva com sucesso!";
-              header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat );	
+              echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Salva com sucesso!</strong> Redirecionando ...
+                    </div>';
+              header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat );	
             }
           endif;
 
           #DESCRICAO Editar
           if(isset($_POST['descEdt'])):
             if(!isset($_POST['oat']) OR !isset($_POST['descricao']) OR !isset($_POST['cod'])){
-              echo "Dados incopletos";
-            }
-            $id = $_POST['cod'];
-            $oat = $_POST['oat'];
-            $descricao = $_POST['descricao'];
+              echo '<div class="alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Dados incompletos!</strong> Os dados estão incorretos.
+                    </div>';
+            }else{
+              $id = $_POST['cod'];
+              $oat = $_POST['oat'];
+              $descricao = $_POST['descricao'];
 
-            $descricoes->setOat($oat);
-            $descricoes->setDescricao($descricao);
+              $descricoes->setOat($oat);
+              $descricoes->setDescricao($descricao);
 
-            if($descricoes->update($id)){
-              echo "Descricao salvo com Sucesso!";
-              header("Refresh: 1, oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=". $oat);	
+              if($descricoes->update($id)){
+                echo '<div class="alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Salva com sucesso!</strong> Redirecionando ...
+                      </div>';
+                header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat);	
+              }
             }
+            if(isset($_GET['acao2']) && $_GET['acao2'] == 'descDel'):
+
+							$id = (int)$_GET['cod'];
+              $oat = $_GET['id'];
+							if($descricoes->delete($id)){
+								echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Deletado com sucesso!</strong> Redirecionando ...
+                    </div>';
+                header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat);	
+							}
+						endif;
 					endif;
 						#FINALIZAR
 						if(isset($_POST['concluir'])):
@@ -118,8 +168,11 @@
               $oats->setStatus($status);
 
               if($oats->finalizar($id)){
-                echo "OAT Encerada!";
-                header("Refresh: 1, oat-operacao.php?acao=oat-finalizar");	
+                echo '<div class="alert alert-success">
+					          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>OAT Encerada!</strong> Redirecionando ...
+                    </div>';
+                header("Refresh: 1, oat-operacao.php?acao=finalizar");	
               }
 						endif;
 
@@ -129,7 +182,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>OAT <small>Abertas</small></h3>
+                <h3>OAT <small>Ordem de Atendimento Tecnico</small></h3>
               </div>
 
               <div class="title_right">

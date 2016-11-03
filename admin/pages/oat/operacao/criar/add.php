@@ -64,12 +64,12 @@
                       </div>
 
 
-                      <input type="hidden" name="id">
+                      <input type="hidden" name="localId">
                       
 		                <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <a type="submit" href="oat-operacao.php?acao=oat-criar" class="btn btn-primary">Cancelar</a>
+                          <a type="submit" href="oat-operacao.php?acao=criar" class="btn btn-primary">Cancelar</a>
                           <button type="submit" name="cadastrar" class="btn btn-success">Cadastrar</button>
                         </div>
                       </div>

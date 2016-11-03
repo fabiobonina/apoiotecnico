@@ -76,7 +76,7 @@
 		$(document).on('click','a.listItem',function(){ 
 			$('#query').val($(this).text());
 			fieldValue = $(this).text();
-			$('input[name="id"]').val($(this).attr('data-id'));
+			$('input[name="localId"]').val($(this).attr('data-id'));
 			$('.suggestions').html("");
 			$('.suggestions').css({'display':'none'});	
 			$('#query').focus();		

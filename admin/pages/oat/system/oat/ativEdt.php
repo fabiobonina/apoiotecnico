@@ -33,15 +33,27 @@
                     <br />
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="query">Localidade <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="query" name="localidade" value="<?php echo $oatCliente; ?> | <?php echo $oatLocal; ?>" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class=" col-md-6 col-xs-12">
+                          <ul class="suggestions hideElem"></ul>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">N° Plaqueta <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="plaqueta" name="plaqueta" value="<?php echo $ativPlaqueta; ?>" required="required" size=11 maxlength=11 class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                      <input type="hidden" name="id" value="<?php echo $ativId; ?>">
+                      <input type="hidden" name="ativo" value="<?php echo $ativId; ?>">
                       <input type="hidden" name="oat" value="<?php echo $oatId; ?>">
-                      <input type="hidden" name="cliente" value="<?php echo $oatCliente; ?>">
-                      <input type="hidden" name="localidade" value="<?php echo $oatLocalId; ?>">
+                      <input type="hidden" name="localId" value="<?php echo $oatLocalId; ?>">
 		                <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
