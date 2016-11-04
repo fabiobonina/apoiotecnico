@@ -3,7 +3,7 @@
       $resultado = $oat->find($oatId);
       $oatLocalId = $resultado->localidade;
       foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
-                          $oatLocal = $value->nome;
+        $oatLocal = $value->nome;
       }endforeach;
       $oatCliente = $resultado->cliente;
       $oatServId = $resultado->servico;
