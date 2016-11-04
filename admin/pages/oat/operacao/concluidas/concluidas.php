@@ -83,7 +83,7 @@
                           <td><?php echo $oatStatus; ?></td>
                           <td><?php echo $oatAtivo; ?></td>
                           <td>
-                            <?php echo "<a href='oat-operacao.php?acao=concluidas&acao1=consulta&oat=" . $oatId . "'><i class='fa  fa-edit'></i>Cunsulta</a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=concluidas&acao1=consulta&oat=" . $oatId . "'><i class='fa  fa-edit'></i>Consulta</a>"; ?>
                             
                           </td>
                         </tr>

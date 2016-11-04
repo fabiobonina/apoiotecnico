@@ -134,7 +134,7 @@
             }
             
 					endif;
-          #RETORNO
+          #RETORNAR
           if(isset($_POST['fechar'])):
           if(!isset($_POST['oat'])){
             echo '<div class="alert alert-danger">

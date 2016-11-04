@@ -8,13 +8,14 @@
           $servicos = new Servicos();
 						#ADD
 						if(isset($_POST['cadastrar'])):
-              $user = $userUsuario;
+              $user = $_POST['usuario'];
 							$localidade = $_POST['localId'];
               foreach($localidades->findAll() as $key => $value):if($value->id == $localidade) {
               $cliente = $value->cliente;
               }endforeach;
               $servico = $_POST['servico'];
               $sistema = $_POST['sistema'];
+              $dataOs = $_POST['data'];
               $dataOat = date("Y-m-d H:i:s");
               $status = "0";
               $ativo = "0";
@@ -24,6 +25,7 @@
               $oat->setLocalidade($localidade);
               $oat->setServico($servico);
               $oat->setSistema($sistema);
+              $oat->setDataOs($dataOs);
               $oat->setDataOat($dataOat);
               $oat->setStatus($status);
               $oat->setAtivo($ativo);
@@ -40,7 +42,8 @@
 						#ATUALIZAR
 						if(isset($_POST['editar'])):
               $oatId = $_POST['oatId'];
-              $user = $userUsuario;
+              $user = $_POST['usuario'];
+							$dataOs = $_POST['data'];
 							$localidade = $_POST['localId'];
               foreach($localidades->findAll() as $key => $value):if($value->id == $localidade) {
               $cliente = $value->cliente;
@@ -56,6 +59,7 @@
                 $oat->setLocalidade($localidade);
                 $oat->setServico($servico);
                 $oat->setSistema($sistema);
+                $oat->setDataOs($dataOs);
                 $oat->setDataOat($dataOat);
                 $oat->setStatus($status);
                 $oat->setAtivo($ativo);

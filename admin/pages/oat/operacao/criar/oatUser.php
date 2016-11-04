@@ -3,12 +3,12 @@
                         <tr>
                           <th>Filial</th>
                           <th>OS</th>
+                          <th>Data</th>
                           <th>Usuario</th>
                           <th>Cliente</th>
                           <th>Localidade</th>
-                          <th>Servico</th>
                           <th>Sistema</th>
-                          <th>Data Solitação</th>
+                          <th>Servico</th>
                           <th>Ação</th>
                         </tr>
                       </thead>
@@ -22,7 +22,7 @@
                         $oatOs = $value->os;
                         $oatServId = $value->servico;
                         $oatSistId = $value->sistema;
-                        $oatDataSol = $value->data_sol;
+                        $oatDataOs = $value->data_os;
                         $oatAtivo = $value->ativo;
                         foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
                           $oatLocal = $value->nome;
@@ -38,12 +38,12 @@
                         <tr>
                           <td><?php echo $oatFilial; ?></td>
                           <td><?php echo $oatOs; ?></td>
+                          <td><?php echo $oatDataOs; ?></td>
                           <td><?php echo $oatUsuario; ?></td>
                           <td><?php echo $oatCliente; ?></td>
                           <td><?php echo $oatLocal; ?></td>
-                          <td><?php echo $oatServico; ?></td>
                           <td><?php echo $oatSistema; ?></td>
-                          <td><?php echo $oatDataSol; ?></td>
+                          <td><?php echo $oatServico; ?></td>
                           <td>
                             <?php echo "<a href='oat-operacao.php?acao=criar&acao1=edt&oatId=" . $oatId . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
                             <?php echo "<a href='oat-operacao.php?acao=criar&acao1=deletar&oatId=" . $oatId . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>

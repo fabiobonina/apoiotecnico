@@ -13,6 +13,7 @@ class Oats extends Crud{
 	private $dataOat;
 	private $filial;
 	private $os;
+	private $data;
 	private $dataOS;
 	private $dataFech;
 	private $dataTerm;
@@ -37,6 +38,7 @@ class Oats extends Crud{
 	public function setSistema($sistema){
 		$this->sistema = $sistema;
 	}
+	
 	public function setDataOat($dataOat){
 		$this->dataOat = $dataOat;
 	}
