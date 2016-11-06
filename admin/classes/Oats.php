@@ -48,6 +48,9 @@ class Oats extends Crud{
 	public function setOs($os){
 		$this->os = $os;
 	}
+	public function setData($data){
+		$this->data = $data;
+	}
 	public function setDataOs($dataOs){
 		$this->dataOs = $dataOs;
 	}
@@ -66,14 +69,15 @@ class Oats extends Crud{
 
 	public function insert(){
 		try{
-			$sql  = "INSERT INTO $this->table (nickuser, cliente, localidade, servico, sistema, data_sol, filial, os, data_os, data_fech, data_term, status, ativo) ";
-			$sql .= "VALUES (:nickuser, :cliente, :localidade, :servico, :sistema, :data_sol, :filial, :os, :data_os, :data_fech, :data_term, :status, :ativo)";
+			$sql  = "INSERT INTO $this->table (nickuser, cliente, localidade, servico, sistema, data, data_sol, filial, os, data_os, data_fech, data_term, status, ativo) ";
+			$sql .= "VALUES (:nickuser, :cliente, :localidade, :servico, :sistema, :data, :data_sol, :filial, :os, :data_os, :data_fech, :data_term, :status, :ativo)";
 			$stmt = DB::prepare($sql);
 			$stmt->bindParam(':nickuser',$this->nickUser);
 			$stmt->bindParam(':cliente',$this->cliente);
 			$stmt->bindParam(':localidade',$this->localidade);
 			$stmt->bindParam(':servico',$this->servico);
 			$stmt->bindParam(':sistema',$this->sistema);
+			$stmt->bindParam(':data',$this->data);
 			$stmt->bindParam(':data_sol',$this->dataOat);
 			$stmt->bindParam(':filial',$this->filial);
 			$stmt->bindParam(':os',$this->os);
@@ -92,13 +96,14 @@ class Oats extends Crud{
 
 	public function update($id){
 		try{
-		$sql  = "UPDATE $this->table SET nickuser = :nickuser, cliente = :cliente, localidade = :localidade, servico = :servico, sistema = :sistema, data_sol = :data_sol, filial = :filial, os = :os, data_os = :data_os, data_fech = :data_fech, data_term = :data_term, status = :status, ativo = :ativo WHERE id = :id";
+		$sql  = "UPDATE $this->table SET nickuser = :nickuser, cliente = :cliente, localidade = :localidade, servico = :servico, sistema = :sistema, data = :data, data_sol = :data_sol, filial = :filial, os = :os, data_os = :data_os, data_fech = :data_fech, data_term = :data_term, status = :status, ativo = :ativo WHERE id = :id";
 		$stmt = DB::prepare($sql);
 		$stmt->bindParam(':nickuser',$this->nickUser);
 		$stmt->bindParam(':cliente',$this->cliente);
 		$stmt->bindParam(':localidade',$this->localidade);
 		$stmt->bindParam(':servico',$this->servico);
 		$stmt->bindParam(':sistema',$this->sistema);
+		$stmt->bindParam(':data',$this->data);
 		$stmt->bindParam(':data_sol',$this->dataOat);
 		$stmt->bindParam(':filial',$this->filial);
 		$stmt->bindParam(':os',$this->os);
@@ -155,7 +160,17 @@ class Oats extends Crud{
 			echo 'ERROR: ' . $e->getMessage();
 		}	
 	}
-
+	public function concluidas($id){
+		try{
+		$sql  = "UPDATE $this->table SET status = :status WHERE id = :id";
+		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':status',$this->status);
+		$stmt->bindParam(':id', $id);
+		return $stmt->execute();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}	
+	}
 	public function findOat($status){
 		try{
 		$sql  = "SELECT * FROM $this->table WHERE BINARY status=:status ";

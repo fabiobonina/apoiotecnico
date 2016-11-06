@@ -38,24 +38,22 @@
                     <br />
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Usuario <span class="required">*</span></label>
+                      
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?php echo '<select id="usuario" name="usuario" class="form-control col-md-3 col-xs-12" >';
+                            <?php echo '<select id="usuario" name="usuario" class="form-control has-feedback-left" >';
                                 echo '<option value =', $oatUser ,'>',$oatUser,'</option>';
                                 foreach($usuarios->findAll() as $key => $value):if($value->ativo == 0) {
                                 echo '<option value =',$value->nickuser,'>',$value->nickuser,'</option>';
                                 }endforeach;
-                                echo '</select></br>';
+                                echo '</select><span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>';
                             ?>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="query">Data <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="data" name="data"  value="<?php echo $oatDataOs; ?>" required="required" class="form-control col-md-7 col-xs-12">
+                      
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          <input type="date" id="data" name="data"  value="<?php echo $oatDataOs; ?>" required="required" class="form-control">
+                          <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                         </div>
-                      </div>
+                      
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="query">Localidade <span class="required">*</span></label>

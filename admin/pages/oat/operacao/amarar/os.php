@@ -2,6 +2,25 @@
 
       $id = $_GET['id'];
       $resultado = $oat->find($id);
+      $oatId = $resultado->id;
+      $oatUsuario = $resultado->nickuser;
+      $oatCliente = $resultado->cliente;
+      $oatLocalId = $resultado->localidade;
+      $oatFilial = $resultado->filial;
+      $oatOs = $resultado->os;
+      $oatServId = $resultado->servico;
+      $oatSistId = $resultado->sistema;
+      $oatDataOs = $resultado->data_os;
+      $oatAtivo = $resultado->ativo;
+      foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
+        $oatLocal = $value->nome;
+      }endforeach;             
+      foreach($servicos->findAll() as $key => $value):if($value->id == $oatServId) {
+        $oatServico = $value->descricao;
+      }endforeach;
+      foreach($sistemas->findAll() as $key => $value):if($value->id == $oatSistId) {
+        $oatSistema =  $value->descricao;
+      }endforeach;
  
       ?>
 
@@ -26,18 +45,27 @@
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Filial <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="filia" name="filial" required="required" size=2 maxlength=2 style="text-transform:uppercase;" class="form-control col-md-7 col-xs-12">
-                        </div>
+                      
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" value="<?php echo $oatUsuario; ?>" disabled="disabled" id="usuario" placeholder="cliente">
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">OS <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="os" name="os" required="required" size=6 maxlength=6 class="form-control col-md-7 col-xs-12">
-                        </div>
+
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="date" class="form-control" id="dataOs" value="<?php echo $oatDataOs; ?>" disabled="disabled" placeholder="data">
+                        <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                       </div>
+
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" id="filial" name="filial" required="required" size=2 maxlength=2 style="text-transform:uppercase;" placeholder="Filial" class="form-control has-feedback-left">
+                        <span class="fa fa-building form-control-feedback left" aria-hidden="true"></span>
+                      </div>
+                     
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          <input type="text" id="os" name="os" required="required" size=6 maxlength=6 placeholder="OS" class="form-control">
+                          <span class="fa fa-wrench form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cliente <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">

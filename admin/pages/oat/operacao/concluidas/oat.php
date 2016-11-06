@@ -148,7 +148,7 @@
             if(isset($_GET['acao2']) && $_GET['acao2'] == 'descDel'):
 
 							$id = (int)$_GET['cod'];
-              $oat = $_GET['id'];
+              $oat = $_GET['oat'];
 							if($descricoes->delete($id)){
 								echo '<div class="alert alert-success">
 					          <button type="button" class="close" data-dismiss="alert">×</button>
@@ -160,11 +160,9 @@
 					endif;
 						#concluidas
 						if(isset($_POST['concluir'])):
-              $id = $_POST['id'];
-              $dataTerm = date("Y-m-d H:i:s");
-              $status = "3";
+              $id = $_POST['oat'];
+              $status = "4";
 
-              $oats->setDataFech($dataFech);
               $oats->setStatus($status);
 
               if($oats->concluidas($id)){

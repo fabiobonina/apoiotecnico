@@ -17,11 +17,10 @@
         $oatSistema =  $value->descricao;
       }endforeach;
       
-      $oatDataSol = $resultado->data_sol; 
+      $oatData = $resultado->data; 
 
       ?>
-
-            <div class="row">
+           <div class="row">
               <div class="col-md-8 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -44,69 +43,47 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <div class="row">
+                      <div class="col-md-2 col-sm-12 col-xs-12 form-group">
+                        <label>OAT</label>
+                        <input type="text" disabled="disabled" name="oatId" value="<?php echo $oatId; ?>" placeholder="OAT" class="form-control">
+                      </div>
+                      <div class="col-md-5 col-sm-12 col-xs-12 form-group">
+                        <label>Usuario</label>
+                        <input type="text" disabled="disabled" name="oatUsuario" value="<?php echo $oatUsuario; ?>" placeholder="Usuario" class="form-control">
+                      </div>
+                      <div class="col-md-5 col-sm-12 col-xs-12 form-group">
+                        <label>Data</label>
+                        <input type="date" disabled="disabled" name="data" value="<?php echo $oatData; ?>" placeholder="Data" class="form-control">
+                      </div>
+                      <div class="col-md-2 col-sm-12 col-xs-12 form-group">
+                        <label>Filial</label>
+                        <input type="text" disabled="disabled" name="oatId" value="<?php echo $oatFilial; ?>" placeholder="OAT" class="form-control">
+                      </div>
+                      <div class="col-md-5 col-sm-12 col-xs-12 form-group">
+                        <label>Cliente</label>
+                        <input type="text" disabled="disabled" name="oatCliente" value="<?php echo $oatCliente; ?>" placeholder="Cliente" class="form-control">
+                      </div>
+                      <div class="col-md-5 col-sm-12 col-xs-12 form-group">
+                        <label>Localidade</label>
+                        <input type="text" disabled="disabled" name="localidade" value="<?php echo $oatLocal; ?>" placeholder="Data" class="form-control">
+                      </div>
+                      <div class="col-md-2 col-sm-12 col-xs-12 form-group">
+                        <label>OS</label>
+                        <input type="text" disabled="disabled" name="oatId" value="<?php echo $oatOs; ?>" placeholder="OAT" class="form-control">
+                      </div>
+                      <div class="col-md-5 col-sm-12 col-xs-12 form-group">
+                        <label>Sistema</label>
+                        <input type="text" disabled="disabled" name="sistema" value="<?php echo $oatSistema; ?>" placeholder="Sistema" class="form-control">
+                      </div>
+                      <div class="col-md-5 col-sm-12 col-xs-12 form-group">
+                        <label>Serviço</label>
+                        <input type="text" disabled="disabled" name="servico" value="<?php echo $oatServico; ?>" placeholder="Serviço" class="form-control">
+                      </div>
+                    </div>
+                  </div>
 
-                    <table class="table1">
-                      <tbody>
-                      <!--1#-->
-                        <tr>
-                          <td>OAT:</td>
-                          <td>
-                            <input type="text" disabled="disabled" name="oatId" value="<?php echo $oatId; ?>" disabled="disabled" class="col-md-3 col-xs-3">
-                          </td>
-                          <td>&nbsp;</td>
-                          <td>Usuario:</td>
-                          <td>
-                            <input type="text" disabled="disabled" name="usuario" value="<?php echo $oatUsuario; ?>" class=" col-md-10 col-xs-10">
-                          </td>
-                          <td>&nbsp;</td>
-                          <td>Sistema</td>
-                          <td>
-                            <input type="text" id="first-name" name="sistema" value="<?php echo $oatSistema; ?>" disabled="disabled" class=" col-md-10 col-xs-10">
-                          </td>
-                        </tr>
-                        <!--/1#-->
-                        <td>&nbsp;</td>
-                        <!--2#-->
-                        <tr>
-                          <td >Filial:</td>
-                          <td>
-                            <input type="text" name="filial" value="<?php echo $oatFilial; ?>" disabled="disabled" class=" col-md-3 col-xs-3">
-                          </td>
-                          <td>&nbsp;</td>
-                          <td >Cliente:</td>
-                          <td>
-                            <input type="text" name="cliente" value="<?php echo $oatCliente; ?>" disabled="disabled" class="col-md-10 col-xs-10">
-                          </td>
-                          <td>&nbsp;</td>
-                          <td >Serviço:</td>
-                          <td>
-                            <input type="text" id="first-name" name="servico" value="<?php echo $oatServico; ?>" disabled="disabled" class=" col-md-10 col-xs-10">
-                          </td>
-                        </tr>
-                        <!--/2#-->
-                        <td>&nbsp;</td>
-                        <!--3#-->
-                          <tr>
-                            <td>OS:</td>
-                          <td>
-                            <input type="text" disabled="disabled" name="os" value="<?php echo $oatOs; ?>" class="col-md-3 col-xs-3"><br />
-                          </td>
-                          <td>&nbsp;</td>
-                          <td>Local:</td>
-                          <td>
-                            <input type="text" id="localidade" name="localidade" value="<?php echo $oatLocal; ?>" disabled="disabled" class="col-md-10 col-xs-10">
-                          </td>
-                            <td>&nbsp;</td>
-                            <td class="pT12 pL4">Data:</td>
-                          <td>
-                            <input type="text" disabled="disabled" name="dataSol" value="<?php echo $oatDataSol; ?>"class="col-md-10 col-xs-10">
-                          </td>
-                        </tr>
-                        <!--/3#-->
-                      </tbody>
-                    </table>
-
-
+                  <div class="x_content">
                    <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
                       <input type="hidden" name="oat" value="<?php echo $oatId; ?>">
 		                  <div class="ln_solid"></div>
@@ -114,7 +91,6 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="oat-operacao.php?acao=retorno" class="btn btn-primary">Voltar</a>
                           <?php echo "<button type='submit' name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success'><i class='fa  fa-check-square-o'></i>Fechar OAT</button>"; ?>
-                          
                         </div>
                       </div>
 		                </form>

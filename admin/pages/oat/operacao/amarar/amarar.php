@@ -95,16 +95,14 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>#</th>
+                          <th>Filial</th>
+                          <th>OS</th>
+                          <th>Data</th>
                           <th>Usuario</th>
                           <th>Cliente</th>
                           <th>Localidade</th>
-                          <th>Filial</th>
-                          <th>OS</th>
-                          <th>Servico</th>
                           <th>Sistema</th>
-                          <th>Data Solitação</th>
-                          <th>Ativo</th>
+                          <th>Servico</th>
                           <th>Ação</th>
                         </tr>
                       </thead>
@@ -118,7 +116,7 @@
                         $oatOs = $value->os;
                         $oatServId = $value->servico;
                         $oatSistId = $value->sistema;
-                        $oatDataSol = $value->data_sol;
+                        $oatData = $value->data;
                         $oatAtivo = $value->ativo;
                         
                         foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
@@ -134,16 +132,14 @@
                       ?>
                       <tbody>
                         <tr>
-                          <td><?php echo $oatId; ?></td>
+                          <td><?php echo $oatFilial; ?></td>
+                          <td><?php echo $oatOs; ?></td>
+                          <td><?php echo $oatData; ?></td>
                           <td><?php echo $oatUsuario; ?></td>
                           <td><?php echo $oatCliente; ?></td>
                           <td><?php echo $oatLocal; ?></td>
-                          <td><?php echo $oatFilial; ?></td>
-                          <td><?php echo $oatOs; ?></td>
-                          <td><?php echo $oatServico; ?></td>
                           <td><?php echo $oatSistema; ?></td>
-                          <td><?php echo $oatDataSol; ?></td>
-                          <td><?php echo $oatAtivo; ?></td>
+                          <td><?php echo $oatServico; ?></td>
                           <td>
                             <?php echo "<a href='oat-operacao.php?acao=amarar&acao1=editar&id=" . $oatId . "'><i class='fa  fa-edit'></i>Amarar OS </a>"; ?>
                           </td>

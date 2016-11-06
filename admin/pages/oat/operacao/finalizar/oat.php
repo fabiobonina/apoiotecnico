@@ -145,36 +145,54 @@
                 header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat);	
               }
             }
-            if(isset($_GET['acao2']) && $_GET['acao2'] == 'descDel'):
+          endif;
+          if(isset($_GET['acao2']) && $_GET['acao2'] == 'descDel'):
 
-							$id = (int)$_GET['cod'];
-              $oat = $_GET['id'];
-							if($descricoes->delete($id)){
-								echo '<div class="alert alert-success">
-					          <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Deletado com sucesso!</strong> Redirecionando ...
-                    </div>';
-                header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat);	
-							}
-						endif;
+            $id = (int)$_GET['cod'];
+            $oat = $_GET['oat'];
+            if($descricoes->delete($id)){
+              echo '<div class="alert alert-success">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <strong>Deletado com sucesso!</strong> Redirecionando ...
+                  </div>';
+              header("Refresh: 1, oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oat);	
+            }
 					endif;
-						#FINALIZAR
-						if(isset($_POST['concluir'])):
-              $id = $_POST['id'];
-              $dataTerm = date("Y-m-d H:i:s");
-              $status = "3";
+					
+          #reabrir
+          if(isset($_POST['reabrir'])):
+            $id = $_POST['oat'];
+            $dataFech = date("Y-m-d H:i:s");
+            $status = "1";
 
-              $oats->setDataFech($dataFech);
-              $oats->setStatus($status);
+            $oats->setDataFech($dataFech);
+            $oats->setStatus($status);
 
-              if($oats->finalizar($id)){
-                echo '<div class="alert alert-success">
-					          <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>OAT Encerada!</strong> Redirecionando ...
-                    </div>';
-                header("Refresh: 1, oat-operacao.php?acao=finalizar");	
-              }
-						endif;
+            if($oats->finalizar($id)){
+              echo '<div class="alert alert-success">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <strong>OAT Encerada!</strong> Redirecionando ...
+                  </div>';
+              header("Refresh: 1, oat-operacao.php?acao=finalizar");	
+            }
+          endif;
+          #FINALIZAR
+          if(isset($_POST['encerrar'])):
+            $id = $_POST['oat'];
+            $dataTerm = date("Y-m-d H:i:s");
+            $status = "3";
+
+            $oats->setDataTerm($dataTerm);
+            $oats->setStatus($status);
+
+            if($oats->finalizar($id)){
+              echo '<div class="alert alert-success">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <strong>OAT Encerada!</strong> Redirecionando ...
+                  </div>';
+              header("Refresh: 1, oat-operacao.php?acao=finalizar");	
+            }
+          endif;
 
 				?>
         <!-- page content -->

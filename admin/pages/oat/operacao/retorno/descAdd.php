@@ -32,14 +32,18 @@
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <textarea class="form-control" name="descricao" rows="10" placeholder="Descrição do Serviço">
-OCORRÊNCIA:
+OCORRENCIA:
 CAUSA:
-SOLUÇÃO:
+SOLUCAO:
 DATA E HORA INICIAL:
 DATA E HORA FINAL:
 KM INICIAL:
 KM FINAL:
-GASTOS GERAIS (PEÇAS, ALIMENTAÇÃO, HOSPEDAGEM, ETC)
+-----GASTOS GERAIS----
+PECAS:
+ALIMENTACAO:
+HOSPEDAGEM:
+ETC:
                           </textarea>
                         </div>
                       </div>

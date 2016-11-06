@@ -15,7 +15,7 @@
               }endforeach;
               $servico = $_POST['servico'];
               $sistema = $_POST['sistema'];
-              $dataOs = $_POST['data'];
+              $data = $_POST['data'];
               $dataOat = date("Y-m-d H:i:s");
               $status = "0";
               $ativo = "0";
@@ -25,7 +25,7 @@
               $oat->setLocalidade($localidade);
               $oat->setServico($servico);
               $oat->setSistema($sistema);
-              $oat->setDataOs($dataOs);
+              $oat->setData($data);
               $oat->setDataOat($dataOat);
               $oat->setStatus($status);
               $oat->setAtivo($ativo);
@@ -43,7 +43,7 @@
 						if(isset($_POST['editar'])):
               $oatId = $_POST['oatId'];
               $user = $_POST['usuario'];
-							$dataOs = $_POST['data'];
+							$data = $_POST['data'];
 							$localidade = $_POST['localId'];
               foreach($localidades->findAll() as $key => $value):if($value->id == $localidade) {
               $cliente = $value->cliente;
@@ -59,7 +59,7 @@
                 $oat->setLocalidade($localidade);
                 $oat->setServico($servico);
                 $oat->setSistema($sistema);
-                $oat->setDataOs($dataOs);
+                $oat->setData($data);
                 $oat->setDataOat($dataOat);
                 $oat->setStatus($status);
                 $oat->setAtivo($ativo);

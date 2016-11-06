@@ -24,18 +24,14 @@
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>Filial</th>
+                          <th>OS</th>
+                          <th>Data</th>
                           <th>Usuario</th>
                           <th>Cliente</th>
                           <th>Localidade</th>
-                          <th>Servico</th>
-                          <th>Filial</th>
-                          <th>OS</th>
                           <th>Sistema</th>
-                          <th>Data Solitação</th>
-                          <th>Data Fechamento</th>
-                          <th>Data Termino</th>
-                          <th>Status</th>
-                          <th>Ativo</th>
+                          <th>Servico</th>
                           <th>Ação</th>
                         </tr>
                       </thead>
@@ -49,6 +45,8 @@
                           $oatOs = $value->os;
                           $oatServId = $value->servico;
                           $oatSistId = $value->sistema;
+                          $oatData = $value->data;
+                          $oatDataOs = $value->data_os;
                           $oatDataSol = $value->data_sol;
                           $oatDataFec = $value->data_fech;
                           $oatDataTer = $value->data_term;
@@ -65,26 +63,21 @@
                           }endforeach;
                           
                           
-                      
                       ?>
                       <tbody>
                         <tr>
                           <td><?php echo $oatId; ?></td>
+                          <td><?php echo $oatFilial; ?></td>
+                          <td><?php echo $oatOs; ?></td>
+                          <td><?php echo $oatData; ?></td>
                           <td><?php echo $oatUsuario; ?></td>
                           <td><?php echo $oatCliente; ?></td>
                           <td><?php echo $oatLocal; ?></td>
-                          <td><?php echo $oatFilial; ?></td>
-                          <td><?php echo $oatOs; ?></td>
-                          <td><?php echo $oatServico; ?></td>
                           <td><?php echo $oatSistema; ?></td>
-                          <td><?php echo $oatDataSol; ?></td>
-                          <td><?php echo $oatDataFec; ?></td>
-                          <td><?php echo $oatDataTer; ?></td>
-                          <td><?php echo $oatStatus; ?></td>
-                          <td><?php echo $oatAtivo; ?></td>
+                          <td><?php echo $oatServico; ?></td>
+                          
                           <td>
                             <?php echo "<a href='oat-operacao.php?acao=finalizar&acao1=consulta&oat=" . $oatId . "'><i class='fa  fa-edit'></i>Consulta</a>"; ?>
-                            
                           </td>
                         </tr>
                       </tbody>
