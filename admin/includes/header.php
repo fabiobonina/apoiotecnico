@@ -15,6 +15,10 @@ if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginSenha']))){
 	$userNivel = $_SESSION['loginNivel'];
 	$userNome = $_SESSION['loginNome'];
 
+  	function __autoload($class_name){
+		require_once 'admin/classes/' . $class_name . '.php';
+	}
+
 ?>
 
 <!DOCTYPE html>

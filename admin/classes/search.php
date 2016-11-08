@@ -12,7 +12,7 @@ if (isset($_GET['term'])){
 	    $stmt->execute(array(':term' => '%'.$_GET['term'].'%'));
 
 	    while($row = $stmt->fetch()) {
-	        $return_arr[] =  array('id'=>$row['id'],'val'=>$row['nome'] ,'cli'=>$row['cliente']);
+	        $return_arr[] =  array('id'=>$row['id'],'val'=>$row['nome'] ,'cli'=>$row['cliente'],'lat'=>$row['latitude'],'long'=>$row['longitude']);
 	    }
 
 	} catch(PDOException $e) {

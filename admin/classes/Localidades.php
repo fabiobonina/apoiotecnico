@@ -107,5 +107,19 @@ class Localidades extends Crud{
 		echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
 	}
 
+	public function geolocal($id){
+		try{
+		$sql  = "UPDATE $this->table SET latitude = :latitude, longitude = :longitude WHERE id = :id ";
+		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':latitude',$this->latitude);
+		$stmt->bindParam(':longitude',$this->longitude);
+		$stmt->bindParam(':id', $id);
+		return $stmt->execute();
+		
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
+		
+	}
 
 }

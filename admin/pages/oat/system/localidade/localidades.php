@@ -3,6 +3,9 @@
 					$localidades = new Localidades();
           $clientes = new Clientes();
 
+          $redirecionar_1 = 'oat-system.php?acao=localidades';
+          $includ_1 = 'admin/pages/oat/system/localidade/';
+
 						#CADASTRAR
 						if(isset($_POST['cadastrar'])):
               $cliente = $_POST['cliente'];
@@ -55,9 +58,31 @@
 
 							if($localidades->update($id)){
 								echo '<div class="alert alert-success">
-					          <button type="button" class="close" data-dismiss="alert">×</button>
+				          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Atualizado com sucesso!</strong> Redirecionando ...
-                    </div>';
+                  </div>';
+                header("Refresh: 1, oat-system.php?acao=localidades");	
+                header("Refresh: 1, ".$redirecionar_1);
+							}
+						endif;
+            #GEOLOCALIZAÇÃO
+						if(isset($_POST['geolocal'])):
+
+							$id = $_POST['localId'];
+              $geolocalizacao = $_POST['geolocalizacao'];
+              $array=explode(",",$geolocalizacao); 
+           
+							$lat = $array[0];
+							$long =$array[1];
+							
+              $localidades->setLat($lat);
+							$localidades->setLong($long);
+
+							if($localidades->geolocal($id)){
+								echo '<div class="alert alert-success">
+				          <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Inserido com sucesso!</strong> Redirecionando ...
+                  </div>';
                 header("Refresh: 1, oat-system.php?acao=localidades");	
 							}
 						endif;
@@ -100,9 +125,11 @@
                 if(isset($_GET['acao1'])){
                   $acao = $_GET['acao1'];	
                   
-                if($acao=='add'){include("admin/pages/oat/system/localidade/add.php");}	
+                if($acao=='add'){include( $includ_1."add.php");}	
                   // cadastro
-                if($acao=='edt'){include("admin/pages/oat/system/localidade/edt.php");}
+                if($acao=='edt'){include( $includ_1."edt.php");}
+
+                if($acao=='geo'){include( $includ_1."geoLocal.php");}
 
                 }
               ?>
@@ -120,9 +147,9 @@
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-bars"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
+                          <li><a href="oat-system.php?acao=localidades&acao1=geo"><i class="fa fa-map-marker"></i>  Localização</a>
                           </li>
                           <li><a href="#">Settings 2</a>
                           </li>
