@@ -13,11 +13,15 @@
       $cont_concluidas = 0;
       $cont_oat = 0;
       $cont_local = 0;
+      $cont_localLat = 0;
 
       foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
         
         $cont_local++;
-        
+        if( $value->latitude <> 0){
+          $cont_localLat++;
+        }
+
       }endforeach;
 
       foreach($oats->findAll() as $key => $value):if($value->ativo == 0   ) {
@@ -94,11 +98,17 @@
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Localidade</span>
               <div class="count"><?php echo $cont_local; ?></div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> </i> Localidades Cadastradas</span>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> <?php echo $cont_localLat; ?></i> Localidades Cadastradas</span>
             </div>
           </div>
           <!-- /top tiles -->
+
+          <div class="row">
+          
           <div id="donutchart" style="width: 500px; height: 300px;"></div>
+
+          </div>
+          <br />
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="dashboard_graph">
@@ -174,8 +184,6 @@
           <br />
 
           <div class="row">
-
-
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">

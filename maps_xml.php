@@ -17,7 +17,7 @@ return $xmlStr;
 if (!$db_selected) {
   die ('Can\'t use db : ' . mysql_error());
 }*/
-$connection= mysqli_connect("localhost", "root", "", "riskzone");
+$connection= mysqli_connect("localhost", "root", "", "system_tec");
 
 if (!$connection) {
   die("Not connected : " . mysql_error());
@@ -30,7 +30,7 @@ $result = mysql_query($query);
 if (!$result) {
   die('Invalid query: ' . mysql_error());
 }*/
-$sql = "SELECT id, nickuser, address, lat, lng, type, descricao, data_check_in FROM markers";
+$sql = "SELECT id, cliente, nome, latitude, longitude, municipio, uf, ativo FROM tb_localidades";
 $consulta = mysqli_query($connection, $sql);
 if (!$consulta)
   die("Erro ao fazer consulta!");
@@ -39,18 +39,18 @@ if (!$consulta)
 header("Content-type: text/xml");
 
 // Start XML file, echo parent node
-echo '<markers>';
+echo '<tb_localidades>';
 // Iterate through the rows, printing XML nodes for each
 while ($row = mysqli_fetch_array($consulta)){
   // ADD TO XML DOCUMENT NODE
   echo '<marker ';
-  echo 'name="' . parseToXML($row['nickuser']) . '" ';
-  echo 'address="' . parseToXML($row['address']) . '" ';
-  echo 'lat="' . $row['lat'] . '" ';
-  echo 'lng="' . $row['lng'] . '" ';
-  echo 'type="' . $row['type'] . '" ';
-  echo 'descricao="' . $row['descricao'] . '" ';
-  echo 'data_check_in="' . $row['data_check_in'] . '" ';
+  echo 'cliente="' . parseToXML($row['cliente']) . '" ';
+  echo 'nome="' . parseToXML($row['nome']) . '" ';
+  echo 'municipio="' . $row['municipio'] . '" ';
+  echo 'uf="' . $row['uf'] . '" ';
+  echo 'lat="' . $row['latitude'] . '" ';
+  echo 'lng="' . $row['longitude'] . '" ';
+  echo 'ativo="' . $row['ativo'] . '" ';
   echo '/>';
 }
 

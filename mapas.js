@@ -22,15 +22,15 @@
       // Change this depending on the name of your PHP file
       downloadUrl("maps_xml.php", function(data) {
         var xml = data.responseXML;
-        var markers = xml.documentElement.getElementsByTagName("marker");
-        for (var i = 0; i < markers.length; i++) {
-          var name = markers[i].getAttribute("name");
-          var address = markers[i].getAttribute("address");
-          var type = markers[i].getAttribute("type");
-          var descricao = markers[i].getAttribute("descricao");
+        var localidade = xml.documentElement.getElementsByTagName("tb_localidades");
+        for (var i = 0; i < localidade.length; i++) {
+          var name = localidade[i].getAttribute("name");
+          var address = localidade[i].getAttribute("address");
+          var type = localidade[i].getAttribute("type");
+          var descricao = localidade[i].getAttribute("descricao");
           var point = new google.maps.LatLng(
-              parseFloat(markers[i].getAttribute("lat")),
-              parseFloat(markers[i].getAttribute("lng")));
+              parseFloat(localidade[i].getAttribute("lat")),
+              parseFloat(localidade[i].getAttribute("lng")));
           var html = "<b>" + name + "</b> <br/>" + address + "</b> <br/>" + type+ "</b>: " + descricao;
           var icon = customIcons[type] || {};
           var marker = new google.maps.Marker({
