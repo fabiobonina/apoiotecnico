@@ -56,16 +56,18 @@
         var data1 = new google.visualization.arrayToDataTable([
           ['Tecnico', 'OAT Pendente de Retorno'],
           <?php
-          $cont_oat = 0;
+          
           foreach($usuarios->findAll() as $key => $value):if($value->ativo == 0   ) {
           $usuario = $value->nickuser;
-            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 2 && $value->nickuser == $usuario  ) {
-              $cont_oat++;
+          $cont_oatAb = 0;
+            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 1 && $value->nickuser == $usuario  ) {
+              $cont_oatAb++;
             }endforeach;  
-            if($cont_oat > 0){?>
-              ["<?php echo $usuario; ?>", <?php echo $cont_oat; ?>],
+            if($cont_oatAb > 0){?>
+              ["<?php echo $usuario; ?>", <?php echo $cont_oatAb; ?>],
           <?php 
             }
+
           }endforeach; ?>
         ]);
 

@@ -13,27 +13,19 @@
     $descricoes = new Descricoes();
     $ativos = new Ativos();
 
-    $cont_abarar_os = 0;
-    $cont_retorno = 0;
-    $cont_finalizar = 0;
-    $cont_concluidas = 0;
 
-    foreach($oats->findAll() as $key => $value):if($value->ativo == 0   ) {
-      
-      $oatStatus = $value->status;
-      if( $oatStatus == 0){
-        $cont_abarar_os++;
-      }elseif($oatStatus == 1){
-        $cont_retorno++;
-      }
-      elseif($oatStatus == 2){
-        $cont_finalizar++;
-      }
-      elseif($oatStatus == 3){
-        $cont_concluidas++;
-      }
 
-    }endforeach; 
+      $cont_local = 0;
+      $cont_localLat = 0;
+
+      foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
+        
+        $cont_local++;
+        if( $value->latitude <> 0){
+          $cont_localLat++;
+        }
+
+      }endforeach;
     ?>
 
 
@@ -41,6 +33,7 @@
 <html>
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
     <script type="text/javascript">
       google.charts.load("upcoming", {packages:["map"]});
       google.charts.setOnLoadCallback(drawChart);
