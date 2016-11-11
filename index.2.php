@@ -15,17 +15,8 @@
 
 
 
-      $cont_local = 0;
-      $cont_localLat = 0;
 
-      foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
-        
-        $cont_local++;
-        if( $value->latitude <> 0){
-          $cont_localLat++;
-        }
 
-      }endforeach;
     ?>
 
 
@@ -36,28 +27,39 @@
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
     <script type="text/javascript">
       google.charts.load("upcoming", {packages:["map"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
+      google.charts.setOnLoadCallback(drawChartMap);
+      function drawChartMap() {
+        var data_maps = google.visualization.arrayToDataTable([
           ['Lat', 'Long', 'Name'],
-          [37.4232, -122.0853, 'Work'],
-          [37.4289, -122.1697, 'University'],
-          [37.6153, -122.3900, 'Airport'],
-          [37.4422, -122.1731, 'Shopping']
-        ]);
+          <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
+            $localidade = $value->cliente . " | " . $value->nome;
+            if( $value->latitude <> 0){
+            ?>
+          
 
+          [<?php echo $value->latitude; ?>, <?php echo $value->longitude; ?>, '<?php echo $localidade; ?>'],
+          <?php    }
+          }endforeach; ?>
+        ]);
+        var options_maps = {
+        showTooltip: true,
+        showInfoWindow: true,
+        useMapTypeControl: true,
+        enableScrollWheel: true,
+        mapType: 'normal',
+        showLine: true,
+        };
         var map = new google.visualization.Map(document.getElementById('map_div'));
-        map.draw(data, {
-          showTooltip: true,
-          showInfoWindow: true
-        });
+        map.draw(data_maps, options_maps);
       }
 
     </script>
   </head>
 
   <body>
-    <div id="map_div" style="width: 400px; height: 300px"></div>
+    <div id="map_div" style="width: 640px; height: 480px"></div>
+
+
   </body>
 </html>
          

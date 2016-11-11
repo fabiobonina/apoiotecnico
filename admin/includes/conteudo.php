@@ -44,33 +44,19 @@
         
       }endforeach; ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
     <script type="text/javascript">
 
       // Load Charts and the corechart and barchart packages.
-      google.charts.load('current', {'packages':['corechart']});
+
+      google.charts.load('current', {'packages':['corechart','bar','map']});
       // Draw the pie chart and bar chart when Charts is loaded.
       google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawStacked);
+      google.charts.setOnLoadCallback(drawChartMap);
 
       function drawChart() {
-
-        var data1 = new google.visualization.arrayToDataTable([
-          ['Tecnico', 'OAT Pendente de Retorno'],
-          <?php
-          
-          foreach($usuarios->findAll() as $key => $value):if($value->ativo == 0   ) {
-          $usuario = $value->nickuser;
-          $cont_oatAb = 0;
-            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 1 && $value->nickuser == $usuario  ) {
-              $cont_oatAb++;
-            }endforeach;  
-            if($cont_oatAb > 0){?>
-              ["<?php echo $usuario; ?>", <?php echo $cont_oatAb; ?>],
-          <?php 
-            }
-
-          }endforeach; ?>
-        ]);
-
+        //#### OAT Status ####### 
         var data2 = google.visualization.arrayToDataTable([
           ['OAT', 'Status'],
           ['Solicitação',     <?php echo $cont_abarar_os; ?>],
@@ -86,23 +72,71 @@
         var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
         piechart.draw(data2, piechart_options);
 
-        var barchart_options = {title:'OAT Abertas X Tecnico',
-          
-          legend: { position: 'none' },
-          chart: { title: 'OAT',
-                   subtitle: 'Pendete de retorno' },
-          bars: 'horizontal', // Required for Material Bar Charts.
-          axes: {
-            x: {
-              0: { side: 'top', label: 'OAT'} // Top x-axis.
-            }
-          },
-          bar: { groupWidth: "90%" }
+      }
+      function drawStacked() {
+        //#### OAT x Tecnico #######
+        var data1 = new google.visualization.arrayToDataTable([
+          ['Tecnico', 'OAT Solicitada', 'OAT Aberta'],
+          <?php foreach($usuarios->findAll() as $key => $value):if($value->ativo == 0   ) {
+          $usuario = $value->nickuser;
+          $cont_userOatSol = 0;
+          $cont_userOatAb = 0;
+            foreach($oats->findAll() as $key => $value):if($value->ativo == 0  && $value->nickuser == $usuario  ) {
+              if( $value->status == 0){
+                $cont_userOatSol++;
+              }
+              if( $value->status == 1){
+                $cont_userOatAb++;
+              }
+            }endforeach;  
+            if($cont_userOatAb > 0 OR $cont_userOatSol > 0){?>
+              ["<?php echo $usuario; ?>", <?php echo $cont_userOatSol; ?>, <?php echo $cont_userOatAb; ?>],
+          <?php } 
+            }endforeach; ?>
+        ]);
+        var barchart_options = {
+        title: 'OAT x Tecnico',
+        chartArea: {width: '50%'},
+        isStacked: true,
+        hAxis: {
+          title: 'Total OAT',
+          minValue: 0,
+        },
+        vAxis: {
+          title: 'Tecnico'
+        }
         };
         var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
         barchart.draw(data1, barchart_options);
+
       }
-</script>
+      //#### GeoLocalização #######
+      function drawChartMap() {
+        var data_maps = google.visualization.arrayToDataTable([
+          ['Lat', 'Long', 'Name'],
+          <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
+            $localidade = $value->cliente . " | " . $value->nome;
+            if( $value->latitude <> 0){
+            ?>
+          
+
+          [<?php echo $value->latitude; ?>, <?php echo $value->longitude; ?>, '<?php echo $localidade; ?>'],
+          <?php    }
+          }endforeach; ?>
+        ]);
+        var options_maps = {
+        showTooltip: true,
+        showInfoWindow: true,
+        useMapTypeControl: true,
+        enableScrollWheel: true,
+        mapType: 'normal',
+        showLine: true,
+        };
+        var map = new google.visualization.Map(document.getElementById('map_div'));
+        map.draw(data_maps, options_maps);
+      }
+
+    </script>
     
 
         <!-- page content -->
@@ -168,75 +202,26 @@
 
           </div>
           <br />
-
-
-
+            
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="dashboard_graph">
 
                 <div class="row x_title">
                   <div class="col-md-6">
-                    <h3>Network Activities <small>Graph title sub-title</small></h3>
-                  </div>
-                  <div class="col-md-6">
-                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                    </div>
+                    <h3>ETAs <small>Geolocalização</small></h3>
                   </div>
                 </div>
 
-                <div class="col-md-9 col-sm-9 col-xs-12">
-                  <div id="placeholder33" style="height: 260px; display: none" class="demo-placeholder"></div>
+                <div class="col-md-12 col-sm-9 col-xs-12">
+                  <div id="placeholder33" style="height: 460px; display: none" class="demo-placeholder"></div>
                   <div style="width: 100%;">
-                    <div id="canvas_dahs" class="demo-placeholder" style="width: 100%; height:270px;"></div>
+                    
+                    <div id="map_div" style="width: 100%; height: 480px"></div>
                   </div>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
-                  <div class="x_title">
-                    <h2>Top Campaign Performance</h2>
-                    <div class="clearfix"></div>
-                  </div>
 
-                  <div class="col-md-12 col-sm-12 col-xs-6">
-                    <div>
-                      <p>Facebook Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Twitter Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12 col-sm-12 col-xs-6">
-                    <div>
-                      <p>Conventional Media</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="100"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Bill boards</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="10"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
-                </div>
 
                 <div class="clearfix"></div>
               </div>
