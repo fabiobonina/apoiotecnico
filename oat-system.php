@@ -29,7 +29,7 @@
             // oat
             if($acao=='oat'){include("admin/pages/oat/system/oat/oat.php");}
             // oat
-            if($acao=='ativo'){include("admin/pages/oat/system/ativo/ativos.php");}
+            if($acao=='ativo'){include("admin/pages/oat/system/ativo/list.php");}
 
           }
         ?>

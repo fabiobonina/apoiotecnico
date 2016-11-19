@@ -13,53 +13,71 @@
     $descricoes = new Descricoes();
     $ativos = new Ativos();
 
-
-
-
-
-    ?>
-
-
+  ?>
+          <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
+            $localId = $value->id;
+            $localidade = $value->cliente . " | " . $value->nome;
+            $cont_oatTt = 0;
+            $municipio = $value->municipio;
+            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId  ) {
+              $cont_oatTt++;
+            }endforeach;
+            if( $cont_oatTt > 0){
+          ?>
+          <?php echo $municipio; ?> <?php echo $localidade; ?> <?php echo $cont_oatTt; ?><br/>
+            <?php }
+          }endforeach; ?>
 
 <html>
   <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
-    <script type="text/javascript">
-      google.charts.load("upcoming", {packages:["map"]});
-      google.charts.setOnLoadCallback(drawChartMap);
-      function drawChartMap() {
-        var data_maps = google.visualization.arrayToDataTable([
-          ['Lat', 'Long', 'Name'],
-          <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
+	  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
+  <script type='text/javascript'>
+     google.charts.load('upcoming', {'packages': ['geochart', 'table']});
+     google.charts.setOnLoadCallback(drawMarkersMap);
+
+      function drawMarkersMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['City',   'Population', 'Area'],
+        <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
+            $localId = $value->id;
             $localidade = $value->cliente . " | " . $value->nome;
-            if( $value->latitude <> 0){
-            ?>
-          
+            $cont_oatTt = 0;
+            $municipio = $value->municipio;
+            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId  ) {
+              $cont_oatTt++;
+            }endforeach;
+            if( $cont_oatTt > 0){
+          ?>
+        ['<?php echo $municipio; ?>',      2761477,    1285.31],
+        <?php }
+        }endforeach; ?>
+        ['Milan',     1324110,    181.76],
+        ['Naples',    959574,     117.27],
+        ['Turin',     907563,     130.17],
+        ['Palermo',   655875,     158.9],
+        ['Genoa',     607906,     243.60],
+        ['Bologna',   380181,     140.7],
+        ['Florence',  371282,     102.41],
+        ['Fiumicino', 67370,      213.44],
+        ['Anzio',     52192,      43.43],
+        ['Ciampino',  38262,      11]
+      ]);
 
-          [<?php echo $value->latitude; ?>, <?php echo $value->longitude; ?>, '<?php echo $localidade; ?>'],
-          <?php    }
-          }endforeach; ?>
-        ]);
-        var options_maps = {
-        showTooltip: true,
-        showInfoWindow: true,
-        useMapTypeControl: true,
-        enableScrollWheel: true,
-        mapType: 'normal',
-        showLine: true,
-        };
-        var map = new google.visualization.Map(document.getElementById('map_div'));
-        map.draw(data_maps, options_maps);
-      }
+      var options = {
 
+        displayMode: 'markers',
+        colorAxis: {colors: ['green', 'blue']}
+      };
+
+      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    };
     </script>
   </head>
-
   <body>
-    <div id="map_div" style="width: 640px; height: 480px"></div>
-
-
+    <div id="chart_div" ></div>
   </body>
 </html>
-         

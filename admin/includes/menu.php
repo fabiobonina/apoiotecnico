@@ -56,6 +56,7 @@
                       <li><a href="oat-system.php?acao=sistemas">Sistemas</a></li>
                       <li><a href="oat-system.php?acao=servicos">Serviços</a></li>
                       <li><a href="oat-system.php?acao=despesas">Tipo Despesa</a></li>
+                      <li><a href="oat-system.php?acao=ativo">Ativo</a></li>
                       <li><a href="oat-system.php?acao=oat">OAT</a></li>
                     </ul>
                   </li>

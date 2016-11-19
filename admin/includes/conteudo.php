@@ -48,12 +48,12 @@
     <script type="text/javascript">
 
       // Load Charts and the corechart and barchart packages.
-
-      google.charts.load('current', {'packages':['corechart','bar','map']});
+      google.charts.load('current', {'packages':['corechart','bar','map','geochart']});
       // Draw the pie chart and bar chart when Charts is loaded.
       google.charts.setOnLoadCallback(drawChart);
       google.charts.setOnLoadCallback(drawStacked);
       google.charts.setOnLoadCallback(drawChartMap);
+      google.charts.setOnLoadCallback(drawMarkersMap);
 
       function drawChart() {
         //#### OAT Status ####### 
@@ -135,6 +135,50 @@
         var map = new google.visualization.Map(document.getElementById('map_div'));
         map.draw(data_maps, options_maps);
       }
+      function drawMarkersMap() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Latitude');
+        data.addColumn('number', 'Longitude');
+        data.addColumn('string', 'Label');
+        data.addColumn('number', 'Atendimento');
+        data.addRows([
+         <?php 
+         $cont_oatLat = 0;
+         foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
+            $localId = $value->id;
+            $localidade = $value->cliente . " | " . $value->nome;
+            $latitude = $value->latitude;
+            $longitude = $value->longitude;
+            $cont_oatTt = 0;
+            
+            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId  ) {
+              $cont_oatTt++;
+            }endforeach;
+            
+            if( $cont_oatTt > 0 && $latitude <> 0){ 
+              ?>
+          [<?php echo $latitude; ?>, <?php echo $longitude; ?>, '<?php echo $localidade; ?>', <?php echo $cont_oatTt; ?>],
+          <?php 
+          $cont_oatLat++;
+          } 
+          }endforeach;
+          $cont_oatLat1 = ($cont_oatLat / $cont_oat)*100;
+          
+          
+          
+           ?>
+        ]);
+
+        var options = {
+          region: 'BR',
+          displayMode: 'markers',
+          colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
+        };
+
+
+          var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
 
     </script>
     
@@ -144,7 +188,7 @@
           <!-- top tiles -->
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total OAT</span>
+              <span class="count_top"><i class="fa fa-wrench"></i> Total OAT</span>
               <div class="count"><?php echo $cont_oat; ?></div>
               <span class="count_bottom"><i class="green"> </i> Ordem de Atend. Tec.</span>
             </div>
@@ -154,24 +198,24 @@
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> </i> Aguardando OS</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> OAT Aberta</span>
+              <span class="count_top"><i class="fa fa-wrench"></i> OAT Aberta</span>
               <div class="count green"><?php echo $cont_retorno; ?></div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> </i> Retorno Tec.</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> OAT Fechada</span>
+              <span class="count_top"><i class="fa fa-wrench"></i> OAT Fechada</span>
               <div class="count"><?php echo $cont_finalizar; ?></div>
               <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i> </i> Baixar no Sistema</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> OAT Concluida</span>
+              <span class="count_top"><i class="fa fa-wrench"></i> OAT Concluida</span>
               <div class="count"><?php echo $cont_concluidas; ?></div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Localidade</span>
+              <span class="count_top"><i class="fa  fa-building"></i> Localidade</span>
               <div class="count"><?php echo $cont_local; ?></div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> <?php echo $cont_localLat; ?></i> Localidades Cadastradas</span>
+              <span class="count_bottom"><i class="green"><i class="fa fa-map-marker"></i> <?php echo $cont_localLat; ?></i> Posição geografica</span>
             </div>
           </div>
           <!-- /top tiles -->
@@ -206,13 +250,34 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="dashboard_graph">
-
+                <div class="row x_title">
+                  <div class="col-md-6">
+                    <h3>OAT | Região <small>Posiçao geografica</small></h3>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-9 col-xs-12">
+                  <div id="placeholder33" style="height: 460px; display: none" class="demo-placeholder"></div>
+                  <div style="width: 80%;">
+                    <div id="chart_div" style="width: 700px; height: 400px;"></div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-3 col-xs-12 bg-white">
+                  <div id="" style="width: 100%; height:100%;">OBS: Os atendimentos exibidos neste gráfico, são os que tem sua posição geografica salva por geolocalização, que corresponde a <?php echo round($cont_oatLat1, 2) ; ?>% do total de atendimentos feitos.</div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+          <br />
+          
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="dashboard_graph">
                 <div class="row x_title">
                   <div class="col-md-6">
                     <h3>ETAs <small>Geolocalização</small></h3>
                   </div>
                 </div>
-
                 <div class="col-md-12 col-sm-9 col-xs-12">
                   <div id="placeholder33" style="height: 460px; display: none" class="demo-placeholder"></div>
                   <div style="width: 100%;">
@@ -220,16 +285,11 @@
                     <div id="map_div" style="width: 100%; height: 480px"></div>
                   </div>
                 </div>
-
-
-
                 <div class="clearfix"></div>
               </div>
             </div>
-
           </div>
           <br />
-
           <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320">

@@ -1,8 +1,7 @@
-
 <?php
-	function __autoload($class_name){
-		require_once 'admin/classes/' . $class_name . '.php';
-	}
+    function __autoload($class_name){
+      require_once 'admin/classes/' . $class_name . '.php';
+    }
 
     $oats = new Oats();
     $usuarios = new Usuarios();
@@ -12,104 +11,67 @@
     $servicos = new Servicos();
     $descricoes = new Descricoes();
     $ativos = new Ativos();
-
-    $cont_abarar_os = 0;
-    $cont_retorno = 0;
-    $cont_finalizar = 0;
-    $cont_concluidas = 0;
-
-    foreach($oats->findAll() as $key => $value):if($value->ativo == 0   ) {
-      
-      $oatStatus = $value->status;
-      if( $oatStatus == 0){
-        $cont_abarar_os++;
-      }elseif($oatStatus == 1){
-        $cont_retorno++;
-      }
-      elseif($oatStatus == 2){
-        $cont_finalizar++;
-      }
-      elseif($oatStatus == 3){
-        $cont_concluidas++;
-      }
-
-    }endforeach; 
+ ?>
+     <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
+            $localId = $value->id;
+            $localidade = $value->cliente . " | " . $value->nome;
+            $latitude = $value->latitude;
+            $longitude = $value->longitude;
+            $cont_oatTt = 0;
+            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId  ) {
+              $cont_oatTt++;
+            }endforeach;
+            if( $cont_oatTt > 0 && $latitude <> 0){
     ?>
+
+    <?php echo $latitude; ?> <?php echo $longitude; ?><?php echo $localidade; ?> <?php echo $cont_oatTt; ?>
+    <?php }
+    }endforeach; ?>
 <html>
   <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
+  
+    <script type='text/javascript'>
+     google.charts.load('upcoming', {'packages': ['geochart', 'table']});
+     google.charts.setOnLoadCallback(drawMarkersMap);
 
-      // Load Charts and the corechart and barchart packages.
-      google.charts.load('current', {'packages':['corechart']});
-      // Draw the pie chart and bar chart when Charts is loaded.
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data1 = new google.visualization.arrayToDataTable([
-          ['Tecnico', 'OAT Solicitada', 'OAT Aberta'],
-          <?php
-          $cont_oatAbe = 0;
-          $cont_oatRet = 0;
-          foreach($usuarios->findAll() as $key => $value):if($value->ativo == 0   ) {
-          $usuario = $value->nickuser;
-            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->nickuser == $usuario  ) {
-              
-              $oatStatus = $value->status;
-              if( $oatStatus == 0){
-                $cont_oatAbe++;
-              }elseif($oatStatus == 1){
-                $cont_oatRet++;
-              }
-              
-            }endforeach;  
-            if($cont_oat > 0){?>
-              ["<?php echo $usuario; ?>", <?php echo $cont_oatAbe; ?>, <?php echo $cont_oatRet; ?>],
-          <?php 
-            }
+      function drawMarkersMap() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Latitude');
+        data.addColumn('number', 'Longitude');
+        data.addColumn('string', 'Label');
+        data.addColumn('number', 'Value 1');
+        data.addRows([
+         <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
+            $localId = $value->id;
+            $localidade = $value->cliente . " | " . $value->nome;
+            $latitude = $value->latitude;
+            $longitude = $value->longitude;
+            $cont_oatTt = 0;
+            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId  ) {
+              $cont_oatTt++;
+            }endforeach;
+            if( $cont_oatTt > 0 && $latitude <> 0){ ?>
+          [<?php echo $latitude; ?>, <?php echo $longitude; ?>, '<?php echo $localidade; ?>', <?php echo $cont_oatTt; ?>],
+          <?php } 
           }endforeach; ?>
         ]);
 
-        var data2 = google.visualization.arrayToDataTable([
-          ['OAT', 'Status'],
-          ['Solicitação',     <?php echo $cont_abarar_os; ?>],
-          ['Aberta',      <?php echo $cont_retorno; ?>],
-          ['Fechada',  <?php echo $cont_finalizar; ?>],
-          ['Concluida', <?php echo $cont_concluidas; ?>]
-        ]);
-
-        var piechart_options = {title:'OAT Status',
-                       width:450,
-                       height:400,
-                      pieHole: 0.4};
-        var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
-        piechart.draw(data2, piechart_options);
-
-        var barchart_options = {title:'OAT Abertas X Tecnico',
-          
-          legend: { position: 'none' },
-          chart: { title: 'OAT',
-                   subtitle: 'Pendete de retorno' },
-          bars: 'horizontal', // Required for Material Bar Charts.
-          axes: {
-            x: {
-              0: { side: 'top', label: 'OAT'} // Top x-axis.
-            }
-          },
-          bar: { groupWidth: "90%" }
+        var options = {
+          region: 'BR',
+          displayMode: 'markers',
+          colorAxis: {colors: ['green', 'blue']}
         };
-        var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
-        barchart.draw(data1, barchart_options);
-      }
-</script>
-<body>
-    <!--Table and divs that hold the pie charts-->
-    <table class="columns">
-      <tr>
-        <td><div id="piechart_div" style="border: 1px solid #ccc"></div></td>
-        <td><div id="barchart_div" style="border: 1px solid #ccc"></div></td>
-      </tr>
-    </table>
+
+
+          var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        };
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
   </body>
 </html>
