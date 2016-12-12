@@ -1,18 +1,29 @@
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>Filial</th>
-                          <th>OS</th>
-                          <th>Data</th>
-                          <th>Usuario</th>
-                          <th>Cliente</th>
-                          <th>Localidade</th>
-                          <th>Sistema</th>
-                          <th>Servico</th>
-                          <th>Ação</th>
-                        </tr>
-                      </thead>
+<style>
 
+.tg  {
+    border-spacing:0;
+    border:none;
+    margin-top: 10px;
+    border-radius: 20px;
+    border: 1px solid #d4d4d4;
+    box-shadow: 1px 1px 1px #d4d4d4;
+    width: 178px;
+    height: 100px;
+    float: left;
+    margin-left: 10px;
+    background-color:#efefef;
+    }
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:5px 25px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:5px 25px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.tg .tb-header{font-weight:bold;font-size:15px;color:#333333;}
+.tg .tg-teste{font-size:0px;}
+.tg .tg-body1{font-weight:bold; font-size:15px;color:#3166ff;text-align:center}
+.tg .tg-body2{font-weight:bold; font-size:13px;color:#3166ff}
+.tg .tg-body3{font-size:12px;color: #333333;}
+.tg .tg-body4{font-size:10px;color:#333333;}
+.tg .tg-footer{text-align:right}
+
+</style>
                 			<?php foreach($oat->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 0 ) {
                         $oatId = $value->id;
                         $oatUsuario = $value->nickuser;
@@ -34,22 +45,35 @@
                           $oatSistema =  $value->descricao;
                         }endforeach;
                       ?>
-                      <tbody>
-                        <tr>
-                          <td><?php echo $oatFilial; ?></td>
-                          <td><?php echo $oatOs; ?></td>
-                          <td><?php echo $oatData; ?></td>
-                          <td><?php echo $oatUsuario; ?></td>
-                          <td><?php echo $oatCliente; ?></td>
-                          <td><?php echo $oatLocal; ?></td>
-                          <td><?php echo $oatSistema; ?></td>
-                          <td><?php echo $oatServico; ?></td>
-                          <td>
-                            <?php echo "<a href='oat-operacao.php?acao=criar&acao1=edt&oatId=" . $oatId . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
-                            <?php echo "<a href='oat-operacao.php?acao=criar&acao1=deletar&oatId=" . $oatId . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
-                          </td>
-                        </tr>
-                      </tbody>
-                      <?php }endforeach; ?>
+<table class="tg">
+  <tr>
+    <th class="tb-header" colspan="5"><?php echo $oatCliente; ?> | <?php echo $oatLocal; ?></th>
+  </tr>
+<div class="x_content">
+  <tr>
+    <td class="tg-body1" rowspan="2"><?php echo $oatFilial; ?> | <?php echo $oatOs; ?></td>
+    <td class="tg-body2"><?php echo $oatSistema; ?></td>
+    <td class="tg-body2"><?php echo $oatServico; ?></td>
+    <td class="tg-o2w9" rowspan="3">gps</td>
+  </tr>
+  <tr>
+    <td class="tg-body4"><?php echo $oatUsuario; ?></td>
+    <td class="tg-body4">Sol. 01/12/2016</td>
+  </tr>
+  <tr>
+    <td class="tg-body3"><?php echo $oatData; ?></td>
+    <td class="tg-body4">Atraso 1</td>
+    <td class="tg-body4">teste</td>
 
-                    </table>
+  </tr>
+  <tr>
+    <td class="tg-footer" colspan="4">
+      OS 
+      CON
+      <?php echo "<a href='oat-operacao.php?acao=criar&acao1=edt&oatId=" . $oatId . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>&nbsp;
+      <?php echo "<a href='oat-operacao.php?acao=criar&acao1=deletar&oatId=" . $oatId . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
+    </td>
+  </tr>
+</table>
+
+<?php }endforeach; ?>

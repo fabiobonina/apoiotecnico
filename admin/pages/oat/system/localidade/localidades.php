@@ -31,7 +31,7 @@
 					          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Inserido com sucesso!</strong> Redirecionando ...
                     </div>';
-                header("Refresh: 1, oat-system.php?acao=localidades");	
+                header("Refresh: 1, ".$redirecionar_1);	
 							}
 						endif;
 						#ATUALIZAR
@@ -61,7 +61,6 @@
 				          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Atualizado com sucesso!</strong> Redirecionando ...
                   </div>';
-                header("Refresh: 1, oat-system.php?acao=localidades");	
                 header("Refresh: 1, ".$redirecionar_1);
 							}
 						endif;
@@ -83,7 +82,7 @@
 				          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Inserido com sucesso!</strong> Redirecionando ...
                   </div>';
-                header("Refresh: 1, oat-system.php?acao=localidades");	
+                header("Refresh: 1, ".$redirecionar_1);	
 							}
 						endif;
 						#DELETAR
@@ -94,7 +93,7 @@
 					          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Deletado com sucesso!</strong> Redirecionando ...
                     </div>';
-                header("Refresh: 1, oat-system.php?acao=localidades");	
+                header("Refresh: 1, ".$redirecionar_1);
 							}
 						endif;
 

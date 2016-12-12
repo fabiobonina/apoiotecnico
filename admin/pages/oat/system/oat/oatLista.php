@@ -84,7 +84,8 @@
                           <td><?php echo $oatAtivo; ?></td>
                           <td>
                             <?php echo "<a href='oat-operacao.php?acao=oat-finalizar&acao1=consulta&id=" . $oatId . "'><i class='fa  fa-edit'></i>Consulta</a>"; ?>
-                            
+                            <?php echo "<a href='oat-operacao.php?acao=criar&acao1=edt&oatId=" . $oatId . "'><i class='fa  fa-edit'></i>Editar </a>"; ?>
+                            <?php echo "<a href='oat-operacao.php?acao=criar&acao1=deletar&oatId=" . $oatId . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
                           </td>
                         </tr>
                       </tbody>
