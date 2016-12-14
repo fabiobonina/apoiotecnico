@@ -1,83 +1,74 @@
-
-<?php
-	function __autoload($class_name){
-		require_once 'admin/classes/' . $class_name . '.php';
-	}
-
-    $oats = new Oats();
-    $usuarios = new Usuarios();
-    $clientes = new Clientes();
-    $localidades = new Localidades();
-    $sistemas = new Sistemas();
-    $servicos = new Servicos();
-    $descricoes = new Descricoes();
-    $ativos = new Ativos();
-
-  ?>
-          <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
-            $localId = $value->id;
-            $localidade = $value->cliente . " | " . $value->nome;
-            $cont_oatTt = 0;
-            $municipio = $value->municipio;
-            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId  ) {
-              $cont_oatTt++;
-            }endforeach;
-            if( $cont_oatTt > 0){
-          ?>
-          <?php echo $municipio; ?> <?php echo $localidade; ?> <?php echo $cont_oatTt; ?><br/>
-            <?php }
-          }endforeach; ?>
-
+<!DOCTYPE html>
 <html>
   <head>
-
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
-	  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
-  <script type='text/javascript'>
-     google.charts.load('upcoming', {'packages': ['geochart', 'table']});
-     google.charts.setOnLoadCallback(drawMarkersMap);
-
-      function drawMarkersMap() {
-      var data = google.visualization.arrayToDataTable([
-        ['City',   'Population', 'Area'],
-        <?php foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
-            $localId = $value->id;
-            $localidade = $value->cliente . " | " . $value->nome;
-            $cont_oatTt = 0;
-            $municipio = $value->municipio;
-            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId  ) {
-              $cont_oatTt++;
-            }endforeach;
-            if( $cont_oatTt > 0){
-          ?>
-        ['<?php echo $municipio; ?>',      2761477,    1285.31],
-        <?php }
-        }endforeach; ?>
-        ['Milan',     1324110,    181.76],
-        ['Naples',    959574,     117.27],
-        ['Turin',     907563,     130.17],
-        ['Palermo',   655875,     158.9],
-        ['Genoa',     607906,     243.60],
-        ['Bologna',   380181,     140.7],
-        ['Florence',  371282,     102.41],
-        ['Fiumicino', 67370,      213.44],
-        ['Anzio',     52192,      43.43],
-        ['Ciampino',  38262,      11]
-      ]);
-
-      var options = {
-
-        displayMode: 'markers',
-        colorAxis: {colors: ['green', 'blue']}
-      };
-
-      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    };
-    </script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Circles</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
   </head>
   <body>
-    <div id="chart_div" ></div>
+    <div id="map"></div>
+    <script>
+
+// This example creates circles on the map, representing populations in North
+// America.
+
+// First, create an object containing LatLng and population for each city.
+var citymap = {
+  chicago: {
+    center: {lat: 41.878, lng: -87.629},
+    population: 2714856
+  },
+  newyork: {
+    center: {lat: 40.714, lng: -74.005},
+    population: 8405837
+  },
+  losangeles: {
+    center: {lat: 34.052, lng: -118.243},
+    population: 3857799
+  },
+  vancouver: {
+    center: {lat: 49.25, lng: -123.1},
+    population: 603502
+  }
+};
+
+function initMap() {
+  // Create the map.
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: {lat: 37.090, lng: -95.712},
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  });
+
+  // Construct the circle for each value in citymap.
+  // Note: We scale the area of the circle based on the population.
+  for (var city in citymap) {
+    // Add the circle for this city to the map.
+    var cityCircle = new google.maps.Circle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: map,
+      center: citymap[city].center,
+      radius: Math.sqrt(citymap[city].population) * 100
+    });
+  }
+}
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
   </body>
 </html>
