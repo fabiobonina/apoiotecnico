@@ -23,6 +23,54 @@
 .tg .tg-body4{font-size:10px;color:#333333;}
 .tg .tg-footer{text-align:right}
 
+body {
+    margin:0;
+    padding:0;
+    color:#000;
+    background:#fff;
+}
+#geral {
+    width:30%;
+    margin:0 auto;
+    background:#ddd;
+    margin-top: 10px;
+}
+
+#cabecalho {
+    padding:10px;
+    background:#fdd;
+}
+#conteudo-1 {
+    float:left;
+     /* diminuimos a largura para não quebrar o layout. 
+      * valor antigo 220
+      */
+    width:210px;
+    padding:10px;
+    background:#bfb;
+}
+#conteudo-2-1 {
+    float:left;
+    width:460px;
+    padding:10px;
+    background:#ddf;
+}
+#conteudo-2-2 {
+    float:right;
+    /*diminuimos a largura para não quebrar o layout
+    * valor antigo 220
+    */
+    width:200px;
+    padding:10px;
+    background:#dff;
+}
+#rodape {
+    clear:both;
+    padding:10px;
+    background:#ff9;
+}
+
+
 </style>
                 			<?php foreach($oat->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 0 ) {
                         $oatId = $value->id;
