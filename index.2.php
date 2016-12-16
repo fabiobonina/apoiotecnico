@@ -1,3 +1,15 @@
+<?php $oats = new Oats();
+      $usuarios = new Usuarios();
+      $clientes = new Clientes();
+      $localidades = new Localidades();
+      $sistemas = new Sistemas();
+      $servicos = new Servicos();
+      $descricoes = new Descricoes();
+      $ativos = new Ativos();
+
+?>
+
+
 <!DOCTYPE html>
 <html>
   <head>

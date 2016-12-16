@@ -1,4 +1,31 @@
-				<?php
+				<style>
+
+.tg  {
+    border-spacing:0;
+    border:none;
+    margin-top: 10px;
+    border-radius: 20px;
+    border: 1px solid #d4d4d4;
+    box-shadow: 1px 1px 1px #d4d4d4;
+    width: 178px;
+    height: 100px;
+    float: left;
+    margin-left: 10px;
+    background-color:#efefef;
+    }
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:5px 25px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:5px 25px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.tg .tb-header{font-weight:bold;font-size:15px;color:#333333;}
+.tg .tg-teste{font-size:0px;}
+.tg .tg-body1{font-weight:bold; font-size:15px;color:#3166ff;text-align:center}
+.tg .tg-body2{font-weight:bold; font-size:13px;color:#3166ff}
+.tg .tg-body3{font-size:12px;color: #333333;}
+.tg .tg-body4{font-size:10px;color:#333333;}
+.tg .tg-footer{text-align:right}
+
+</style>
+
+        <?php
 
 					$oat = new Oats();
           $usuarios = new Usuarios();
@@ -133,14 +160,88 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <?php
-                      if($userNivel == 0){include("admin/pages/oat/operacao/criar/oatUser.php");}
-                      else{include("admin/pages/oat/operacao/criar/oatAdm.php");}
-                    ?>
+
+
                   </div>
                 </div>
               </div>
               <!--/Tabela Lista-->
+
+              <?php foreach($oat->findAll() as $key => $value):if($value->ativo == 0 && $value->status == 0 ) {
+                        $oatId = $value->id;
+                        $oatUsuario = $value->nickuser;
+                        $oatCliente = $value->cliente;
+                        $oatLocalId = $value->localidade;
+                        $oatFilial = $value->filial;
+                        $oatOs = $value->os;
+                        $oatServId = $value->servico;
+                        $oatSistId = $value->sistema;
+                        $oatData = $value->data;
+                        $oatAtivo = $value->ativo;
+                        foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
+                          $oatLocal = $value->nome;
+                        }endforeach;             
+                        foreach($servicos->findAll() as $key => $value):if($value->id == $oatServId) {
+                          $oatServico = $value->descricao;
+                        }endforeach;
+                        foreach($sistemas->findAll() as $key => $value):if($value->id == $oatSistId) {
+                          $oatSistema =  $value->descricao;
+                        }endforeach;
+                      ?>
+             <div class="col-md-4 col-sm-12 col-xs-12">
+              <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                  <h2><?php echo $oatCliente; ?> | <?php echo $oatLocal; ?></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="dashboard-widget-content">
+                    <ul class="quick-list">
+                      <li><a href="#"><?php echo $oatSistema; ?></a></li>
+                      <li><a href="#"><?php echo $oatServico; ?></a></li>
+                      <li><i class="fa fa-bar-chart"></i><a href="#"><?php echo $oatUsuario; ?></a></li>
+                      <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a></li>
+                      <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a></li>
+                    </ul>
+                    <div class="sidebar-widget">
+                      <h3><?php echo $oatFilial; ?> | <?php echo $oatOs; ?></h3>
+                      <canvas width="150" height="80" id="foo" class="" style="width: 70px; height: 20px;"></canvas>
+                      <div class="goal-wrapper">
+                        <span class="gauge-value pull-left"></span>
+                        <span id="gauge-text" class="gauge-value pull"><?php echo $oatData; ?></span>
+                        <span id="goal-text" class="goal-value pull-right"></span>
+                      </div>
+                      <img src="images/geolocation.png" alt="">
+                    </div>
+                  </div>
+                  <div class="ln_solid"></div>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><?php echo "<a href='oat-operacao.php?acao=criar&acao1=edt&oatId=" . $oatId . "'><i class='fa  fa-edit'></i>Editar </a>"; ?></li>
+                    &nbsp;
+                    <li><?php echo "<a href='oat-operacao.php?acao=criar&acao1=deletar&oatId=" . $oatId . "' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?></li>
+                    &nbsp;
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+<?php }endforeach; ?>
+
+ 
+
+              </div>
             </div>
           </div>
         </div>
