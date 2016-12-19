@@ -4,7 +4,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Nova OAT <small>Insira os dados</small></h2>
+                    <h2>Nova Solicitação <small>Insira os dados</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                       <li class="dropdown">
@@ -80,7 +80,7 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a type="submit" href="oat-operacao.php?acao=criar" class="btn btn-primary">Cancelar</a>
-                          <button type="submit" name="cadastrar" class="btn btn-success">Cadastrar</button>
+                          <button type="submit" name="solOat" class="btn btn-success">Cadastrar</button>
                         </div>
                       </div>
 		                </form>

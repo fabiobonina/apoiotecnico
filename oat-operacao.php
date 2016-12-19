@@ -22,11 +22,9 @@
           if(isset($_GET['acao'])){
             $acao = $_GET['acao'];	
             
-            if($acao=='criar'){include("admin/pages/oat/operacao/criar/criar.php");}	
-            // cadastro
-            if($acao=='amarar'){include("admin/pages/oat/operacao/amarar/amarar.php");}	
+            if($acao=='solicitacao'){include("admin/pages/oat/operacao/solicitacao.php");}
             // exibicao
-            if($acao=='retorno'){include("admin/pages/oat/operacao/retorno/oat.php");}
+            if($acao=='retorno'){include("admin/pages/oat/operacao/retorno.php");}
             // edicao
             if($acao=='finalizar'){include("admin/pages/oat/operacao/finalizar/oat.php");}
                 // edicao

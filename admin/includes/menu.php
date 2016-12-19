@@ -31,12 +31,11 @@
                       <li><a href="index.php">Dashboard</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-wrench"></i> OAT-Ordem Atend. Tec. <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-wrench"></i> OS-Ordem Serviço <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="oat-operacao.php?acao=criar">Abrir OAT</a></li>
-                      <li><a href="oat-operacao.php?acao=retorno">Retorno OAT</a></li>
+                      <li><a href="oat-operacao.php?acao=solicitacao">OS Solicitação</a></li>
+                      <li><a href="oat-operacao.php?acao=retorno">OS Retorno</a></li>
                       <?php if($userNivel > 0){ ?>
-                      <li><a href="oat-operacao.php?acao=amarar">Amarar OS</a></li>
                       <li><a href="oat-operacao.php?acao=finalizar">Finalizar OAT</a></li>
                       <li><a href="oat-operacao.php?acao=concluidas">OAT Concluidas</a></li>
                       <?php } ?>
