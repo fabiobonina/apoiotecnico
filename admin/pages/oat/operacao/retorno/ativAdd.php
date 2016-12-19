@@ -34,14 +34,14 @@
                       <input type="hidden" name="oat" value="<?php echo $oatId; ?>">
                       <input type="hidden" name="cliente" value="<?php echo $oatCliente; ?>">
                       <input type="hidden" name="localidade" value="<?php echo $oatLocalId; ?>">
-		                <div class="ln_solid"></div>
+		                    <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="javascript:window.history.go(-1)" class="btn btn-primary">Voltar</a>
                           <button type="submit" name="ativAdd" class="btn btn-success">Cadastrar</button>
                         </div>
                       </div>
-		            </form>
+		                </form>
                   </div>
                 </div>
               </div>

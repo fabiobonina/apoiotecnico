@@ -6,14 +6,22 @@
       $oatFilial = $resultado->filial;
       $oatOs = $resultado->os;
       $oatCliente = $resultado->cliente;
-      $oatLocalId = $resultado->localidade;
+      $oatLocalId = $resultado->localidade;           
+      $oatServId = $resultado->servico;
+      $oatSistId = $resultado->sistema;
+      $oatData = $resultado->data;
+      $oatAtivo = $resultado->ativo;
+      $oatDataSol = $resultado->data_sol;
+      $oatStatus = $resultado->status;
       foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
-        $oatLocal = $value->nome;
+          $oatLocal = $value->nome;
+          $oatLat = $value->latitude;
+          $oatLong = $value->longitude;
       }endforeach;             
-      foreach($servicos->findAll() as $key => $value):if($value->id == $resultado->servico) {
+      foreach($servicos->findAll() as $key => $value):if($value->id == $oatServId) {
         $oatServico = $value->descricao;
       }endforeach;
-      foreach($sistemas->findAll() as $key => $value):if($value->id == $resultado->sistema) {
+      foreach($sistemas->findAll() as $key => $value):if($value->id == $oatSistId) {
         $oatSistema =  $value->descricao;
       }endforeach;
       
@@ -21,106 +29,61 @@
 
       ?>
 
-            <div class="row">
-              <div class="col-md-8 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>OAT <small>Consulta</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-
-                    <table class="table1">
-                      <tbody>
-                      <!--1#-->
-                        <tr>
-                          <td>OAT:</td>
-                          <td>
-                            <input type="text" disabled="disabled" name="oat" value="<?php echo $oatId; ?>" disabled="disabled" class="col-md-3 col-xs-3">
-                          </td>
-                          <td>&nbsp;</td>
-                          <td>Usuario:</td>
-                          <td>
-                            <input type="text" disabled="disabled" name="usuario" value="<?php echo $oatUsuario; ?>" class=" col-md-10 col-xs-10">
-                          </td>
-                          <td>&nbsp;</td>
-                          <td>Sistema</td>
-                          <td>
-                            <input type="text" id="first-name" name="sistema" value="<?php echo $oatSistema; ?>" disabled="disabled" class=" col-md-10 col-xs-10">
-                          </td>
-                        </tr>
-                        <!--/1#-->
-                        <td>&nbsp;</td>
-                        <!--2#-->
-                        <tr>
-                          <td >Filial:</td>
-                          <td>
-                            <input type="text" name="filial" value="<?php echo $oatFilial; ?>" disabled="disabled" class=" col-md-3 col-xs-3">
-                          </td>
-                          <td>&nbsp;</td>
-                          <td >Cliente:</td>
-                          <td>
-                            <input type="text" name="cliente" value="<?php echo $oatCliente; ?>" disabled="disabled" class="col-md-10 col-xs-10">
-                          </td>
-                          <td>&nbsp;</td>
-                          <td >Serviço:</td>
-                          <td>
-                            <input type="text" id="first-name" name="servico" value="<?php echo $oatServico; ?>" disabled="disabled" class=" col-md-10 col-xs-10">
-                          </td>
-                        </tr>
-                        <!--/2#-->
-                        <td>&nbsp;</td>
-                        <!--3#-->
-                          <tr>
-                            <td>OS:</td>
-                          <td>
-                            <input type="text" disabled="disabled" name="os" value="<?php echo $oatOs; ?>" class="col-md-3 col-xs-3"><br />
-                          </td>
-                          <td>&nbsp;</td>
-                          <td>Local:</td>
-                          <td>
-                            <input type="text" id="localidade" name="localidade" value="<?php echo $oatLocal; ?>" disabled="disabled" class="col-md-10 col-xs-10">
-                          </td>
-                            <td>&nbsp;</td>
-                            <td class="pT12 pL4">Data:</td>
-                          <td>
-                            <input type="text" disabled="disabled" name="dataSol" value="<?php echo $oatDataSol; ?>"class="col-md-10 col-xs-10">
-                          </td>
-                        </tr>
-                        <!--/3#-->
-                      </tbody>
-                    </table>
-
-
-                   <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-                      <input type="hidden" name="oat" value="<?php echo $oatId; ?>"><br />
-		                  <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <a href="oat-operacao.php?acao=finalizar" class="btn btn-primary">Voltar</a>
-                          <?php echo "<button type='submit' name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success'><i class='fa  fa-check-square-o'></i>Encerrar OAT</button>"; ?>
-                          
-                        </div>
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2><?php echo $oatCliente; ?> | <?php echo $oatLocal; ?></h2>
+                          <div class="clearfix"></div>
                       </div>
-		                </form>
+                      <div class="x_content">
+                        <div class="dashboard-widget-content">
+                          <ul class="quick-list">
+                            <li><a href="#"><?php echo $oatSistema; ?></a></li>
+                            <li><a href="#"><?php echo $oatServico; ?></a></li>
+                            <li><a href="#"><?php echo $oatUsuario; ?></a></li>
+                            <li><a href="#">Sol. <?php echo $oatDataSol; ?></a></li>
+                            <li><a href="#">N° AOT: <?php echo $oatId; ?></a></li>
+                          </ul>
+                          <div class="sidebar-widget">
+                            <h3><?php echo $oatFilial; ?> | <?php echo $oatOs; ?></h3>
+                            <canvas width="150" height="80" id="foo" class="" style="width: 70px; height: 20px;"></canvas>
+                            <div class="goal-wrapper">
+                              <span class="gauge-value pull-left"></span>
+                              <span id="gauge-text" class="gauge-value pull"><?php echo $oatData; ?></span>
+                              <span id="goal-text" class="goal-value pull-right"></span>
+                            </div>
+                              <?php 
+                              if($oatLat <> 0 && $oatLong <> 0){
+                              echo "<a href='https://maps.google.com/maps?q=". $oatLat ."%2C". $oatLong ."&z=17&hl=pt-BR' target='_blank'><img src='images/geolocation.png' alt=''></a>";
+                              }else{
+                              echo "<a ><img src='images/geolocation-sem.png'></a>";
+                              }
+                              ?>
+                          </div>
+                        </div>
+                          <div class="ln_solid"></div>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <?php if($oatStatus == 1){ ?>
+                          <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
+                            <input type="hidden" name="oat" value="<?php echo $oatId; ?>"><br />
+                            <a href="<?php echo $redirecionar_1; ?>" class="btn btn-primary btn-xs">Voltar</a>
+                            <button type="button" class="btn btn-dark btn-xs" data-toggle="modal" data-target=".modal-oatEdt<?php echo $oatId; ?>"><i class='fa  fa-edit'></i> EDT</a></button>
+                            <?php echo "<button type='submit' name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success btn-xs'><i class='fa  fa-check-square-o'></i>Encerrar OAT</button>"; ?>
+                          </form>
+                          <?php }else{       ?>
+                          <li><a href="<?php echo $redirecionar_1; ?>" class="btn btn-primary">Voltar</a></li>
+                          <li><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm<?php echo $oatId; ?>"><i class='fa  fa-sign-in'></i> OS</button></li>
+                          <li><button type="button" class="btn btn-dark btn-xs" data-toggle="modal" data-target=".modal-oatEdt<?php echo $oatId; ?>"><i class='fa  fa-edit'></i> ALT</a></button></li>
+                          <?php echo "<a href='". $redirecionar_1 ."&acao1=deletar&oatId=" . $oatId . "' class='btn btn-danger btn-xs' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i> DEL</a>"; ?>
+                          <li><a href="<?php echo $redirecionar_1; ?>" class="btn btn-primary">Voltar</a></li>
+                          <?php echo "<button type='submit' name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success'><i class='fa  fa-check-square-o'></i>Fechar OAT</button>"; ?>
+                          
+                          <?php } ?>
+                        </ul>
+                      </div>
+                      <?php include( $includ_1."edt.php"); ?>
+                    </div>
                   </div>
-                </div>
-              </div>
             <div class="row">
               <!--Tabela Ativo-->
               <div class="col-md-4 col-sm-12 col-xs-12">

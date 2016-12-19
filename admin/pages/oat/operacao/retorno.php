@@ -35,12 +35,15 @@
                   </div>
                 </div>
 
-                <?php // cadastro
-                    include( $includ_1."add.php");
+                <?php
+                  if(isset($_GET['acao1'])){
+                  $acao = $_GET['acao1'];	
+                  if($acao=='consulta'){include($includ_1."consulta.php");}
+                  }else{
+                      include( $includ_1."oatCard.php");
+                  }
                 ?>
-                <?php // cadastro
-                    include( $includ_1."oatCard.php");
-                ?>
+
 
 
               </div>

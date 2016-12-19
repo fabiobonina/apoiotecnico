@@ -1,10 +1,13 @@
 <?php
-    $oat = new Oats();
+    $oats = new Oats();
     $usuarios = new Usuarios();
     $clientes = new Clientes();
     $localidades = new Localidades();
     $sistemas = new Sistemas();
     $servicos = new Servicos();
+    $descricoes = new Descricoes();
+    $ativos = new Ativos();
+    
     #ADD
     if(isset($_POST['solOat'])):
     $user = $_POST['usuario'];
@@ -19,17 +22,17 @@
     $status = "0";
     $ativo = "0";
 
-    $oat->setUser($user);
-    $oat->setCliente($cliente);
-    $oat->setLocalidade($localidade);
-    $oat->setServico($servico);
-    $oat->setSistema($sistema);
-    $oat->setData($data);
-    $oat->setDataOat($dataOat);
-    $oat->setStatus($status);
-    $oat->setAtivo($ativo);
+    $oats->setUser($user);
+    $oats->setCliente($cliente);
+    $oats->setLocalidade($localidade);
+    $oats->setServico($servico);
+    $oats->setSistema($sistema);
+    $oats->setData($data);
+    $oats->setDataOat($dataOat);
+    $oats->setStatus($status);
+    $oats->setAtivo($ativo);
     # Insert
-    if($oat->insert()){
+    if($oats->insert()){
     echo '<div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>Inserido com sucesso!</strong> Redirecionando ...
@@ -53,17 +56,17 @@
     $status = "0";
     $ativo = "0";
 
-    $oat->setUser($user);
-    $oat->setCliente($cliente);
-    $oat->setLocalidade($localidade);
-    $oat->setServico($servico);
-    $oat->setSistema($sistema);
-    $oat->setData($data);
-    $oat->setDataOat($dataOat);
-    $oat->setStatus($status);
-    $oat->setAtivo($ativo);
+    $oats->setUser($user);
+    $oats->setCliente($cliente);
+    $oats->setLocalidade($localidade);
+    $oats->setServico($servico);
+    $oats->setSistema($sistema);
+    $oats->setData($data);
+    $oats->setDataOat($dataOat);
+    $oats->setStatus($status);
+    $oats->setAtivo($ativo);
 
-    if($oat->update($oatId)){
+    if($oats->update($oatId)){
     echo '<div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>Atualizada com sucesso!</strong> Redirecionando ...
@@ -85,12 +88,12 @@
             $dataOs = date("Y-m-d H:i:s");
             $status = "1";
 
-            $oat->setFilial($filial);
-            $oat->setOs($os);
-            $oat->setDataOs($dataOs);
-            $oat->setStatus($status);
+            $oats->setFilial($filial);
+            $oats->setOs($os);
+            $oats->setDataOs($dataOs);
+            $oats->setStatus($status);
 
-            if($oat->amarar($id)){
+            if($oats->amarar($id)){
             echo '<div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>OS amarada com sucesso!</strong> Redirecionando ...
@@ -103,7 +106,7 @@
     #DELETAR
     if(isset($_GET['acao1']) && $_GET['acao1'] == 'deletar'):
     $oatId = (int)$_GET['oatId'];
-    if($oat->delete($oatId)){
+    if($oats->delete($oatId)){
     echo '<div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>Deletada com sucesso!</strong> Redirecionando ...
