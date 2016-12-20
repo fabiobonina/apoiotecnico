@@ -90,9 +90,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2><small>Ativo </small>
-                    <form data-parsley-validate method="get" action="">
-                      <a type="submit" href="oat-operacao.php?acao=finalizar&acao1=consulta&oat=<?php echo $aotId ?>&acao2=ativAdd" ><i class='fa  fa-plus'></i>Adicionar</a>
-		                </form></h2>
+
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -204,4 +202,10 @@
               </div>
               <!--/Tabela Lista-->
             </div>
-         <?php  }  ?>
+         <?php  }  
+         
+         include( $includ_ativo."ativoAdd.php");
+         
+         ?>
+
+         

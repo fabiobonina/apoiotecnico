@@ -2,6 +2,7 @@
 
           $redirecionar_1 = 'oat-operacao.php?acao=retorno';
           $includ_1 = 'admin/pages/oat/system/oat/';
+          $includ_ativo = 'admin/pages/oat/system/ativo/';
           $tabAcao = 'oat-operacao.php?acao=retorno';
           $oatStatus = 1;
 
@@ -29,16 +30,19 @@
             </div>
               <div class="clearfix"></div>
               <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="x_panel">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-oatAdd"><i class='fa  fa-wrench'></i> Retorno OS</button>
-                  </div>
-                </div>
+
 
                 <?php
                   if(isset($_GET['acao1'])){
                   $acao = $_GET['acao1'];	
-                  if($acao=='consulta'){include($includ_1."consulta.php");}
+                  if($acao=='consulta'){ ?>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-ativoAdd"><i class='fa  fa-wrench'></i> Ativo</button>
+                  </div>
+                </div>
+                    
+                  <?php  include($includ_1."consulta.php");}
                   }else{
                       include( $includ_1."oatCard.php");
                   }
