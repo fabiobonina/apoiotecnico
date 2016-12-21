@@ -3,6 +3,7 @@
           $redirecionar_1 = 'oat-operacao.php?acao=retorno';
           $includ_1 = 'admin/pages/oat/system/oat/';
           $includ_ativo = 'admin/pages/oat/system/ativo/';
+          $includ_desc = 'admin/pages/oat/system/descricao/';
           $tabAcao = 'oat-operacao.php?acao=retorno';
           $oatStatus = 1;
 
@@ -39,6 +40,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="x_panel">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-ativoAdd"><i class='fa  fa-wrench'></i> Ativo</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-descAdd"><i class='fa  fa-wrench'></i> Descrição</button>
                   </div>
                 </div>
                     
