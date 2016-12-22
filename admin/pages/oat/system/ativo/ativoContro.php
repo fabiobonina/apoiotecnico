@@ -1,6 +1,6 @@
           <?php 
             #ATIVO ADD
-            if(isset($_POST['ativAdd'])):
+            if(isset($_POST['ativoAdd'])):
               if(!isset($_POST['cliente']) OR !isset($_POST['localidade']) OR !isset($_POST['plaqueta'])){
                 echo '<div class="alert alert-danger">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -30,7 +30,7 @@
             endif;
 
             #ATIVO Editar
-            if(isset($_POST['ativEdt'])):
+            if(isset($_POST['ativoEdt'])):
               if(!isset($_POST['localId']) OR !isset($_POST['plaqueta']) OR !isset($_POST['ativo'])){
                 echo '<div class="alert alert-danger">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -56,13 +56,13 @@
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <strong>Salva com sucesso!</strong> Redirecionando ...
                         </div>';
-                  header("Refresh: 1, oat-operacao.php?acao=retorno&acao1=consulta&oat=". $oat);	
+                  header("Refresh: 1, $redirecionar_1&acao1=consulta&oat=". $oat);	
                 }
               }
               
             endif;
             #DELETAR
-          	if(isset($_GET['acao2']) && $_GET['acao2'] == 'ativDel'):
+          	if(isset($_GET['acao2']) && $_GET['acao2'] == 'ativoDel'):
 
 							$id = (int)$_GET['cod'];
               $oat = $_GET['oat'];
@@ -71,7 +71,7 @@
 					          <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Deletado com sucesso!</strong> Redirecionando ...
                     </div>';
-                header("Refresh: 1, oat-operacao.php?acao=retorno&acao1=consulta&oat=". $oat);	
+                header("Refresh: 1, $redirecionar_1&acao1=consulta&oat=". $oat);	
 							}
 						endif;
           ?>

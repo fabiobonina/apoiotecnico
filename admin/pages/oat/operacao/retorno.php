@@ -8,6 +8,8 @@
           $oatStatus = 1;
 
           include( "admin/pages/oat/system/oat/oatContr.php");
+          include( "admin/pages/oat/system/descricao/descContro.php");
+          include( "admin/pages/oat/system/ativo/ativoContro.php");
 
 				?>
         
@@ -39,8 +41,9 @@
                   if($acao=='consulta'){ ?>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="x_panel">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-ativoAdd"><i class='fa  fa-wrench'></i> Ativo</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-descAdd"><i class='fa  fa-wrench'></i> Descrição</button>
+                    <a href="<?php echo $redirecionar_1; ?>" class="btn btn-default "><i class='fa fa-arrow-left'></i> Voltar</a>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".modal-ativoAdd"><i class='fa  fa-barcode'></i> Ativo</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".modal-descAdd"><i class='fa  fa-cogs'></i> Desc. Serviço</button>
                   </div>
                 </div>
                     
@@ -48,11 +51,12 @@
                   }else{
                       include( $includ_1."oatCard.php");
                   }
+                  include( $includ_desc."descAdd.php");
                 ?>
-
-
 
               </div>
             </div>
             <!-- /page content -->
+
+
 

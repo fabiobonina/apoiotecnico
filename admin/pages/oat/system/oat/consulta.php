@@ -79,43 +79,22 @@
                   <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="x_panel">
                       <div class="x_title">
-                        <h2>Ativos</h2>
+                        <h2>Ativos da Empresa</h2>
                           <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
                         <div class="dashboard-widget-content">
-                          <table id="table" class="table ">
-                            <thead>
-                              <tr>
-                                <th>N.Plaqueta</th>
-                                <th>Ação</th>
-                              </tr>
-                            </thead>
-                            <tbody>
                               <?php foreach($ativos->findAll() as $key => $value):if($value->cliente == $oatCliente && $value->localidade == $oatLocalId ) { 
                                 $ativoId = $value->id;
                                 $ativoPlaq = $value->plaqueta;
                                 ?>
-                                <tr>
-                                  <td><?php echo $ativoPlaq; ?></td>
-                                  <td>
-                                    <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-                                      <div class="form-group">
-                                        <input type="hidden" name="ativo" value="<?php echo $ativId; ?>">
-                                        <input type="hidden" name="oat" value="<?php echo $oatId; ?>">
-                                        <input type="hidden" name="localId" value="<?php echo $oatLocalId; ?>">
-                                      </div>
-                                        <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-ativoEdt"><i class='fa  fa-edit'></i> Editar</button>
-                                        <?php echo "<a href='oat-operacao.php?acao=finalizar&acao1=consulta&oat=" . $oatId . "&acao2=ativDel&cod=".$ativoId." ' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i>Deletar</a>"; ?>
-                                        <button type="submit" name="ativoAdd" class="btn btn-success btn-xs">Enviar Ativo</button>
-                                    </form>
-                                  </td>
-                                </tr>
-
-
+                                  <li>
+                                    <?php echo $ativoPlaq; ?>
+                                    <button type="button" class="btn btn-dark btn-xs" data-toggle="modal" data-target=".modal-ativoEdt<?php echo $ativoId; ?>"><i class='fa  fa-edit'></i> EDT</a></button>
+                                    <?php echo "<a href='". $redirecionar_1 ."&acao1=consulta&oat=" . $oatId . "&acao2=ativoDel&cod=".$ativoId." ' class='btn btn-danger btn-xs'' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i> DEL</a>"; ?>
+                                  </li>
+                                  <?php include( $includ_ativo."ativoEdt.php"); ?>
                                 <?php }endforeach; ?>
-                            </tbody>
-                          </table>
                         </div>
                           <div class="ln_solid"></div>
                         <ul class="nav navbar-right panel_toolbox">
@@ -123,55 +102,7 @@
                       </div>
                     </div>
                   </div>
-                  <?php //include( $includ_1."edt.php"); ?>
                <!-- Small modal -->
-                  <?php
-                    $resultado = $ativos->find($ativoId);
-                    $ativPlaqueta = $resultado->plaqueta;
-                  ?>
-                      <div class="modal fade modal-ativoEdt" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                              <h4 class="modal-title" id="myModalLabel2"><?php echo $oatCliente; ?> | <?php echo $oatLocal; ?></h4>
-                            </div>
-                            <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
-                              <div class="modal-body">
-                                <h4>Ativo Empresa</h4>
-                                
-                                <div class="form-group">
-                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="query">Localidade <span class="required">*</span></label>
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="query" name="localidade" value="<?php echo $oatCliente; ?> | <?php echo $oatLocal; ?>" required="required" class="form-control col-md-7 col-xs-12">
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <div class=" col-md-6 col-xs-12">
-                                    <ul class="suggestions hideElem"></ul>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">N° Plaqueta <span class="required">*</span></label>
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="plaqueta" name="plaqueta" value="<?php echo $ativPlaqueta; ?>" required="required" size=11 maxlength=11 class="form-control col-md-7 col-xs-12">
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <input type="hidden" name="ativo" value="<?php echo $ativId; ?>">
-                                  <input type="hidden" name="oat" value="<?php echo $oatId; ?>">
-                                  <input type="hidden" name="localId" value="<?php echo $oatLocalId; ?>">
-                                </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                <button type="submit" name="ativoAdd" class="btn btn-success">Enviar Ativo</button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /modals -->
                    
 
         <?php
@@ -180,8 +111,6 @@
            if($acao=='descCons'){include("admin/pages/oat/operacao/finalizar/descCons.php");}	
             // cadastro
            if($acao=='descEdt'){include("admin/pages/oat/operacao/finalizar/descEdt.php");}
-           if($acao=='ativAdd'){include("admin/pages/oat/operacao/finalizar/ativAdd.php");}
-           if($acao=='ativEdt'){include("admin/pages/oat/operacao/finalizar/ativEdt.php");}
           }else{
         ?>
             <div class="row">
@@ -189,58 +118,38 @@
               <div class="col-md-8 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><small>Descrição </small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
+                    <h2>Descrição do Serviço</h2>
+                      <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <table id="table" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Descrição</th>
-                          <th>Ação</th>
-                        </tr>
-                      </thead>
+                    <div class="dashboard-widget-content">
+                          <?php foreach($descricoes->findAll() as $key => $value):if($value->oat == $oatId ) { 
+                            $descId = $value->id;
+                            $descDescricao =  $value->descricao;
+                            ?>
 
-                			<?php foreach($descricoes->findAll() as $key => $value):if($value->oat == $oatId ) { ?>
-                      <tbody>
-                        <tr>
-                          <td><?php echo $value->id; ?></td>
-                          <td><?php echo $value->descricao; ?></td>
-                          <td>
-                            <?php echo "<a href='oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oatId ."&acao2=descEdt&cod=".$value->id."'><i class='fa  fa-edit'></i>Editar</a>"; ?>
-                            <?php echo "<a href='oat-operacao.php?acao=finalizar&acao1=consulta&oat=". $oatId. "&acao2=descCons&cod=".$value->id."'><i class='fa  fa-eye'></i>Visializar</a>";?>
-                          </td>
-                        </tr>
-                      </tbody>
-                      <?php }endforeach; ?>
-
-                    </table>
+                              <li>
+                              <?php echo $value->id; ?>
+                              <?php echo $value->descricao; ?>
+                              </li>
+                              <li>
+                                <button type="button" class="btn btn-dark btn-xs" data-toggle="modal" data-target=".modal-descEdt<?php echo $descId; ?>"><i class='fa  fa-edit'></i> EDT</button>
+                              </li>
+                              <?php include( $includ_desc."descEdt.php"); ?>
+                            <?php }endforeach; ?>
+                    </div>
+                      <div class="ln_solid"></div>
+                    <ul class="nav navbar-right panel_toolbox">
+                    </ul>
                   </div>
-                    
                 </div>
               </div>
               <!--/Tabela Lista-->
+
+
             </div>
-         <?php  }  
-         
+         <?php  }
          include( $includ_ativo."ativoAdd.php");
-         
          ?>
 
          

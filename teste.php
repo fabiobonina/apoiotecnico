@@ -2,13 +2,22 @@
 <head>
 <script type="text/javascript">
 var selecionado = null;
+
 function teste(value) {
+    var b = 'value';
     alert(value);
+    
 }
+
 </script>
 </head>
 <body>
-    <input type='button' value='oi' onclick='teste(this.value)' />
+    <input type='button' value='fabio' onclick='teste(this.value)' />
+    <?php
+    $teste = "<script>document.write(b)</script>";
+    echo $teste;
+    echo $teste2 = 200;
+    ?>
 </div>
 </body>
 </html>

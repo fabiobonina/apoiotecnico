@@ -114,5 +114,28 @@
     header("Refresh: 1, $redirecionar_1");	
     }
     endif;
+    #RETORNAR
+    if(isset($_POST['fechar'])):
+        if(!isset($_POST['oat'])){
+        echo '<div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Dados incompletos!</strong> Os dados estão incorretos.
+                </div>';
+        }else{
+            $id = $_POST['oat'];
+            $dataFech = date("Y-m-d H:i:s");
+            $status = "2";
+
+            $oats->setDataFech($dataFech);
+            $oats->setStatus($status);
+            if($oats->retorno($id)){
+                echo '<div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>OAT Fechada!</strong> Redirecionando ...
+                    </div>';
+                header("Refresh: 1, oat-operacao.php?acao=retorno");	
+            }
+        }
+    endif;
 
 ?>

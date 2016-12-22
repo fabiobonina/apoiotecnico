@@ -29,7 +29,7 @@
                               </div>
                             </div>
                             <div class="form-group">
-                              <div class=" col-md-6 col-xs-12">
+                              <div class=" col-md-6 col-sm-6 col-xs-12">
                                 <ul class="suggestions hideElem"></ul>
                               </div>
                             </div>
