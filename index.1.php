@@ -24,7 +24,7 @@
             if( $cont_oatTt > 0 && $latitude <> 0){
     ?>
 
-    <?php echo $latitude; ?> <?php echo $longitude; ?><?php echo $localidade; ?> <?php echo $cont_oatTt; ?>
+    <?php// echo $latitude; ?> <?php //echo $longitude; ?><?php //echo $localidade; ?> <?php //echo $cont_oatTt; ?>
     <?php }
     }endforeach; ?>
 
@@ -42,21 +42,12 @@
               // Criamos um Array com algumas informações básicas
               // de uma pessoa.
               $localOS_info = array(
-                  $localidade {
-                    'center {
-                      lat =>'. $latitude,
-                      lng= $longitude
-                      },
-                    population: $cont_oatTt
-                     },
-                  "idade" => 22,
-                  "profissao" => "Webmaster",
-                  "cidade" => utf8_encode("São Paulo"),
-                  "interesses" => array(utf8_encode("informática"), utf8_encode("programação"), "esportes")
+                  "$localidade".': { center: { lat: '.$latitude.', lng: '.$longitude.'}, population:'. $cont_oatTt.'},'
               );
             //chicago: { center: {lat: 41.878, lng: -87.629}, population: 2714856},
               // Agora transformamos esse Array em uma String
               // formatada em JSON
+              //"interesses" => array(utf8_encode("informática"), utf8_encode("programação"), "esportes")
               $json = json_encode($localOS_info);
 
               echo $json;

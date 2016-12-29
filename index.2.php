@@ -1,15 +1,3 @@
-
-<?php $oats = new Oats();
-      $usuarios = new Usuarios();
-      $clientes = new Clientes();
-      $localidades = new Localidades();
-      $sistemas = new Sistemas();
-      $servicos = new Servicos();
-      $descricoes = new Descricoes();
-      $ativos = new Ativos();
-
-?>
-
 <?php
     function __autoload($class_name){
       require_once 'admin/classes/' . $class_name . '.php';
@@ -50,7 +38,8 @@ var citymap = {
 chicago: { center: {lat: 41.878, lng: -87.629}, population: 2714856},
 newyork: { center: {lat: 40.714, lng: -74.005}, population: 8405837},
 losangeles: { center: {lat: 34.052, lng: -118.243}, population: 3857799},
-vancouver: { center: {lat: 49.25, lng: -123.1}, population: 603502}
+vancouver: { center: {lat: 49.25, lng: -123.1}, population: 603502},
+"AGESPISA | ETA TERESINA III E IV" : { center: { lat: -5.145820, lng: -42.804356}, population:1},
 };
 
  function initMap() {
