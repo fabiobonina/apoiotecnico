@@ -66,8 +66,9 @@
                           <form id="demo-form2" data-parsley-validate method="post" action="" class="form-horizontal form-label-left">
                             <input type="hidden" name="oat" value="<?php echo $oatId; ?>"><br />
                             <a href="<?php echo $redirecionar_1; ?>" class="btn btn-primary btn-xs">Voltar</a>
-                            <button type="button" class="btn btn-dark btn-xs" data-toggle="modal" data-target=".modal-oatEdt<?php echo $oatId; ?>"><i class='fa  fa-edit'></i> EDT</a></button>
+                            <?php if($oatStatus == 1){ ?>
                             <?php echo "<button type='submit' name='fechar' ' onclick='return confirm(\"Deseja realmente Fechar OAT?\")' class='btn btn-success btn-xs'><i class='fa  fa-check-square-o'></i>Encerrar OAT</button>"; ?>
+                            <?php } ?>
                           </form>
                         </ul>
                       </div>

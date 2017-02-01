@@ -58,10 +58,11 @@
                         <ul class="nav navbar-right panel_toolbox">
                           <?php if($oatStatus == 1){ ?>
                           <?php echo "<a href='". $redirecionar_1 ."&acao1=consulta&oat=" . $oatId . "' class='btn btn-primary btn-xs'><i class='fa  fa-edit'></i>Consulta</a>"; ?>
-                          <li><button type="button" class="btn btn-dark btn-xs" data-toggle="modal" data-target=".modal-oatEdt<?php echo $oatId; ?>"><i class='fa  fa-edit'></i> EDT</a></button></li>
-                          
-                          <?php }else{       ?>
+                          <?php }else{
+                            if($userNivel > 1){
+                            ?>
                           <li><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm<?php echo $oatId; ?>"><i class='fa  fa-sign-in'></i> OS</button></li>
+                          <?php } ?>
                           <li><button type="button" class="btn btn-dark btn-xs" data-toggle="modal" data-target=".modal-oatEdt<?php echo $oatId; ?>"><i class='fa  fa-edit'></i> EDT</a></button></li>
                           <?php echo "<a href='". $redirecionar_1 ."&acao1=deletar&oatId=" . $oatId . "' class='btn btn-danger btn-xs' onclick='return confirm(\"Deseja realmente deletar?\")'><i class='fa  fa-trash-o'></i> DEL</a>"; ?>
                           <?php } ?>
