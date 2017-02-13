@@ -24,11 +24,11 @@
             if( $cont_oatTt > 0 && $latitude <> 0){
     ?>
 
-<<<<<<< HEAD
+
     <?php //echo $latitude; ?> <?php //echo $longitude; ?><?php //echo $localidade; ?> <?php //echo $cont_oatTt; ?>
-=======
+
     <?php// echo $latitude; ?> <?php //echo $longitude; ?><?php //echo $localidade; ?> <?php //echo $cont_oatTt; ?>
->>>>>>> origin/master
+
     <?php }
     }endforeach; ?>
 
@@ -45,22 +45,52 @@
               //[ echo $latitude; ,  echo $longitude; , echo $localidade;',  echo $cont_oatTt; ],
               // Criamos um Array com algumas informações básicas
               // de uma pessoa.
-<<<<<<< HEAD
-              $localOS_info = array('"'.$localidade.'"': { center: { lat: '. $latitude .', lng: '. $longitude.'}, population:'. $cont_oatTt. '},');
-=======
-              $localOS_info = array(
-                  "$localidade".': { center: { lat: '.$latitude.', lng: '.$longitude.'}, population:'. $cont_oatTt.'},'
-              );
->>>>>>> origin/master
-            //chicago: { center: {lat: 41.878, lng: -87.629}, population: 2714856},
-              // Agora transformamos esse Array em uma String
-              // formatada em JSON
-              //"interesses" => array(utf8_encode("informática"), utf8_encode("programação"), "esportes")
-              $json = json_encode($localOS_info);
-
-              echo $json;
-
             }
-          }endforeach;
+         }endforeach;
+
 
   ?>
+
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Localidades</th>
+                          <th>Servicos</th>
+                          <th>Sistemas</th>
+                          <th>Data</th>
+                          
+                        </tr>
+                      </thead>
+
+                			<?php foreach($oats->ultimaOat() as $key => $value):{ 
+                          $oatLocalId = $value->localidade;
+                          $oatServId = $value->servico;
+                          $oatSistId = $value->sistema;
+                          $oatUltimoAtend = $value->UltimaData;
+                          foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
+                            $oatLocal = $value->nome;
+                          }endforeach;             
+                          foreach($servicos->findAll() as $key => $value):if($value->id == $oatServId) {
+                            $oatServico = $value->descricao;
+                          }endforeach;
+                          foreach($sistemas->findAll() as $key => $value):if($value->id == $oatSistId) {
+                            $oatSistema =  $value->descricao;
+                          }endforeach;
+                          
+                      ?>
+                      <tbody>
+                        <tr>
+                          <td><?php echo $oatLocalId; ?></td>
+                          <td><?php echo $oatLocal; ?></td>
+                          <td><?php echo $oatServico; ?></td>
+                          <td><?php echo $oatSistema; ?></td>
+                          <td><?php echo $oatUltimoAtend; ?></td>
+
+                          
+                        </tr>
+                      </tbody>
+                      <?php }endforeach; ?>
+
+                    </table>
+

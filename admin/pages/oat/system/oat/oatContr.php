@@ -16,6 +16,9 @@
         $cliente = $value->cliente;
     }endforeach;
     $servico = $_POST['servico'];
+    foreach($servicos->findAll() as $key => $value):if($value->id == $servico) {
+        $servTipo = $value->tipo;
+    }endforeach;
     $sistema = $_POST['sistema'];
     $data = $_POST['data'];
     $dataOat = date("Y-m-d H:i:s");
@@ -28,6 +31,7 @@
     $oats->setServico($servico);
     $oats->setSistema($sistema);
     $oats->setData($data);
+    $oats->setData($dataUltimoAt);
     $oats->setDataOat($dataOat);
     $oats->setStatus($status);
     $oats->setAtivo($ativo);
@@ -55,6 +59,35 @@
     $dataOat = date("Y-m-d H:i:s");
     $status = "0";
     $ativo = "0";
+
+    foreach($oats->ultimaOat() as $key => $value):if($value->localidade == $localidade && $value->localidade == $localidade){ 
+                          $oatLocalId = $value->localidade;
+                          $oatServId = $value->servico;
+                          $oatSistId = $value->sistema;
+                          $oatUltimoAtend = $value->UltimaData;
+                          foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
+                            $oatLocal = $value->nome;
+                          }endforeach;             
+                          foreach($servicos->findAll() as $key => $value):if($value->id == $oatServId) {
+                            $oatServico = $value->descricao;
+                          }endforeach;
+                          foreach($sistemas->findAll() as $key => $value):if($value->id == $oatSistId) {
+                            $oatSistema =  $value->descricao;
+                          }endforeach;
+                          
+                      ?>
+                      <tbody>
+                        <tr>
+                          <td><?php echo $oatLocalId; ?></td>
+                          <td><?php echo $oatLocal; ?></td>
+                          <td><?php echo $oatServico; ?></td>
+                          <td><?php echo $oatSistema; ?></td>
+                          <td><?php echo $oatUltimoAtend; ?></td>
+
+                          
+                        </tr>
+                      </tbody>
+                      <?php }endforeach; ?>
 
     $oats->setUser($user);
     $oats->setCliente($cliente);

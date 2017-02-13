@@ -14,6 +14,7 @@ class Oats extends Crud{
 	private $filial;
 	private $os;
 	private $data;
+	private $dataUltimoAt;
 	private $dataOS;
 	private $dataFech;
 	private $dataTerm;
@@ -48,8 +49,11 @@ class Oats extends Crud{
 	public function setOs($os){
 		$this->os = $os;
 	}
-	public function setData($data){
+	public function setDataUltimoAl($data){
 		$this->data = $data;
+	}
+	public function setData($dataUltimoAt){
+		$this->dataUltimoAt = $dataUltimoAt;
 	}
 	public function setDataOs($dataOs){
 		$this->dataOs = $dataOs;
@@ -69,8 +73,8 @@ class Oats extends Crud{
 
 	public function insert(){
 		try{
-			$sql  = "INSERT INTO $this->table (nickuser, cliente, localidade, servico, sistema, data, data_sol, filial, os, data_os, data_fech, data_term, status, ativo) ";
-			$sql .= "VALUES (:nickuser, :cliente, :localidade, :servico, :sistema, :data, :data_sol, :filial, :os, :data_os, :data_fech, :data_term, :status, :ativo)";
+			$sql  = "INSERT INTO $this->table (nickuser, cliente, localidade, servico, sistema, data, dtUltimoAt, data_sol, filial, os, data_os, data_fech, data_term, status, ativo) ";
+			$sql .= "VALUES (:nickuser, :cliente, :localidade, :servico, :sistema, :data, :dtUltimoAt, :data_sol, :filial, :os, :data_os, :data_fech, :data_term, :status, :ativo)";
 			$stmt = DB::prepare($sql);
 			$stmt->bindParam(':nickuser',$this->nickUser);
 			$stmt->bindParam(':cliente',$this->cliente);
@@ -78,6 +82,7 @@ class Oats extends Crud{
 			$stmt->bindParam(':servico',$this->servico);
 			$stmt->bindParam(':sistema',$this->sistema);
 			$stmt->bindParam(':data',$this->data);
+			$stmt->bindParam(':dtUltimoAt',$this->dataUltimoAt);
 			$stmt->bindParam(':data_sol',$this->dataOat);
 			$stmt->bindParam(':filial',$this->filial);
 			$stmt->bindParam(':os',$this->os);
@@ -182,5 +187,19 @@ class Oats extends Crud{
 			echo 'ERROR: ' . $e->getMessage();
 		}
 	}
+
+		public function ultimaOat(){
+		try{
+		$sql  = "SELECT localidade, servico, sistema, MAX(data) As UltimaData FROM $this->table GROUP BY localidade";
+		$stmt = DB::prepare($sql);
+		$stmt->bindParam(':status', $status, PDO::PARAM_INT);
+		$stmt->execute();
+		return $stmt->fetchAll();
+		} catch(PDOException $e) {
+			echo 'ERROR: ' . $e->getMessage();
+		}
+	}
+
+	
 
 }
