@@ -1,18 +1,17 @@
 <?php
-//ESTA API ESTÁ UTILIZANDO O BENCO DE DADOS AULA COM A TABELA
+//ESTA API ESTÁ UTILIZANDO O BANCO DE DADOS AULA COM A TABELA
 //USUÁRIOS E UTILIZA ENVIO E RETORNO EM OBJETOS
 header("Access-Control-Allow-Origin:http://localhost:8100");
 header("Content-Type: application/x-www-form-urlencoded");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
-    $banco="mysql:host=localhost;dbname=aula";
+    $banco="mysql:host=localhost;dbname=system_tec";
     $user="root";
     $pass="";
 
     //RECUPERAÇÃO DO FORMULÁRIO
     $data = file_get_contents("php://input");
     $id = json_decode($data);
-
 
     // TRANSFORMA OS DADOS
     $id = trim($id);
