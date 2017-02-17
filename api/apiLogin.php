@@ -9,11 +9,11 @@ $pass = "";
 $data = file_get_contents("php://input");
 $objData = json_decode($data);
 
-//$nickuser = $objData->username;
-//$senha_informada = $objData->password;
+$nickuser = $objData->username;
+$senha_informada = $objData->password;
 
-$nickuser = 'fabio.bonina';
-$senha_informada = '123abc';
+//$nickuser = 'fabio.bonina';
+//$senha_informada = '123abc';
 
 //$nickuser = 'fabio.bonina';
 //$senha = '123abc';
