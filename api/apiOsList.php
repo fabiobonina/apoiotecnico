@@ -34,7 +34,7 @@ foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->sta
 	$oatDataSol = $value->data_sol;
 	$oatDataOs = $value->data_os;
 	$oatDataFec = $value->data_fech;
-    $oatDataTer = $value->data_term;
+  $oatDataTer = $value->data_term;
 	$oatStatus = $value->status;
 	foreach($localidades->findAll() as $key => $value):if($value->id == $oatLocalId) {
 		$oatLocal = $value->nome;

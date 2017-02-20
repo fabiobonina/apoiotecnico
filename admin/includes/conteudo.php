@@ -43,8 +43,44 @@
         }
 
       }endforeach; ?>
+      <?php
+      $cont_oatLat = 0;
+      $out = "{";
+
+         foreach($localidades->findAll() as $key => $value):{
+            $localId = $value->id;
+            $localidade = $value->cliente . " | " . $value->nome;
+            $localLat = $value->latitude;
+            $localLong = $value->longitude;
+            $cont_oatTt = 0;
+
+            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId && $value->status < 5 ) {
+              $cont_oatTt++;
+            }endforeach;
+
+            if( $cont_oatTt > 0 && $localLat <> 0){
+              $cont_oatLat++;
+          		if ($out != "{") {
+          			$out .= ",";
+          		}
+              $out .= '"'.$localidade.'": { ';
+          		$out .= 'center: {lat: '.$localLat.', ';
+          		$out .= 'lng: '.$localLong.'},';
+              $out .= 'atendimento: '.$cont_oatTt.'}';
+
+
+            }
+          }endforeach;
+
+    		$out .= "}";
+
+        $cont_oatLat1 = ($cont_oatLat / $cont_oat)*100;
+
+   ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
+    <script async defer src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
+
+
     <script type="text/javascript">
 
       // Load Charts and the corechart and barchart packages.
@@ -135,50 +171,43 @@
         var map = new google.visualization.Map(document.getElementById('map_div'));
         map.draw(data_maps, options_maps);
       }
-      function drawMarkersMap() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Latitude');
-        data.addColumn('number', 'Longitude');
-        data.addColumn('string', 'Label');
-        data.addColumn('number', 'Atendimento');
-        data.addRows([
-         <?php
-         $cont_oatLat = 0;
-         foreach($localidades->findAll() as $key => $value):if($value->ativo == 0 ) {
-            $localId = $value->id;
-            $localidade = $value->cliente . " | " . $value->nome;
-            $latitude = $value->latitude;
-            $longitude = $value->longitude;
-            $cont_oatTt = 0;
-
-            foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId && $oatStatus < 4 ) {
-              $cont_oatTt++;
-            }endforeach;
-
-            if( $cont_oatTt > 0 && $latitude <> 0){
-              ?>
-          [<?php echo $latitude; ?>, <?php echo $longitude; ?>, '<?php echo $localidade; ?>', <?php echo $cont_oatTt; ?>],
-          <?php
-          $cont_oatLat++;
-          }
-          }endforeach;
-          $cont_oatLat1 = ($cont_oatLat / $cont_oat)*100;
-
-           ?>
-        ]);
-
-        var options = {
-          region: 'BR',
-          displayMode: 'markers',
-          colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
-        };
-
-
-          var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
-          chart.draw(data, options);
-        }
 
     </script>
+    <script>
+    //var citymap = <?php echo json_encode($out) ?>;
+    var citymap = <?php echo $out; ?>;
+
+
+
+     function initMap() {
+       // Create the map.
+       var map = new google.maps.Map(document.getElementById('map'), {
+         zoom: 4,
+         center: {lat: -14.239104, lng: -51.925403},
+         mapTypeId: google.maps.MapTypeId.TERRAIN
+       });
+
+       // Construct the circle for each value in citymap.
+       // Note: We scale the area of the circle based on the population.
+       for (var city in citymap) {
+         // Add the circle for this city to the map.
+         var cityCircle = new google.maps.Circle({
+           strokeColor: '#FF0000',
+           strokeOpacity: 0.8,
+           strokeWeight: 2,
+           fillColor: '#FF0000',
+           fillOpacity: 0.35,
+           map: map,
+           center: citymap[city].center,
+           radius: Math.sqrt(citymap[city].atendimento) * 5000
+         });
+       }
+     }
+
+         </script>
+         <script async defer
+             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q&callback=initMap"></script>
+       </body>
 
 
         <!-- page content -->
@@ -253,14 +282,14 @@
                     <h3>OAT | Região <small>Posiçao geografica</small></h3>
                   </div>
                 </div>
-                <div class="col-md-6 col-sm-9 col-xs-12">
+                <div class="col-md-8 col-sm-9 col-xs-12">
                   <div id="placeholder33" style="height: 460px; display: none" class="demo-placeholder"></div>
-                  <div style="width: 80%;">
-                    <div id="chart_div" style="width: 100%; height: 400px;"></div>
+                  <div style="width: 100%;">
+                    <div id="map" style="width: 100%; height: 460px;"></div>
                   </div>
                 </div>
-                <div class="col-md-6 col-sm-3 col-xs-12 bg-white">
-                  <div id="" style="width: 100%; height:100%;">OBS: Os atendimentos exibidos neste gráfico, são os que tem sua posição geografica salva por geolocalização, que corresponde a <?php echo round($cont_oatLat1, 2) ; ?>%( <?php echo $cont_oatLat ; ?> ) do total de atendimentos feitos.</div>
+                <div class="col-md-4 col-sm-3 col-xs-12 bg-white">
+                  <div style="width: 100%; height:100%;">OBS: Os atendimentos exibidos neste gráfico, são os que tem sua posição geografica salva por geolocalização, que corresponde a <?php echo round($cont_oatLat1, 2) ; ?>%( <?php echo $cont_oatLat ; ?> ) do total de atendimentos feitos.</div>
                 </div>
                 <div class="clearfix"></div>
               </div>

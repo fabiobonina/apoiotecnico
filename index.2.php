@@ -11,6 +11,36 @@
     $servicos = new Servicos();
     $descricoes = new Descricoes();
     $ativos = new Ativos();
+
+    $cont_oatLat = 0;
+    $out = "{";
+
+       foreach($localidades->findAll() as $key => $value):{
+          $localId = $value->id;
+          $localidade = $value->cliente . " | " . $value->nome;
+          $localLat = $value->latitude;
+          $localLong = $value->longitude;
+          $cont_oatTt = 0;
+
+          foreach($oats->findAll() as $key => $value):if($value->ativo == 0 && $value->localidade == $localId && $value->status < 4 ) {
+            $cont_oatTt++;
+          }endforeach;
+
+          if( $cont_oatTt > 0 && $localLat <> 0){
+        		if ($out != "{") {
+        			$out .= ",";
+        		}
+            $out .= '"'.$localidade.'": { ';
+        		$out .= 'center: {lat: '.$localLat.', ';
+        		$out .= 'lng: '.$localLong.'},';
+            $out .= 'atendimento: '.$cont_oatTt.'}';
+
+
+          }
+        }endforeach;
+
+  		$out .= "}";
+
  ?>
  <!DOCTYPE html>
  <html>
@@ -34,19 +64,16 @@
 
 
 <script>
-var citymap = {
-chicago: { center: {lat: 41.878, lng: -87.629}, population: 2714856},
-newyork: { center: {lat: 40.714, lng: -74.005}, population: 8405837},
-losangeles: { center: {lat: 34.052, lng: -118.243}, population: 3857799},
-vancouver: { center: {lat: 49.25, lng: -123.1}, population: 603502},
-"AGESPISA | ETA TERESINA III E IV" : { center: { lat: -5.145820, lng: -42.804356}, population:1},
-};
+//var citymap = <?php echo json_encode($out) ?>;
+var citymap = <?php echo $out; ?>;
+
+
 
  function initMap() {
    // Create the map.
    var map = new google.maps.Map(document.getElementById('map'), {
      zoom: 4,
-     center: {lat: 37.090, lng: -95.712},
+     center: {lat: -8.063759, lng: -34.871540},
      mapTypeId: google.maps.MapTypeId.TERRAIN
    });
 
@@ -62,7 +89,7 @@ vancouver: { center: {lat: 49.25, lng: -123.1}, population: 603502},
        fillOpacity: 0.35,
        map: map,
        center: citymap[city].center,
-       radius: Math.sqrt(citymap[city].population) * 100
+       radius: Math.sqrt(citymap[city].atendimento) * 10000
      });
    }
  }
