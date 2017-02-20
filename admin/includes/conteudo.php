@@ -79,7 +79,9 @@
    ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script async defer src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
-
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q&callback=initMap">
+    </script>
 
     <script type="text/javascript">
 
@@ -205,8 +207,7 @@
      }
 
          </script>
-         <script async defer
-             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q&callback=initMap"></script>
+
        </body>
 
 
@@ -282,13 +283,13 @@
                     <h3>OAT | Região <small>Posiçao geografica</small></h3>
                   </div>
                 </div>
-                <div class="col-md-8 col-sm-9 col-xs-12">
+                <div class="col-md-10 col-sm-9 col-xs-12">
                   <div id="placeholder33" style="height: 460px; display: none" class="demo-placeholder"></div>
                   <div style="width: 100%;">
                     <div id="map" style="width: 100%; height: 460px;"></div>
                   </div>
                 </div>
-                <div class="col-md-4 col-sm-3 col-xs-12 bg-white">
+                <div class="col-md-2 col-sm-3 col-xs-12 bg-white">
                   <div style="width: 100%; height:100%;">OBS: Os atendimentos exibidos neste gráfico, são os que tem sua posição geografica salva por geolocalização, que corresponde a <?php echo round($cont_oatLat1, 2) ; ?>%( <?php echo $cont_oatLat ; ?> ) do total de atendimentos feitos.</div>
                 </div>
                 <div class="clearfix"></div>
