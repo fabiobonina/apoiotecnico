@@ -79,9 +79,7 @@
    ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script async defer src="http://maps.google.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q" type="text/javascript"></script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q&callback=initMap">
-    </script>
+
 
     <script type="text/javascript">
 
@@ -175,38 +173,7 @@
       }
 
     </script>
-    <script>
-    //var citymap = <?php echo json_encode($out) ?>;
-    var citymap = <?php echo $out; ?>;
 
-
-
-     function initMap() {
-       // Create the map.
-       var map = new google.maps.Map(document.getElementById('map'), {
-         zoom: 4,
-         center: {lat: -14.239104, lng: -51.925403},
-         mapTypeId: google.maps.MapTypeId.TERRAIN
-       });
-
-       // Construct the circle for each value in citymap.
-       // Note: We scale the area of the circle based on the population.
-       for (var city in citymap) {
-         // Add the circle for this city to the map.
-         var cityCircle = new google.maps.Circle({
-           strokeColor: '#FF0000',
-           strokeOpacity: 0.8,
-           strokeWeight: 2,
-           fillColor: '#FF0000',
-           fillOpacity: 0.35,
-           map: map,
-           center: citymap[city].center,
-           radius: Math.sqrt(citymap[city].atendimento) * 5000
-         });
-       }
-     }
-
-         </script>
 
        </body>
 
@@ -323,3 +290,34 @@
 
         </div>
         <!-- /page content -->
+        <script>
+          //#### Atendimento por Região #######
+          var citymap = <?php echo $out; ?>;
+           function initMap() {
+             // Create the map.
+             var map = new google.maps.Map(document.getElementById('map'), {
+               zoom: 4,
+               center: {lat: -14.239104, lng: -51.925403},
+               mapTypeId: google.maps.MapTypeId.TERRAIN
+             });
+
+             // Construct the circle for each value in citymap.
+             // Note: We scale the area of the circle based on the population.
+             for (var city in citymap) {
+               // Add the circle for this city to the map.
+               var cityCircle = new google.maps.Circle({
+                 strokeColor: '#FF0000',
+                 strokeOpacity: 0.8,
+                 strokeWeight: 2,
+                 fillColor: '#FF0000',
+                 fillOpacity: 0.35,
+                 map: map,
+                 center: citymap[city].center,
+                 radius: Math.sqrt(citymap[city].atendimento) * 5000
+               });
+             }
+           }
+        </script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q&callback=initMap">
+        </script>
