@@ -27,12 +27,12 @@
     </style>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q&callback=initMap"></script>
-    <script src="data.json"></script>
+    <script src="http://localhost:83/code/skyhub/api/apiLocalList.php"></script>
     <script type="text/javascript" src="../src/markerclusterer.js"></script>
 
     <script>
       function initialize() {
-        var center = new google.maps.LatLng(37.4419, -122.1419);
+        var center = new google.maps.LatLng(-18.8800397, -47.05878999999999);
 
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 3,
@@ -46,8 +46,11 @@
           var latLng = new google.maps.LatLng(dataPhoto.latitude,
               dataPhoto.longitude);
           var marker = new google.maps.Marker({
-            position: latLng
+            position: latLng,
+            title: "Meu ponto personalizado! :-D"
+
           });
+          
           markers.push(marker);
         }
         var markerCluster = new MarkerClusterer(map, markers, {imagePath: '../images0/m'});

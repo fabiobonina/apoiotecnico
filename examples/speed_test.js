@@ -18,9 +18,9 @@ speedTest.markers = [];
 speedTest.infoWindow = null;
 
 speedTest.init = function() {
-  var latlng = new google.maps.LatLng(39.91, 116.38);
+  var latlng = new google.maps.LatLng(-18.8800397, -47.05878999999999);
   var options = {
-    'zoom': 2,
+    'zoom': 4,
     'center': latlng,
     'mapTypeId': google.maps.MapTypeId.ROADMAP
   };
@@ -37,6 +37,7 @@ speedTest.init = function() {
   speedTest.infoWindow = new google.maps.InfoWindow();
 
   speedTest.showMarkers();
+
 };
 
 speedTest.showMarkers = function() {
@@ -54,12 +55,15 @@ speedTest.showMarkers = function() {
   var panel = $('markerlist');
   panel.innerHTML = '';
   var numMarkers = $('nummarkers').value;
+  var filtroNome = $('filtroNome').value;
 
-  for (var i = 0; i < numMarkers; i++) {
+  for (var i = 0; i < 500; i++) {
     var titleText = speedTest.pics[i].photo_title;
     if (titleText === '') {
       titleText = 'No title';
     }
+
+    
 
     var item = document.createElement('DIV');
     var title = document.createElement('A');
@@ -74,8 +78,7 @@ speedTest.showMarkers = function() {
     var latLng = new google.maps.LatLng(speedTest.pics[i].latitude,
         speedTest.pics[i].longitude);
 
-    var imageUrl = 'http://chart.apis.google.com/chart?cht=mm&chs=24x32&chco=' +
-        'FFFFFF,008CFF,000000&ext=.png';
+    var imageUrl = '../images0/marcador.png';
     var markerImage = new google.maps.MarkerImage(imageUrl,
         new google.maps.Size(24, 32));
 
@@ -109,9 +112,7 @@ speedTest.markerClickFunction = function(pic, latlng) {
       '</h3><div class="info-body">' +
       '<a href="' + url + '" target="_blank"><img src="' +
       fileurl + '" class="info-img"/></a></div>' +
-      '<a href="http://www.panoramio.com/" target="_blank">' +
-      '<img src="http://maps.google.com/intl/en_ALL/mapfiles/' +
-      'iw_panoramio.png"/></a><br/>' +
+      '<br/>'+
       '<a href="' + pic.owner_url + '" target="_blank">' + pic.owner_name +
       '</a></div></div>';
 
@@ -137,7 +138,7 @@ speedTest.time = function() {
   $('timetaken').innerHTML = 'timing...';
   var start = new Date();
   if ($('usegmm').checked) {
-    speedTest.markerClusterer = new MarkerClusterer(speedTest.map, speedTest.markers, {imagePath: '../images/m'});
+    speedTest.markerClusterer = new MarkerClusterer(speedTest.map, speedTest.markers, {imagePath: '../images0/m'});
   } else {
     for (var i = 0, marker; marker = speedTest.markers[i]; i++) {
       marker.setMap(speedTest.map);

@@ -55,20 +55,21 @@
       }
       .info-body {
         width: 200px;
-        height: 200px;
+        height: 100px;
         line-height: 200px;
         margin: 2px 0;
         text-align: center;
         overflow: hidden;
       }
       .info-img {
-        height: 220px;
-        width: 200px;
+        height: 80px;
+        width: 80px;
       }
     </style>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD690bEo7B-V4nQR5T8-aiyf61bbGzrL6Q&callback=initMap"></script>
-    <script src="data.json"></script>
+    <!--script src="data.json"></script-->
+    <script src="http://localhost:83/code/skyhub/api/apiLocalList.php"></script>
     <script type="text/javascript" src="../src/markerclusterer.js"></script>
     <script src="speed_test.js"></script>
 
@@ -90,7 +91,7 @@
 
   <body>
     <div id="panel">
-      <h3>An example of MarkerClusterer v3</h3>
+      <h3>ETAs Geolocalização</h3>
 
       <div>
         <input type="checkbox" checked="checked" id="usegmm"/>
@@ -106,11 +107,11 @@
           <option value="500">500</option>
           <option value="1000">1000</option>
         </select>
-
+        <input id="filtroNome"/>
         <span>Time used: <span id="timetaken"></span> ms</span>
       </div>
 
-      <strong>Marker List</strong>
+      <strong>ETAs</strong>
       <div id="markerlist">
 
       </div>

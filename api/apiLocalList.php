@@ -16,9 +16,9 @@ header('Content-Type: text/html; charset=utf-8');
   $servicos = new Servicos();
   $descricoes = new Descricoes();
   $ativos = new Ativos();
-  $out = "[";
+  $out = 'var data = { "count": 10785236, "photos":  [';
 
-   foreach($localidades->findAll() as $key => $value){
+   foreach($localidades->findAll() as $key => $value): {
 
       $localId = $value->id;
       $localCliente = $value->cliente;
@@ -30,19 +30,20 @@ header('Content-Type: text/html; charset=utf-8');
       $localLong = $value->longitude;
       $localAtivo = $value->ativo;
 
-  		if ($out != "[") {
+  		if ($out != 'var data = { "count": 10785236, "photos":  [') {
   			$out .= ",";
   		}
       $out .= '{"id": "'.$localId.'",';
+      $out .= '"photo_title": "'.$localCliente.' | '.$localNome.'",';
   		$out .= '"cliente": "'.$localCliente.'",';
       $out .= '"regional": "'.$localRegional.'",';
-  		$out .= '"name": "'.$localNome.'",';
+  		$out .= '"nome": "'.$localNome.'",';
   		$out .= '"municipio": "'.$localMunicipio.'",';
   		$out .= '"uf": "'.$localUf.'",';
-  		$out .= '"latitude": "'.$localLat.'",';
-  		$out .= '"longitude": "'.$localLong.'",';
+  		$out .= '"latitude": '.$localLat.',';
+  		$out .= '"longitude": '.$localLong.',';
       $out .= '"ativo": "'.$localAtivo.'"}';
   	 }endforeach;
-		$out .= "]";
+		$out .= "]}";
 
 		echo $out;
