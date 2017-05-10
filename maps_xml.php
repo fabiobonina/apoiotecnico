@@ -30,7 +30,7 @@ $result = mysql_query($query);
 if (!$result) {
   die('Invalid query: ' . mysql_error());
 }*/
-$sql = "SELECT id, cliente, nome, latitude, longitude, municipio, uf, ativo FROM tb_localidades";
+$sql = "SELECT id, cliente, nome, municipio, uf, latitude, longitude, ativo FROM tb_localidades";
 $consulta = mysqli_query($connection, $sql);
 if (!$consulta)
   die("Erro ao fazer consulta!");

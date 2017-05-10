@@ -77,8 +77,8 @@
 				$('#query').val($(this).text());
 				fieldValue = $(this).text();
 				$('input[name="localId"]').val($(this).attr('data-id'));
-        $('input[name="localLat"]').val($(this).attr('data-Lat'));
-        $('input[name="localLong"]').val($(this).attr('data-Long'));
+        		$('input[name="localLat"]').val($(this).attr('data-Lat'));
+        		$('input[name="localLong"]').val($(this).attr('data-Long'));
 				$('.suggestions').html("");
 				$('.suggestions').css({'display':'none'});	
 				$('#query').focus();		

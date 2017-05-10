@@ -61,9 +61,7 @@ speedTest.showMarkers = function() {
     var titleText = speedTest.pics[i].photo_title;
     if (titleText === '') {
       titleText = 'No title';
-    }
-
-    
+    }    
 
     var item = document.createElement('DIV');
     var title = document.createElement('A');
@@ -105,16 +103,17 @@ speedTest.markerClickFunction = function(pic, latlng) {
       e.preventDefault();
     }
     var title = pic.photo_title;
-    var url = pic.photo_url;
-    var fileurl = pic.photo_file_url;
+    var local = pic.municipio;
+    var uf = pic.uf;
+    var url = 'https://maps.google.com/maps?q=' + pic.latitude +'%2C'+ pic.longitude +'&z=17&hl=pt-BR';
+    var fileurl = '../images/geolocation.png';
 
-    var infoHtml = '<div class="info"><h3>' + title +
-      '</h3><div class="info-body">' +
-      '<a href="' + url + '" target="_blank"><img src="' +
-      fileurl + '" class="info-img"/></a></div>' +
+    var infoHtml = '<div class="info"><h3>' + title +'</h3>'+
+      '<div class="info-body">' +
+      '<p>' + local + ' /' + uf + '</p>'+
+      '</div>' +
       '<br/>'+
-      '<a href="' + pic.owner_url + '" target="_blank">' + pic.owner_name +
-      '</a></div></div>';
+      '</div></div>';
 
     speedTest.infoWindow.setContent(infoHtml);
     speedTest.infoWindow.setPosition(latlng);
