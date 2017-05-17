@@ -9,7 +9,7 @@ $user = "root";
 $pass = "";
 */
 //$_GET, $_POST e $_COOKIE.
-//RECUPERAÇÃO DO FORMULÁRIO
+
 if(isset($_GET['cmd'])){
     $data = $_GET['cmd'];
 
@@ -37,7 +37,7 @@ if(isset($_POST['cmd'])){
     $data = $_POST['cmd'];
 
     echo $data;
-    //var_dump ($data);
+    var_dump ($data);
     $objData = $data;
 
     try {
@@ -60,7 +60,7 @@ if(isset($_COOKIE['cmd'])){
     $data = $_POST['cmd'];
 
     echo $data;
-    //var_dump ($data);
+    var_dump ($data);
     $objData = $data;
 
     try {
@@ -82,7 +82,7 @@ if(isset($_REQUEST['cmd'])){
     $data = $_POST['cmd'];
 
     echo $data;
-    //var_dump ($data);
+    var_dump ($data);
     $objData = $data;
 
 
