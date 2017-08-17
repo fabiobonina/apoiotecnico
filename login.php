@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-if(isset($_SESSION['loginUser']) && (isset($_SESSION['loginSenha']))){
+if(isset($_SESSION['loginEmail']) && (isset($_SESSION['loginSenha']))){
 	header("Location: index.php");exit;
 }
 
@@ -14,11 +14,11 @@ $usuario = new Usuarios();
 
 if(isset($_POST['logar'])):
 
-  $nickuser=$_POST["nickuser"];
+  $email=$_POST["email"];
   $senha=$_POST["senha"];
   //$datalogin = date("Y-m-d H:i:s");
 
-  $usuario->setNickuser($nickuser);
+  $usuario->setEmail($email);
   $usuario->setSenha($senha);
   //$usuario->setDatalogin($datalogin);
 
@@ -51,7 +51,7 @@ if(isset($_POST['cadastrar'])):
 			$nickuser=$_POST["nickuser"];
 			$senha=$_POST["senha"];
       $senhaR=$_POST["senhaR"];
-			$nivel_usuario = "0";
+			$nivel = "0";
 			$ativo = "0";
 			$datacadastro = date("Y-m-d H:i:s");
 			$datalogin = date("Y-m-d H:i:s");
@@ -64,7 +64,7 @@ if(isset($_POST['cadastrar'])):
 			$usuario->setSenha($senha);
 			$usuario->setDataCadastro($datacadastro);
 			$usuario->setDatalogin($datalogin);
-			$usuario->setNivel($nivel_usuario);
+			$usuario->setNivel($nivel);
 			$usuario->setAtivo($ativo);
 			# Insert
 			if($usuario->insert()){
@@ -116,7 +116,7 @@ if(isset($_POST['cadastrar'])):
             <form action="#" method="post">
               <h1>Login</h1>
               <div>
-                <input type="text" name="nickuser" class="form-control" placeholder="Usuário" required="" />
+                <input type="email" name="email" class="form-control" placeholder="Email" required="" />
               </div>
               <div>
                 <input type="password" name="senha" class="form-control" placeholder="Senha" required="" />
