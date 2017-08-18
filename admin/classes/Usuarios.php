@@ -115,25 +115,44 @@ class Usuarios extends Crud{
 						$loginEmail = $show->email;
 						$loginUser = $show->nickuser;
 						$loginProprietario = $show->proprietario;
-						$loginGrupoLoja = $show->grupoLoja;
+						$loginGrupo = $show->grupoLoja;
 						$loginLoja = $show->loja;
 						$loginNivel = $show->nivel;
+						$loginAtivo = $show->ativo;
 					}
+					if($loginAtivo == 0){
+						try{
+							$sql  = "UPDATE $this->table SET data_ultimo_login = :data_ultimo_login WHERE id = :id";
+							$stmt = DB::prepare($sql);
+							$stmt->bindParam(':data_ultimo_login', $this->datalogin);
+							$stmt->bindParam(':id', $id);
+							$stmt->execute();
+						} catch(PDOException $e) {
+							echo 'ERROR: ' . $e->getMessage();
+						}
 					$_SESSION['loginId'] = $loginId;
 					$_SESSION['loginNome'] = $loginNome;
 					$_SESSION['loginEmail'] = $loginEmail;
 					$_SESSION['loginUser'] = $loginUser;
 					$_SESSION['loginProprietario'] = $loginProprietario;
-					$_SESSION['loginGrupoLoja'] = $loginGrupoLoja;
+					$_SESSION['loginGrupo'] = $loginGrupo;
 					$_SESSION['loginLoja'] = $loginLoja;
 					$_SESSION['loginNivel'] = $loginNivel;
 
-					echo '<div class="alert alert-success">
-						<button type="button" class="close" data-dismiss="alert">×</button>
-						<strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
-					</div>';
 					
-					header("Refresh: 3, index.php?acao=welcome");
+					
+					echo '<div class="alert alert-success">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Logado com Sucesso!</strong> Redirecionando para o sistema.
+						 </div>';
+					header("Refresh: 1, index.php?acao=welcome");
+					}else{
+						echo '<div class="alert alert-danger">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								<strong>Erro ao logar!</strong> contate o administrador do sistema.
+							</div>';
+					}
+					
 				}else{
 					echo '<div class="alert alert-danger">
 						<button type="button" class="close" data-dismiss="alert">×</button>

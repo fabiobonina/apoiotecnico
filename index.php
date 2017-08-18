@@ -1,4 +1,6 @@
-  <!-- Header -->
+  <!-- Horario -->
+   <?php date_default_timezone_set('America/Recife');?>
+  
   <?php include("admin/includes/header.php");?>
   <!-- /Header -->
 

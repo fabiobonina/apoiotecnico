@@ -3,7 +3,7 @@ ob_start();
 session_start();
 
 // login
-if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginSenha']))){
+if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginNivel']))){
 	header("Location: login.php");exit;
 }
 
@@ -11,9 +11,12 @@ if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginSenha']))){
 	include("admin/includes/logout.php");
 
 	$userUsuario = $_SESSION['loginUser'];
-	$userSenha = $_SESSION['loginSenha'];
+  $userEmail = $_SESSION['loginEmail'];
+	$userSenha = $_SESSION['loginProprietario'];
 	$userNivel = $_SESSION['loginNivel'];
-	$userNome = $_SESSION['loginNome'];
+	$userGrupo = $_SESSION['loginGrupoLoja'];
+  $userLoja = $_SESSION['loginLoja'];
+  $userNome = $_SESSION['loginNome'];
 
   	function __autoload($class_name){
 		require_once 'admin/classes/' . $class_name . '.php';

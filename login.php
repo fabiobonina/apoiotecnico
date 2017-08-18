@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Recife');
 ob_start();
 session_start();
 if(isset($_SESSION['loginEmail']) && (isset($_SESSION['loginSenha']))){
@@ -16,11 +17,11 @@ if(isset($_POST['logar'])):
 
   $email=$_POST["email"];
   $senha=$_POST["senha"];
-  //$datalogin = date("Y-m-d H:i:s");
+  $datalogin = date("Y-m-d H:i:s");
 
   $usuario->setEmail($email);
   $usuario->setSenha($senha);
-  //$usuario->setDatalogin($datalogin);
+  $usuario->setDatalogin($datalogin);
 
   # Logar
   if($usuario->logar()){
@@ -53,7 +54,7 @@ if(isset($_POST['cadastrar'])):
       $senhaR=$_POST["senhaR"];
 			$nivel = "0";
 			$ativo = "0";
-			$datacadastro = date("Y-m-d H:i:s");
+			$datacadastro = date("Y-m-d");
 			$datalogin = date("Y-m-d H:i:s");
 
   if($email == $emailR && $senha == $senhaR){

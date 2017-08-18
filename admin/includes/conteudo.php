@@ -7,7 +7,7 @@
       $descricoes = new Descricoes();
       $ativos = new Ativos();
 
-      $cont_abarar_os = 0;
+      $cont_anarar_os = 0;
       $cont_retorno = 0;
       $cont_finalizar = 0;
       $cont_concluidas = 0;
@@ -28,7 +28,7 @@
 
         $oatStatus = $value->status;
         if( $oatStatus == 0){
-          $cont_abarar_os++;
+          $cont_anarar_os++;
         }elseif($oatStatus == 1){
           $cont_retorno++;
         }
@@ -95,7 +95,7 @@
         //#### OAT Status #######
         var data2 = google.visualization.arrayToDataTable([
           ['OAT', 'Status'],
-          ['Solicitação',     <?php echo $cont_abarar_os; ?>],
+          ['Solicitação',     <?php echo $cont_anarar_os; ?>],
           ['Aberta',      <?php echo $cont_retorno; ?>],
           ['Fechada',  <?php echo $cont_finalizar; ?>],
           ['Concluida', <?php echo $cont_concluidas; ?>]
@@ -189,7 +189,7 @@
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> OAT Solicitada</span>
-              <div class="count"><?php echo $cont_abarar_os; ?></div>
+              <div class="count"><?php echo $cont_anarar_os; ?></div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> </i> Aguardando OS</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
