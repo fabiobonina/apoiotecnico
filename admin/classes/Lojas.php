@@ -1,9 +1,9 @@
 <?php
 require_once 'Crud.php';
 
-class Clientes extends Crud{
+class Lojas extends Crud{
 	
-	protected $table = 'tb_clientes';
+	protected $table = 'tb_loja';
 	private $nome;
 	private $nick;
 	private $ativo;

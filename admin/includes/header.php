@@ -14,7 +14,7 @@ if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['loginNivel']))){
   $userEmail = $_SESSION['loginEmail'];
 	$userSenha = $_SESSION['loginProprietario'];
 	$userNivel = $_SESSION['loginNivel'];
-	$userGrupo = $_SESSION['loginGrupoLoja'];
+	$userGrupo = $_SESSION['loginGrupo'];
   $userLoja = $_SESSION['loginLoja'];
   $userNome = $_SESSION['loginNome'];
 

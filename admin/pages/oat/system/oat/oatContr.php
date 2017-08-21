@@ -87,7 +87,7 @@
                           
                         </tr>
                       </tbody>
-                      <?php }endforeach; ?>
+                      <?php }endforeach;
 
     $oats->setUser($user);
     $oats->setCliente($cliente);
@@ -144,7 +144,7 @@
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>Deletada com sucesso!</strong> Redirecionando ...
     </div>';
-    header("Refresh: 1, $redirecionar_1");	
+    header("Refresh: 1, $redirecionar_1");
     }
     endif;
     #RETORNAR

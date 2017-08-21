@@ -10,7 +10,7 @@ header('Content-Type: text/html; charset=utf-8');
 
   $oats = new Oats();
   $usuarios = new Usuarios();
-  $clientes = new Clientes();
+  $lojas = new Lojas();
   $localidades = new Localidades();
   $sistemas = new Sistemas();
   $servicos = new Servicos();
@@ -21,7 +21,7 @@ header('Content-Type: text/html; charset=utf-8');
    foreach($localidades->findAll() as $key => $value): {
 
       $localId = $value->id;
-      $localCliente = $value->cliente;
+      $localLoja = $value->loja;
       $localRegional = $value->regional;
       $localNome = $value->nome;
       $localMunicipio = $value->municipio;
@@ -34,8 +34,8 @@ header('Content-Type: text/html; charset=utf-8');
   			$out .= ",";
   		}
       $out .= '{"id": "'.$localId.'",';
-      $out .= '"photo_title": "'.$localCliente.' | '.$localNome.'",';
-  		$out .= '"cliente": "'.$localCliente.'",';
+      $out .= '"photo_title": "'.$localLoja.' | '.$localNome.'",';
+  		$out .= '"loja": "'.$localLoja.'",';
       $out .= '"regional": "'.$localRegional.'",';
   		$out .= '"nome": "'.$localNome.'",';
   		$out .= '"municipio": "'.$localMunicipio.'",';
