@@ -96,14 +96,14 @@ if(isset($_POST['cadastrar'])):
     <link href="admin/img/fa-paw.png" rel="icon" type="image/png" />
 
     <!-- Bootstrap -->
-    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="config/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="config/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Animate.css -->
-    <link href="https://colorlib.com/polygon/gentelella/css/animate.min.css" rel="stylesheet">
+    <!--link href="https://colorlib.com/polygon/gentelella/css/animate.min.css" rel="stylesheet"-->
 
     <!-- Custom Theme Style -->
-    <link href="build/css/custom.min.css" rel="stylesheet">
+    <link href="config/build/css/custom.min.css" rel="stylesheet">
   </head>
 
   <body class="login">
